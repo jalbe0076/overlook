@@ -1,4 +1,6 @@
 import chai from 'chai';
+import { customerList } from './sample-customer-list.js';
+
 const expect = chai.expect;
 
 describe('See if the tests are running', function() {
