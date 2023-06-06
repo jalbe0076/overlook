@@ -27,6 +27,10 @@
     "start": "webpack serve",
     "build": "webpack",
     "test": "mochapack 'test/**/*.js'",
-    "lint": "./node_modules/.bin/eslint 'src/**.js' 'test/**.js'"
+    "lint": "./node_modules/.bin/eslint 'src/**.js' 'test/**.js'",
+    "sass": "node-sass src/main.scss src/css/styles.css -w"
+  },
+  "dependencies": {
+    "node-sass": "^6.0.1"
   }
 }
