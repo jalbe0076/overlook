@@ -2,7 +2,7 @@ import chai from 'chai';
 import { customerList } from './sample-data/sample-customer-list.js';
 import { roomList } from './sample-data/sample-room-list.js';
 import { bookingList } from './sample-data/sample-booking-list.js';
-import { checkUsername, getCustomer } from '../src/booking-utils.js';
+import { checkUsername, getUserPastBookings  } from '../src/booking-utils.js';
 
 const expect = chai.expect;
 
@@ -14,7 +14,6 @@ describe('Get a customer\'s name from their username', () => {
     user = checkUsername(userName);
     keyword = userName.substring(0, 8);
     userId = parseInt(userName.substring(8));
-    customer = getCustomer(user);
   });
 
   it('Should have a valid username, customer followed by their ID', () => {
@@ -39,5 +38,31 @@ describe('Get a customer\'s name from their username', () => {
   it('Should be able to get another users ID associated with the username', () => {
     user = checkUsername('customer1');
     expect(user).to.equal(1);
+  });
+});
+
+describe(`Get a users past booking`, () => {
+  let  userId, userBookings;
+
+  beforeEach(() => {
+    userId = 15;
+    const bookings = bookingList.bookings;
+    userBookings = getUserPastBookings(userId, bookings)
+  });
+
+  it('Should return a list of past bookings', () => {
+    expect(userBookings[0]).to.have.keys([ 'id', 'userID', 'date', 'roomNumber' ]);
+  });
+
+  it('Should return a list of another users bookings', () => {
+    user = 1;
+    userBookings = getUserPastBookings(userId, bookings);
+    expect(userBookings[0]).to.have.keys([ 'id', 'userID', 'date', 'roomNumber' ]);
+  });
+
+  it(`Should let the user know if they don't have past bookings`, () => {
+    user = 2;
+    userBookings = getUserPastBookings(userId, bookings);
+    expect(userBookings).to.equal('No past bookings');
   });
 });

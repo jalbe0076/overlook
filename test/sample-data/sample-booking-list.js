@@ -29,6 +29,12 @@ const bookingList = {
         "userID": 1,
         "date": "2022/02/05",
         "roomNumber": 12
+    },
+    {
+        "id": "5fwrgu4i7k55hl6ww",
+        "userID": 13,
+        "date": "2022/01/19",
+        "roomNumber": 20
     }
   ]
 };
