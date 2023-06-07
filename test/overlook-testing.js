@@ -42,27 +42,18 @@ describe('Get a customer\'s name from their username', () => {
 });
 
 describe(`Get a users past booking`, () => {
-  let  userId, userBookings;
-
-  beforeEach(() => {
-    userId = 15;
-    const bookings = bookingList.bookings;
-    userBookings = getUserPastBookings(userId, bookings)
-  });
-
   it('Should return a list of past bookings', () => {
+    const userBookings = getUserPastBookings(13, bookingList.bookings);
     expect(userBookings[0]).to.have.keys([ 'id', 'userID', 'date', 'roomNumber' ]);
   });
 
   it('Should return a list of another users bookings', () => {
-    user = 1;
-    userBookings = getUserPastBookings(userId, bookings);
+    const userBookings = getUserPastBookings(1, bookingList.bookings);
     expect(userBookings[0]).to.have.keys([ 'id', 'userID', 'date', 'roomNumber' ]);
   });
 
   it(`Should let the user know if they don't have past bookings`, () => {
-    user = 2;
-    userBookings = getUserPastBookings(userId, bookings);
+    const userBookings = getUserPastBookings(2, bookingList.bookings);
     expect(userBookings).to.equal('No past bookings');
   });
 });
