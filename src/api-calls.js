@@ -32,9 +32,17 @@ const deleteBooking = (id) => {
     .catch(err => console.log("ERROR", err));
 };
 
+const findCustomer = (id) => {
+  return fetch(`http://localhost:3001/api/v1/customers/${id}`)
+      .then(response => response.json())
+      .then(resolve => resolve)
+      .catch(error => console.log("ERROR", error));
+};
+
 export {
   getAllData,
   getData,
   postBooking,
-  deleteBooking
+  deleteBooking,
+  findCustomer
 };
