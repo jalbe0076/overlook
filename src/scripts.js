@@ -1,11 +1,31 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
+// =========================================================
+// ===============   variables and imports   ===============
+// =========================================================
 
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
+import { getAllData } from './api-calls';
 
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
+let customers;
+let rooms;
+let bookings;
 
+// =========================================================
+// ==================   event listeners   ==================
+// =========================================================
 
-console.log('This is the JavaScript entry file - your code begins here.');
+window.addEventListener('load', () => {
+  setData();
+})
+
+// =========================================================
+// =====================   functions   =====================
+// =========================================================
+
+const setData = () => {
+  getAllData()
+    .then(resolve => {
+      customers = resolve[0].customers;
+      rooms = resolve[1].rooms;
+      bookings = resolve[2].bookings;
+    });
+};
