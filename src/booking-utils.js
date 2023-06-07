@@ -37,7 +37,22 @@ const getUserPastBookings = (userId, bookings) => {
   }  
 };
 
+const getTotalSpent = (userBookings, roomList) => {
+  let totalSpent = 0;
+
+  if (!Array.isArray(userBookings)) {
+    return `$0`;
+  } else {
+    userBookings.forEach(booking => {
+      const room = roomList.find(room => room.number === booking.roomNumber);
+      totalSpent += room.costPerNight;
+    });
+  }
+  return `$${totalSpent.toFixed(2)}`;
+};
+
 export {
   checkUsername,
-  getUserPastBookings
+  getUserPastBookings,
+  getTotalSpent
 }

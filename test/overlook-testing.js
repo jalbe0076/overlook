@@ -2,7 +2,7 @@ import chai from 'chai';
 import { customerList } from './sample-data/sample-customer-list.js';
 import { roomList } from './sample-data/sample-room-list.js';
 import { bookingList } from './sample-data/sample-booking-list.js';
-import { checkUsername, getUserPastBookings  } from '../src/booking-utils.js';
+import { checkUsername, getUserPastBookings, getTotalSpent  } from '../src/booking-utils.js';
 
 const expect = chai.expect;
 
@@ -61,19 +61,19 @@ describe(`Get a users past booking`, () => {
 describe(`Should calculate total spent in the past`, () => {
   it('Should return the total spent for past bookings', () => {
     const userBookings = getUserPastBookings(13, bookingList.bookings);
-    const totalSpent = getTotalSpent(userBookings);
-    expect(totalSpent).to.equal('$516.04');
+    const totalSpent = getTotalSpent(userBookings, roomList.rooms);
+    expect(totalSpent).to.equal('$849.54');
   });
 
   it('Should return the total spent for another users past bookings', () => {
     const userBookings = getUserPastBookings(1, bookingList.bookings);
-    const totalSpent = getTotalSpent(userBookings);
-    expect(totalSpent).to.equal('$172.09');
+    const totalSpent = getTotalSpent(userBookings, roomList.rooms);
+    expect(totalSpent).to.equal('$358.40');
   });
 
   it(`Should return $0 if the user has not spent any nights`, () => {
     const userBookings = getUserPastBookings(2, bookingList.bookings);
-    const totalSpent = getTotalSpent(userBookings);
+    const totalSpent = getTotalSpent(userBookings, roomList.rooms);
     expect(totalSpent).to.equal('$0');
   });
 });
