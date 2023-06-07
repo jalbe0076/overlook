@@ -6,6 +6,10 @@ const getData = (data) => {
       .catch(error => console.log("ERROR", error));
 };
 
+const getAllData = () => {
+  return Promise.all([ getData('customers'), getData('rooms'), getData('bookings') ]);
+};
+
 const postBooking = (room) => {
   fetch('http://localhost:3001/api/v1/bookings', {
     method: 'POST',
@@ -17,12 +21,20 @@ const postBooking = (room) => {
     .catch(err => console.log("ERROR", err));
 };
 
-const getAllData = () => {
-  return Promise.all([ getData('customers'), getData('rooms'), getData('bookings') ]);
+const deleteBooking = (id) => {
+  fetch(`http://localhost:3001/api/v1/bookings/${id}`, {
+    method: 'DELETE',
+    body: '',
+    headers: { 'Content-Type': 'application/json' }
+  })
+    .then(response => response.json())
+    .then(() => setData())
+    .catch(err => console.log("ERROR", err));
 };
 
 export {
   getAllData,
   getData,
-  postBooking
+  postBooking,
+  deleteBooking
 };

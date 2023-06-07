@@ -3,7 +3,7 @@
 // =========================================================
 
 import './css/styles.css';
-import { getAllData, postBooking } from './api-calls';
+import { getAllData, postBooking, deleteBooking } from './api-calls';
 
 let customers;
 let rooms;
