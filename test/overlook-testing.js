@@ -57,3 +57,23 @@ describe(`Get a users past booking`, () => {
     expect(userBookings).to.equal('No past bookings');
   });
 });
+
+describe(`Should calculate total spent in the past`, () => {
+  it('Should return the total spent for past bookings', () => {
+    const userBookings = getUserPastBookings(13, bookingList.bookings);
+    const totalSpent = getTotalSpent(userBookings);
+    expect(totalSpent).to.equal('$516.04');
+  });
+
+  it('Should return the total spent for another users past bookings', () => {
+    const userBookings = getUserPastBookings(1, bookingList.bookings);
+    const totalSpent = getTotalSpent(userBookings);
+    expect(totalSpent).to.equal('$172.09');
+  });
+
+  it(`Should return $0 if the user has not spent any nights`, () => {
+    const userBookings = getUserPastBookings(2, bookingList.bookings);
+    const totalSpent = getTotalSpent(userBookings);
+    expect(totalSpent).to.equal('$0');
+  });
+});
