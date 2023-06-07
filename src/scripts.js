@@ -3,7 +3,7 @@
 // =========================================================
 
 import './css/styles.css';
-import { getAllData } from './api-calls';
+import { getAllData, postBooking } from './api-calls';
 
 let customers;
 let rooms;
@@ -15,7 +15,7 @@ let bookings;
 
 window.addEventListener('load', () => {
   setData();
-})
+});
 
 // =========================================================
 // =====================   functions   =====================
@@ -28,4 +28,8 @@ const setData = () => {
       rooms = resolve[1].rooms;
       bookings = resolve[2].bookings;
     });
+};
+
+export {
+  setData
 };
