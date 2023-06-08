@@ -4,12 +4,27 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <title>Overlook</title>
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo">
+  <section class="banner">
+    <div class="logo-bar">
+      <h1>OVERLOOK <span class="logo">YOUR BOUTIQUE HOTEL</span></h1>
+      <a href="#" class="current-user user-dropdown">John Doe</a>
+      <div class="dropdown-menu" id="user-items" aria-expanded="false">
+        <li><div class="total-nights">Nights with us<span class="user-metrix"></span></div></li>
+        <li><div class="total-spent">Total spent so far<span class="user-metrix"></span></div></li>
+        <li><a href="#" class="user-item" id="user-settings">Settings</a></li>
+        <li><a href="#" class="user-item" id="user-logout">Logout</a></li>
+      </div>
+    </div>
+  </section>
+  <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
   
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
+
   <script src="bundle.js"></script>
 
 </body>

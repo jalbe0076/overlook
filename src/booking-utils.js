@@ -55,4 +55,4 @@ export {
   checkUsername,
   getUserPastBookings,
   getTotalSpent
-}
+};

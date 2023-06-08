@@ -1,2 +1,8 @@
-body {
-  background: radial-gradient(circle, #3f5efb 0%, #fc466b 100%); }
+* {
+  font-family: 'Inter', sans-serif; }
+
+[aria-expanded="true"] {
+  display: block; }
+
+[aria-expanded="false"] {
+  display: none; }
