@@ -2,7 +2,7 @@
 // ===============   variables and imports   ===============
 // =========================================================
 
-import { getUserPastBookings, getTotalSpent } from "./booking-utils";
+import { getUserPastBookings, getTotalSpent, formatDate } from "./booking-utils";
 import { bookings, rooms, currentUser } from "./scripts";
 
 const userDropdownMenu = document.querySelector('#user-items');
@@ -55,31 +55,66 @@ const updateTotalSpent = () => {
   totalSpent.innerText = `${amoutSpent}`;
 };
 
-const populateAvailableRooms = (date, rooms) => {
+const populateBookings = (bookings, rooms) => {
   displayRooms.innerHTML = '';
-  rooms.forEach(booking => {
-    displayRooms.innerHTML += `
-    <article class="rooms">
-      <img class="room-image" src="./images/turing-logo.png" alt="turing logo">
-      <div class="room-info">
-        <h3 class="room-type">${booking.roomType}</h3>
-        <p class="bed-size">${booking.numBeds} ${booking.bedSize}, ${function () { if(booking.bidet) { 'Bidet' } } }</p>
-        <ul class="amenities">
-          <li>Wifi</li>
-          <li>Air conditioner</li>
-          <li>Balcony</li>
-          <li>Pet Friendly</li>
-          <li>Access to gym and pool</li>
-        </ul>
-        <p class="room-cost">$${booking.costPerNight}</p>
-      </div>
-    </article>
-    `;
+  // const date = bookings.date;
+  
+  bookings.forEach(booking => {
+      const room = rooms.find(room => room.number === booking.roomNumber);
+
+      displayRooms.innerHTML += `
+      <article class="rooms">
+        <img class="room-image" src="./images/turing-logo.png" alt="turing logo">
+        <div class="room-info">
+          <h3 class="room-type">${room.roomType}</h3>
+          <p class="bed-size">${room.numBeds} ${room.bedSize}${room.bidet ? ', Bidet' : '' }</p>
+          <ul class="amenities">
+            <li>Wifi</li>
+            <li>Air conditioner</li>
+            <li>Balcony</li>
+            <li>Pet Friendly</li>
+            <li>Access to gym and pool</li>
+          </ul>
+          <p class="booked-date">Date: ${booking.date}</p>
+          <p class="reference">Booking Reference: ${booking.id}</p>
+          <p class="room-cost">$${room.costPerNight}</p>
+        </div>
+      </article>
+      `;
+  });
+};
+
+const populateAvailableRooms = (date, bookings, rooms) => {
+  displayRooms.innerHTML = '';
+  const formatedDate = formatDate(date)
+  const unavailableRooms = bookings.filter(booking => booking.date === formatedDate);
+
+  rooms.forEach(room => {
+    if(unavailableRooms.find(bookedRoom => bookedRoom.Number.includes(room.roomNumber))) {
+      displayRooms.innerHTML += `
+      <article class="rooms">
+        <img class="room-image" src="./images/turing-logo.png" alt="turing logo">
+        <div class="room-info">
+          <h3 class="room-type">${room.roomType}</h3>
+          <p class="bed-size">${room.numBeds} ${room.bedSize}${function () { if(room.bidet) { ', Bidet' } } }</p>
+          <ul class="amenities">
+            <li>Wifi</li>
+            <li>Air conditioner</li>
+            <li>Balcony</li>
+            <li>Pet Friendly</li>
+            <li>Access to gym and pool</li>
+          </ul>
+          <p class="room-cost">$${room.costPerNight}</p>
+        </div>
+      </article>
+      `;
+    }
   });
 };
 
 export {
   handleDropdown,
   updateNightsStayed,
-  updateTotalSpent
+  updateTotalSpent,
+  populateBookings
 };

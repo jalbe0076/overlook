@@ -58,5 +58,6 @@ console.log('Mhere')
 export {
   checkUsername,
   getUserPastBookings,
-  getTotalSpent
+  getTotalSpent,
+  formatDate
 };
