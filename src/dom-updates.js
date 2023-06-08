@@ -9,6 +9,8 @@ const userDropdownMenu = document.querySelector('#user-items');
 const totalNights = document.querySelector('.total-nights');
 const totalSpent = document.querySelector('.total-spent');
 const displayRooms = document.querySelector('main');
+const userProfile = document.querySelector('.user-profile');
+const welcomeUser = document.querySelector('.welcome-user');
 
 let lastFocusedElement;
 
@@ -118,9 +120,20 @@ const populateAvailableRooms = (date, bookings, rooms) => {
   });
 };
 
+const populateUserWelcome = (usersName) => {
+  const firstName = usersName.split(' ')[0];
+  welcomeUser.innerText = `Welcome, ${firstName}`;
+};
+
+const populateUserProfile = (usersName) => {
+  userProfile.innerText = `${usersName}`;
+};
+
 export {
   handleDropdown,
   updateNightsStayed,
   updateTotalSpent,
-  populateBookings
+  populateBookings,
+  populateUserWelcome,
+  populateUserProfile
 };

@@ -44,7 +44,7 @@ h1 .logo {
   font-weight: 200;
 }
 
-.current-user {
+.user-profile {
   padding-right: 1rem;
   font-size: 1.5rem;
 }
@@ -56,13 +56,6 @@ h1 .logo {
     font-size: 1.4rem;
     font-weight: 300;
   }
-  // & ul {
-  //   width: 90%;
-  // }
-
-  // & li {
-  //   width: 100%;
-  // }
 }
 
 .dropdown-menu {
@@ -72,10 +65,6 @@ h1 .logo {
   padding: 1em;
   border: .1rem solid $black;
   border-radius: 0.5em;
-
-  // & li {
-  //   padding: 1em 0;
-  // }
 }
 
 .user-data-box {
@@ -92,7 +81,6 @@ h1 .logo {
     margin-top: .2em;
     font-weight: 500;
   }
-
 }
 
 .user-item {
@@ -115,14 +103,12 @@ h1 .logo {
 main {
   display: flex;
   flex-wrap: wrap;
-  // width: 80%;
   margin: 1em 1em;
 }
 .rooms {
   display: flex;
-  // justify-content: flex-start;
   border: $black solid 3px;
-  max-width: 700px;
+  max-width: 700px; 
   margin: 1em;
 
   & img {
