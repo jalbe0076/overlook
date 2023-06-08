@@ -24,7 +24,7 @@
         </ul>
       </div>
     </div>
-    <section class="welcome-user">
+    <nav class="welcome-user">
       <h2 class="current-user">Welcome!</h2>
       <div class="trip-actions">
         <button href="#" class="nav-tab" id="bookings">Plan your next stay</button>
@@ -32,7 +32,7 @@
         <button href="#" class="nav-tab" id="upcoming-trip">Upcoming trips</button>
       </div>
       <form id="booking-options" action="../src/scripts.js">
-        <input type="date" id="pick-day" name="trip-day" value="2018-07-22" min="2018-01-01" max="2024-06-01">
+        <input type="date" id="pick-day" name="trip-day" value="2018-07-22" min="2023-05-21" max="2024-06-01">
         <select name="room-types" id="room-types">
           <option value="single room">Single Room</option>
           <option value="junior suite">Junior Suite</option>
@@ -44,12 +44,39 @@
       <div class="trip-message .hidden">
         <!--  TRIPS MESSAGE FOR PAST OR FUTURE  -->
       </div>
-    </section>  
+    </nav>  
   </section>
   <main>
-    <!--  TRIPS GET POPULATED HERE  -->
+    <!--  ROOMS GET POPULATED HERE  -->
+    <article class="rooms">
+      <img class="room-image" src="./images/turing-logo.png" alt="turing logo">
+      <div class="room-info">
+        <h3 class="room-type">Residential Suite</h3>
+        <p class="bed-size">1 queen bed, Bidet</p>
+        <ul class="amenities">
+          <li>Wifi</li>
+          <li>Air conditioner</li>
+          <li>Balcony</li>
+          <li>Pet Friendly</li>
+          <li>Access to gym and pool</li>
+        </ul>
+      </div>
+    </article>
+    <article class="rooms">
+      <img class="room-image" src="./images/turing-logo.png" alt="turing logo">
+      <div class="room-info">
+        <h3 class="room-type">Residential Suite</h3>
+        <p class="bed-size">1 queen bed, Bidet</p>
+        <ul class="amenities">
+          <li>Wifi</li>
+          <li>Air conditioner</li>
+          <li>Balcony</li>
+          <li>Pet Friendly</li>
+          <li>Access to gym and pool</li>
+        </ul>
+      </div>
+    </article>
   </main>
-  <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
   <script src="bundle.js"></script>
 </body>
 </html>

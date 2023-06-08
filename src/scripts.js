@@ -3,6 +3,7 @@
 // =========================================================
 
 import './css/styles.css';
+import './images/turing-logo.png'
 import { getAllData, postBooking, deleteBooking, findCustomer, getData } from './api-calls'
 import { handleDropdown, updateNightsStayed, updateTotalSpent } from './dom-updates';
 
@@ -11,8 +12,8 @@ let rooms;
 let bookings;
 let currentUser;
 
-
-let dropdownLinks = document.querySelector(".user-dropdown");
+const pastTrips = document.querySelector('#past-trips');
+let dropdownLinks = document.querySelector('.user-dropdown');
 
 // =========================================================
 // ==================   event listeners   ==================
@@ -23,6 +24,8 @@ window.addEventListener('load', () => {
 });
 
 dropdownLinks.addEventListener('click', handleDropdown);
+
+pastTrips = addEventListener('click', )
 
 // =========================================================
 // =====================   functions   =====================
