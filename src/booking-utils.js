@@ -43,7 +43,7 @@ const getUserPastBookings = (userId, bookings) => {
 
 const getTotalSpent = (userBookings, roomList) => {
   let totalSpent = 0;
-console.log('Mhere')
+
   if (!Array.isArray(userBookings)) {
     return `$0`;
   } else {
@@ -52,6 +52,7 @@ console.log('Mhere')
       totalSpent += room.costPerNight;
     });
   }
+  
   return `$${totalSpent.toFixed(2)}`;
 };
 
@@ -59,5 +60,6 @@ export {
   checkUsername,
   getUserPastBookings,
   getTotalSpent,
-  formatDate
+  formatDate,
+  getTodaysDate
 };

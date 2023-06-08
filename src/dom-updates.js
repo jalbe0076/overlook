@@ -51,15 +51,21 @@ const updateNightsStayed = () => {
 const updateTotalSpent = () => {
   const nightsStayed = getUserPastBookings(currentUser.id, bookings);
   const amoutSpent = getTotalSpent(nightsStayed, rooms);
-  console.log(amoutSpent)
   totalSpent.innerText = `${amoutSpent}`;
 };
 
-const populateBookings = (bookings, rooms) => {
+const populateBookings = (date, bookings, rooms, timeline) => {
   displayRooms.innerHTML = '';
-  // const date = bookings.date;
+  const formatedDate = formatDate(date);
+  let timelineBookings;
+
+  if (timeline === 'past') {
+    timelineBookings = bookings.filter(booking => formatedDate > booking.date);
+  } else {
+    timelineBookings = bookings.filter(booking => formatedDate <= booking.date);
+  }
   
-  bookings.forEach(booking => {
+  timelineBookings.forEach(booking => {
       const room = rooms.find(room => room.number === booking.roomNumber);
 
       displayRooms.innerHTML += `

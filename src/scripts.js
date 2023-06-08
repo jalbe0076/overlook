@@ -6,16 +6,18 @@ import './css/styles.css';
 import './images/turing-logo.png'
 import { getAllData, postBooking, deleteBooking, findCustomer, getData } from './api-calls'
 import { handleDropdown, updateNightsStayed, updateTotalSpent, populateBookings } from './dom-updates';
-import { getUserPastBookings } from './booking-utils';
+import { getUserPastBookings, getTodaysDate } from './booking-utils';
 
 let customers;
 let rooms;
 let bookings;
 let currentUser;
 let userBookings;
+let todaysDate;
 
-let pastTrips = document.querySelector('#past-trips');
-let dropdownLinks = document.querySelector('.user-dropdown');
+const pastTrips = document.querySelector('#past-trips');
+const futureTrips = document.querySelector('#upcoming-trips')
+const dropdownLinks = document.querySelector('.user-dropdown');
 
 // =========================================================
 // ==================   event listeners   ==================
@@ -23,16 +25,19 @@ let dropdownLinks = document.querySelector('.user-dropdown');
 
 window.addEventListener('load', () => {
   setData();
+  todaysDate = getTodaysDate();
 });
 
 dropdownLinks.addEventListener('click', handleDropdown);
 
-pastTrips = addEventListener('click', () => {
-  console.log(currentUser.id)
-  console.log(bookings)
+pastTrips.addEventListener('click', () => {
   userBookings = getUserPastBookings(currentUser.id, bookings);
-  console.log(userBookings)
-  populateBookings(userBookings, rooms);
+  populateBookings(todaysDate, userBookings, rooms, 'past');
+});
+
+futureTrips.addEventListener('click', () => {
+  userBookings = getUserPastBookings(currentUser.id, bookings);
+  populateBookings(todaysDate, userBookings, rooms, 'future');
 });
 
 // =========================================================
@@ -46,8 +51,6 @@ const setData = () => {
       rooms = resolve[1].rooms;
       bookings = resolve[2].bookings;
       currentUser = getCustomer(50);
-      
-      
       updateNightsStayed()
       updateTotalSpent()
     });
