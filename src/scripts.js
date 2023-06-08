@@ -3,15 +3,16 @@
 // =========================================================
 
 import './css/styles.css';
-import { getAllData, postBooking, deleteBooking } from './api-calls'
-import { findCustomer } from "./api-calls";
-import { handleDropdown } from './dom-updates';
+import { getAllData, postBooking, deleteBooking, findCustomer, getData } from './api-calls'
+import { handleDropdown, updateNightsStayed, updateTotalSpent } from './dom-updates';
 
 let customers;
 let rooms;
 let bookings;
+let currentUser;
 
-let userOptions = document.querySelectorAll('.dropdown-menu > li a')
+
+let dropdownLinks = document.querySelector(".user-dropdown");
 
 // =========================================================
 // ==================   event listeners   ==================
@@ -21,24 +22,7 @@ window.addEventListener('load', () => {
   setData();
 });
 
-let dropdownLinks = document.querySelector(".user-dropdown");
 dropdownLinks.addEventListener('click', handleDropdown);
-
-userOptions.forEach(link => {
-  link.addEventListener('keyup', () => {
-   
-  })
-});
-
-
-
-// for (let i = 0; i < dropdownLinks.length; i++) {
-
-//   dropdownLinks[i].addEventLister('click', (e) => {
-//     console.log('click')
-//     handleDropdown(e)});
-
-// }
 
 // =========================================================
 // =====================   functions   =====================
@@ -50,13 +34,20 @@ const setData = () => {
       customers = resolve[0].customers;
       rooms = resolve[1].rooms;
       bookings = resolve[2].bookings;
+      currentUser = getCustomer(50);
+      updateNightsStayed()
+      updateTotalSpent()
     });
 };
 
 const getCustomer = (userId) => {
-  return findCustomer(userId);
+  return customers.find(customer => customer.id === userId);
+  // return findCustomer(userId);
 };
 
 export {
-  setData
+  bookings,
+  setData,
+  currentUser,
+  rooms
 };

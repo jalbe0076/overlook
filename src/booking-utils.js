@@ -28,7 +28,7 @@ const checkUsername = (username) => {
 };
 
 const getUserPastBookings = (userId, bookings) => {
-  const userBookings = bookings.filter(bookings => bookings.userID === userId);
+  const userBookings = bookings.filter((bookings) => bookings.userID === userId);
 
   if (!userBookings.length) {
     return 'No past bookings';
@@ -39,7 +39,7 @@ const getUserPastBookings = (userId, bookings) => {
 
 const getTotalSpent = (userBookings, roomList) => {
   let totalSpent = 0;
-
+console.log('Mhere')
   if (!Array.isArray(userBookings)) {
     return `$0`;
   } else {

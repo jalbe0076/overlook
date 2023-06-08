@@ -1,5 +1,70 @@
 * {
-  font-family: 'Inter', sans-serif; }
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #212427; }
+
+li {
+  list-style-type: none; }
+
+a {
+  text-decoration: none; }
+
+.logo-bar {
+  background-color: #cfd1d1;
+  min-height: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+
+h1 {
+  font-size: 2rem;
+  font-weight: 500;
+  padding-left: 1rem; }
+
+h1 .logo {
+  font-weight: 200; }
+
+.current-user {
+  padding-right: 1rem;
+  font-size: 1.5rem; }
+
+.dropdown-container {
+  position: relative; }
+  .dropdown-container .vip-status {
+    font-size: 1.4rem;
+    font-weight: 300; }
+
+.dropdown-menu {
+  position: absolute;
+  top: 3rem;
+  right: 0.5rem;
+  padding: 1em;
+  border: 0.1rem solid #212427;
+  border-radius: 0.5em; }
+
+.user-data-box {
+  display: flex;
+  flex-direction: column;
+  background-color: #cfd1d1;
+  border-radius: .6rem;
+  padding: 1em;
+  margin: 1em 0;
+  font-size: 1.1rem; }
+  .user-data-box .user-metrix {
+    font-size: 2rem;
+    margin-top: .2em;
+    font-weight: 500; }
+
+.user-item {
+  font-size: 1.4rem;
+  font-weight: 400; }
+
+.user-settings {
+  padding: 0  0 0.5em 0; }
+
+.user-logout {
+  padding: 0.5em 0 0 0; }
 
 [aria-expanded="true"] {
   display: block; }

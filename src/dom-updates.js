@@ -1,5 +1,19 @@
-let userDropdownMenu = document.querySelector('#user-items');
+// =========================================================
+// ===============   variables and imports   ===============
+// =========================================================
+
+import { getUserPastBookings, getTotalSpent } from "./booking-utils";
+import { bookings, rooms, currentUser } from "./scripts";
+
+const userDropdownMenu = document.querySelector('#user-items');
+const totalNights = document.querySelector('.total-nights');
+const totalSpent = document.querySelector('.total-spent');
+
 let lastFocusedElement;
+
+// =========================================================
+// =====================   functions   =====================
+// =========================================================
 
 const handleDropdown = (e) => {
   if (userDropdownMenu.getAttribute('aria-expanded') === 'true') {
@@ -28,6 +42,20 @@ const handleToggleEscape = (e) => {
   }
 };
 
+const updateNightsStayed = () => {
+  const nightsStayed = getUserPastBookings(currentUser.id, bookings);
+  totalNights.innerText = `${nightsStayed.length}`;
+};
+
+const updateTotalSpent = () => {
+  const nightsStayed = getUserPastBookings(currentUser.id, bookings);
+  const amoutSpent = getTotalSpent(nightsStayed, rooms);
+  console.log(amoutSpent)
+  totalSpent.innerText = `${amoutSpent}`;
+};
+
 export {
-  handleDropdown
-}
+  handleDropdown,
+  updateNightsStayed,
+  updateTotalSpent
+};
