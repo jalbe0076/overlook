@@ -10,9 +10,13 @@
 // =====================   functions   =====================
 // =========================================================
 
-const getDate = () => {
-  let date = new Date().toLocaleDateString("en-CA").replaceAll('-', '/');
+const getTodaysDate = () => {
+  let date = new Date().toLocaleDateString("en-CA");
   return date;
+};
+
+const formatDate = (date) => {
+  return date.replaceAll('-', '/');
 };
 
 const checkUsername = (username) => {
