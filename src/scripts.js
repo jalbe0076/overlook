@@ -5,7 +5,7 @@
 import './css/styles.css';
 import './images/turing-logo.png'
 import { getAllData, postBooking, deleteBooking, findCustomer, getData } from './api-calls'
-import { handleDropdown, updateNightsStayed, updateTotalSpent, populateBookings, populateUserProfile, populateUserWelcome, populateAvailableRooms } from './dom-updates';
+import { handleDropdown, updateNightsStayed, updateTotalSpent, populateBookings, populateUserProfile, populateUserWelcome, populateAvailableRooms, setCalendarDates } from './dom-updates';
 import { getUserBookings, getTodaysDate, filterOutUnavailableRooms } from './booking-utils';
 
 
@@ -28,6 +28,7 @@ const pickedDate = document.querySelector('#pick-day');
 
 window.addEventListener('load', () => {
   setData();
+  setCalendarDates();
 });
 
 dropdownLinks.addEventListener('click', handleDropdown);

@@ -11,6 +11,7 @@ const totalSpent = document.querySelector('.total-spent');
 const displayRooms = document.querySelector('main');
 const userProfile = document.querySelector('.user-profile');
 const welcomeUser = document.querySelector('.welcome-user');
+const pickedDate = document.querySelector('#pick-day');
 
 const todaysDate = getTodaysDate();
 let lastFocusedElement;
@@ -125,6 +126,11 @@ const populateUserProfile = (usersName) => {
   userProfile.innerText = `${usersName}`;
 };
 
+const setCalendarDates = () => {
+  pickedDate.value = todaysDate;
+  pickedDate.min = todaysDate;
+};
+
 export {
   handleDropdown,
   updateNightsStayed,
@@ -132,5 +138,6 @@ export {
   populateBookings,
   populateUserWelcome,
   populateUserProfile,
-  populateAvailableRooms
+  populateAvailableRooms,
+  setCalendarDates
 };
