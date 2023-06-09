@@ -5,8 +5,8 @@
 import './css/styles.css';
 import './images/turing-logo.png'
 import { getAllData, postBooking, deleteBooking, findCustomer, getData } from './api-calls'
-import { handleDropdown, updateNightsStayed, updateTotalSpent, populateBookings, populateUserProfile, populateUserWelcome } from './dom-updates';
-import { getUserBookings, getTodaysDate } from './booking-utils';
+import { handleDropdown, updateNightsStayed, updateTotalSpent, populateBookings, populateUserProfile, populateUserWelcome, populateAvailableRooms } from './dom-updates';
+import { getUserBookings, getTodaysDate, filterOutUnavailableRooms } from './booking-utils';
 
 
 let customers;
@@ -44,7 +44,9 @@ futureTrips.addEventListener('click', () => {
 
 formData.addEventListener('submit', (e) => {
   e.preventDefault();
-  new Date(`${pickedDate.value}T00:00`).toLocaleDateString("en-CA");
+  const selectedDate = new Date(`${pickedDate.value}T00:00`).toLocaleDateString("en-CA");
+  const availableRooms = filterOutUnavailableRooms(selectedDate, bookings, rooms)
+  populateAvailableRooms(availableRooms);
 });
 
 // =========================================================

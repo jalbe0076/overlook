@@ -2,7 +2,7 @@
 // ===============   variables and imports   ===============
 // =========================================================
 
-import { getUserBookings, getTotalSpent, formatDate } from "./booking-utils";
+import { getUserBookings, getTotalSpent, filterOutUnavailableRooms } from "./booking-utils";
 import { bookings, rooms, currentUser } from "./scripts";
 import { getTodaysDate } from "./booking-utils";
 
@@ -94,13 +94,11 @@ const populateBookings = (date, bookings, rooms) => {
   });
 };
 
-const populateAvailableRooms = (date, bookings, rooms) => {
+const populateAvailableRooms = (availableRooms) => {
   displayRooms.innerHTML = '';
-  
 
-  rooms.forEach(room => {
-    if(unavailableRooms.find(bookedRoom => bookedRoom.Number.includes(room.roomNumber))) {
-      displayRooms.innerHTML += `
+  availableRooms.forEach(room => {
+    displayRooms.innerHTML += `
       <article class="rooms">
         <img class="room-image" src="./images/turing-logo.png" alt="turing logo">
         <div class="room-info">
@@ -115,9 +113,7 @@ const populateAvailableRooms = (date, bookings, rooms) => {
           </ul>
           <p class="room-cost">$${room.costPerNight}</p>
         </div>
-      </article>
-      `;
-    }
+      </article>`;
   });
 };
 
@@ -136,5 +132,6 @@ export {
   updateTotalSpent,
   populateBookings,
   populateUserWelcome,
-  populateUserProfile
+  populateUserProfile,
+  populateAvailableRooms
 };
