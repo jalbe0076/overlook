@@ -64,10 +64,18 @@ const getTotalSpent = (userBookings, roomList) => {
   return `$${totalSpent.toFixed(2)}`;
 };
 
+const filterOutUnavailableRooms = (date, bookings, rooms) => {
+  const formatedDate = formatDate(date)
+  const unavailableRooms = bookings.filter(booking => booking.date === formatedDate).map(unavailableRoom => unavailableRoom.roomNumber);
+  const availableRooms = rooms.filter(room => !unavailableRooms.includes(room.number))
+  return availableRooms;
+};
+
 export {
   checkUsername,
   getUserBookings,
   getTotalSpent,
   formatDate,
-  getTodaysDate
+  getTodaysDate,
+  filterOutUnavailableRooms
 };

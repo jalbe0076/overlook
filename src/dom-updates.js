@@ -2,7 +2,7 @@
 // ===============   variables and imports   ===============
 // =========================================================
 
-import { getUserBookings, getTotalSpent, formatDate, getTodaysDate } from "./booking-utils";
+import { getUserBookings, getTotalSpent, formatDate, getTodaysDate, filterOutUnavailableRooms } from "./booking-utils";
 import { bookings, rooms, currentUser } from "./scripts";
 
 const userDropdownMenu = document.querySelector('#user-items');
@@ -11,6 +11,7 @@ const totalSpent = document.querySelector('.total-spent');
 const displayRooms = document.querySelector('main');
 const userProfile = document.querySelector('.user-profile');
 const welcomeUser = document.querySelector('.welcome-user');
+const pickedDate = document.querySelector('#pick-day');
 
 const todaysDate = getTodaysDate();
 let lastFocusedElement;
@@ -93,14 +94,11 @@ const populateBookings = (date, bookings, rooms) => {
   });
 };
 
-const populateAvailableRooms = (date, bookings, rooms) => {
+const populateAvailableRooms = (availableRooms) => {
   displayRooms.innerHTML = '';
-  const formatedDate = formatDate(date)
-  const unavailableRooms = bookings.filter(booking => booking.date === formatedDate);
 
-  rooms.forEach(room => {
-    if(unavailableRooms.find(bookedRoom => bookedRoom.Number.includes(room.roomNumber))) {
-      displayRooms.innerHTML += `
+  availableRooms.forEach(room => {
+    displayRooms.innerHTML += `
       <article class="rooms">
         <img class="room-image" src="./images/turing-logo.png" alt="turing logo">
         <div class="room-info">
@@ -115,9 +113,7 @@ const populateAvailableRooms = (date, bookings, rooms) => {
           </ul>
           <p class="room-cost">$${room.costPerNight}</p>
         </div>
-      </article>
-      `;
-    }
+      </article>`;
   });
 };
 
@@ -130,11 +126,18 @@ const populateUserProfile = (usersName) => {
   userProfile.innerText = `${usersName}`;
 };
 
+const setCalendarDates = () => {
+  pickedDate.value = todaysDate;
+  pickedDate.min = todaysDate;
+};
+
 export {
   handleDropdown,
   updateNightsStayed,
   updateTotalSpent,
   populateBookings,
   populateUserWelcome,
-  populateUserProfile
+  populateUserProfile,
+  populateAvailableRooms,
+  setCalendarDates
 };
