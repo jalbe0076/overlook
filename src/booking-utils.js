@@ -31,19 +31,27 @@ const checkUsername = (username) => {
   return userId;
 };
 
-const getUserPastBookings = (userId, bookings) => {
+const getUserBookings = (date, userId, bookings, timeline) => {
   const userBookings = bookings.filter((bookings) => bookings.userID === userId);
+  const todaysDate = formatDate(date);
+  let timelineBookings;
 
-  if (!userBookings.length) {
-    return 'No past bookings';
+  if (timeline === 'past') {
+    timelineBookings = userBookings.filter(booking => todaysDate > booking.date);
   } else {
-    return userBookings;
+    timelineBookings = userBookings.filter(booking => todaysDate < booking.date);
+  }
+
+  if (!timelineBookings.length) {
+    return `No ${timeline} bookings`;
+  } else {
+    return timelineBookings;
   }  
 };
 
 const getTotalSpent = (userBookings, roomList) => {
   let totalSpent = 0;
-
+  
   if (!Array.isArray(userBookings)) {
     return `$0`;
   } else {
@@ -52,13 +60,13 @@ const getTotalSpent = (userBookings, roomList) => {
       totalSpent += room.costPerNight;
     });
   }
-  
+
   return `$${totalSpent.toFixed(2)}`;
 };
 
 export {
   checkUsername,
-  getUserPastBookings,
+  getUserBookings,
   getTotalSpent,
   formatDate,
   getTodaysDate

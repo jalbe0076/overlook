@@ -2,8 +2,9 @@
 // ===============   variables and imports   ===============
 // =========================================================
 
-import { getUserPastBookings, getTotalSpent, formatDate } from "./booking-utils";
+import { getUserBookings, getTotalSpent, formatDate } from "./booking-utils";
 import { bookings, rooms, currentUser } from "./scripts";
+import { getTodaysDate } from "./booking-utils";
 
 const userDropdownMenu = document.querySelector('#user-items');
 const totalNights = document.querySelector('.total-nights');
@@ -12,6 +13,7 @@ const displayRooms = document.querySelector('main');
 const userProfile = document.querySelector('.user-profile');
 const welcomeUser = document.querySelector('.welcome-user');
 
+const todaysDate = getTodaysDate();
 let lastFocusedElement;
 
 // =========================================================
@@ -46,28 +48,28 @@ const handleToggleEscape = (e) => {
 };
 
 const updateNightsStayed = () => {
-  const nightsStayed = getUserPastBookings(currentUser.id, bookings);
+  const nightsStayed = getUserBookings(todaysDate, currentUser.id, bookings, 'past');
   totalNights.innerText = `${nightsStayed.length}`;
 };
 
 const updateTotalSpent = () => {
-  const nightsStayed = getUserPastBookings(currentUser.id, bookings);
+  const nightsStayed = getUserBookings(todaysDate, currentUser.id, bookings, 'past');
   const amoutSpent = getTotalSpent(nightsStayed, rooms);
   totalSpent.innerText = `${amoutSpent}`;
 };
 
-const populateBookings = (date, bookings, rooms, timeline) => {
+const populateBookings = (date, bookings, rooms) => {
   displayRooms.innerHTML = '';
-  const formatedDate = formatDate(date);
-  let timelineBookings;
+  // const formatedDate = formatDate(date);
+  // let timelineBookings;
 
-  if (timeline === 'past') {
-    timelineBookings = bookings.filter(booking => formatedDate > booking.date);
-  } else {
-    timelineBookings = bookings.filter(booking => formatedDate <= booking.date);
-  }
+  // if (timeline === 'past') {
+  //   timelineBookings = bookings.filter(booking => formatedDate > booking.date);
+  // } else {
+  //   timelineBookings = bookings.filter(booking => formatedDate <= booking.date);
+  // }
   
-  timelineBookings.forEach(booking => {
+  bookings.forEach(booking => {
       const room = rooms.find(room => room.number === booking.roomNumber);
 
       displayRooms.innerHTML += `
