@@ -33,11 +33,13 @@
       </div>
       <form id="booking-options" action="../src/scripts.js" method="get">
         <input type="date" id="pick-day" name="trip-day" value="2022-04-22" min="2017-05-21" max="2024-06-01">
-        <select name="room-types" id="room-types">
-          <option value="single room">Single Room</option>
-          <option value="junior suite">Junior Suite</option>
-          <option value="suite">Suite</option>
-          <option value="residential suite">Residential Suite</option>
+        <select name="room-types" id="room-types" placeholder="Room Type">
+          <option disabled selected value="All Rooms">Select room type</option>
+          <option value="All Rooms">All Rooms</option>
+          <option value="Single Room">Single Room</option>
+          <option value="Junior Suite">Junior Suite</option>
+          <option value="Suite">Suite</option>
+          <option value="Residential Suite">Residential Suite</option>
         </select>
         <button type="submit" form="booking-options" value="submit" class="see-available-rooms">See available rooms</button>
       </form>
