@@ -2,7 +2,7 @@ import chai from 'chai';
 import { customerList } from './sample-data/sample-customer-list.js';
 import { roomList } from './sample-data/sample-room-list.js';
 import { bookingList } from './sample-data/sample-booking-list.js';
-import { checkUsername, getUserBookings, getTotalSpent  } from '../src/booking-utils.js';
+import { checkUsername, getUserBookings, getTotalSpent, filterOutUnavailableRooms  } from '../src/booking-utils.js';
 
 const expect = chai.expect;
 
@@ -110,5 +110,22 @@ describe(`Get a users bookings and calculate past total costs`, () => {
   it(`Should return $0 if the user has not spent any nights`, () => {
     const totalSpent = getTotalSpent(user2Bookings, roomList.rooms);
     expect(totalSpent).to.equal('$0');
+  });
+});
+
+describe('Get a customer\'s name from their username', () => {
+  it('Should filter out rooms that are already booked for that day', () => {
+    const availableRooms = filterOutUnavailableRooms('2022-04-22', bookingList.bookings, roomList.rooms); 
+    expect(availableRooms).to.have.lengthOf(1);
+  });
+
+  it('Should filter out rooms that are already booked for a different day', () => {
+    const availableRooms = filterOutUnavailableRooms('2022-02-05', bookingList.bookings, roomList.rooms); 
+    expect(availableRooms).to.have.lengthOf(2);
+  });
+
+  it('Should return all rooms if no rooms are booked for the day', () => {
+    const availableRooms = filterOutUnavailableRooms('2022-02-04', bookingList.bookings, roomList.rooms); 
+    expect(availableRooms).to.have.lengthOf(3);
   });
 });

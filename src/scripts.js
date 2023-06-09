@@ -19,6 +19,8 @@ const todaysDate = getTodaysDate();
 const pastTrips = document.querySelector('#past-trips');
 const futureTrips = document.querySelector('#upcoming-trips')
 const dropdownLinks = document.querySelector('.user-profile');
+const formData = document.querySelector('#booking-options');
+const pickedDate = document.querySelector('#pick-day');
 
 // =========================================================
 // ==================   event listeners   ==================
@@ -38,6 +40,11 @@ pastTrips.addEventListener('click', () => {
 futureTrips.addEventListener('click', () => {
   userBookings = getUserBookings(todaysDate, currentUser.id, bookings, 'upcoming');
   populateBookings(todaysDate, userBookings, rooms);
+});
+
+formData.addEventListener('submit', (e) => {
+  e.preventDefault();
+  new Date(`${pickedDate.value}T00:00`).toLocaleDateString("en-CA");
 });
 
 // =========================================================

@@ -64,10 +64,15 @@ const getTotalSpent = (userBookings, roomList) => {
   return `$${totalSpent.toFixed(2)}`;
 };
 
+const filterOutUnavailableRooms = (date, bookings, rooms) => {
+
+};
+
 export {
   checkUsername,
   getUserBookings,
   getTotalSpent,
   formatDate,
-  getTodaysDate
+  getTodaysDate,
+  filterOutUnavailableRooms
 };

@@ -96,8 +96,7 @@ const populateBookings = (date, bookings, rooms) => {
 
 const populateAvailableRooms = (date, bookings, rooms) => {
   displayRooms.innerHTML = '';
-  const formatedDate = formatDate(date)
-  const unavailableRooms = bookings.filter(booking => booking.date === formatedDate);
+  
 
   rooms.forEach(room => {
     if(unavailableRooms.find(bookedRoom => bookedRoom.Number.includes(room.roomNumber))) {
