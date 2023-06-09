@@ -59,7 +59,7 @@ const updateTotalSpent = () => {
   totalSpent.innerText = `${amoutSpent}`;
 };
 
-const populateBookings = (date, bookings, rooms) => {
+const populateBookings = (bookings, rooms) => {
   displayRooms.innerHTML = '';
 
   bookings.forEach(booking => {

@@ -36,12 +36,12 @@ dropdownLinks.addEventListener('click', handleDropdown);
 
 pastTrips.addEventListener('click', () => {
   userBookings = getUserBookings(todaysDate, currentUser.id, bookings, 'past');
-  populateBookings(todaysDate, userBookings, rooms);
+  populateBookings(userBookings, rooms);
 });
 
 futureTrips.addEventListener('click', () => {
   userBookings = getUserBookings(todaysDate, currentUser.id, bookings, 'upcoming');
-  populateBookings(todaysDate, userBookings, rooms);
+  populateBookings(userBookings, rooms);
 });
 
 formData.addEventListener('submit', (e) => {
