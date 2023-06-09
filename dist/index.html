@@ -4,13 +4,51 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <title>Overlook</title>
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo">
-  
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
+  <section class="banner">
+    <div class="logo-bar">
+      <h1>OVERLOOK <span class="logo">BOUTIQUE HOTEL</span></h1>
+      <div class="dropdown-container">
+        <a href="#" class="user-profile">John Doe</a>
+        <ul class="dropdown-menu" id="user-items" aria-expanded="false">
+          <p class="vip-status">VIP placeholder</p>
+          <div class="user-data-box">Nights with us<span class="user-metrix  total-nights"></span></div>
+          <li><div class="user-data-box">Total spent so far<span class="user-metrix total-spent"></span></div></li>
+          <li class="user-settings"><a href="#" class="user-item" id="user-settings">Settings</a></li>
+          <li class="user-logout"><a href="#" class="user-item" id="user-logout">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+    <nav>
+      <h2 class="welcome-user">Welcome!</h2>
+      <div class="trip-actions">
+        <button href="#" class="nav-tab" id="bookings">Plan your next stay</button>
+        <button href="#" class="nav-tab" id="past-trips">Your past trips</button>
+        <button href="#" class="nav-tab" id="upcoming-trips">Upcoming trips</button>
+      </div>
+      <form id="booking-options" action="../src/scripts.js">
+        <input type="date" id="pick-day" name="trip-day" value="2018-07-22" min="2023-05-21" max="2024-06-01">
+        <select name="room-types" id="room-types">
+          <option value="single room">Single Room</option>
+          <option value="junior suite">Junior Suite</option>
+          <option value="suite">Suite</option>
+          <option value="residential suite">Residential Suite</option>
+        </select>
+        <button type="submit" form="booking-options" value="submit" class="see-available-rooms">See available rooms</button>
+      </form>
+      <div class="trip-message .hidden">
+        <!--  TRIPS MESSAGE FOR PAST OR FUTURE  -->
+      </div>
+    </nav>  
+  </section>
+  <main>
+    <!--  ROOMS GET POPULATED HERE  -->
+  </main>
   <script src="bundle.js"></script>
-
 </body>
 </html>
