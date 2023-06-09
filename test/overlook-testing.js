@@ -56,7 +56,7 @@ describe(`Get a users bookings and calculate past total costs`, () => {
     expect(user13Bookings).to.have.lengthOf(2);
   });
 
-  it('Should accomodate a change in date', () => {
+  it('Should accommodate a change in date', () => {
     expect(alternativeUser13Bookings[0]).to.have.keys([ 'id', 'userID', 'date', 'roomNumber' ]);
     expect(alternativeUser13Bookings).to.have.lengthOf(1);
   });
@@ -72,6 +72,11 @@ describe(`Get a users bookings and calculate past total costs`, () => {
   it(`Should let the user know if they don't have upcoming bookings`, () => {
     user13Bookings = getUserBookings('2023-06-08', 13, bookingList.bookings, 'upcoming');
     expect(user13Bookings).to.equal('No upcoming bookings');
+  });
+
+  it(`If the booking date is today then the booking should show up as upcoming`, () => {
+    user13Bookings = getUserBookings('2022-01-19', 13, bookingList.bookings, 'upcoming');
+    expect(user13Bookings).to.have.lengthOf(1);
   });
 
   it('Future bookings should have specific information', () => {

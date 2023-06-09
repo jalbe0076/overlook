@@ -39,7 +39,7 @@ const getUserBookings = (date, userId, bookings, timeline) => {
   if (timeline === 'past') {
     timelineBookings = userBookings.filter(booking => todaysDate > booking.date);
   } else {
-    timelineBookings = userBookings.filter(booking => todaysDate < booking.date);
+    timelineBookings = userBookings.filter(booking => todaysDate <= booking.date);
   }
 
   if (!timelineBookings.length) {

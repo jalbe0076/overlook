@@ -2,9 +2,8 @@
 // ===============   variables and imports   ===============
 // =========================================================
 
-import { getUserBookings, getTotalSpent, filterOutUnavailableRooms } from "./booking-utils";
+import { getUserBookings, getTotalSpent, formatDate, getTodaysDate, filterOutUnavailableRooms } from "./booking-utils";
 import { bookings, rooms, currentUser } from "./scripts";
-import { getTodaysDate } from "./booking-utils";
 
 const userDropdownMenu = document.querySelector('#user-items');
 const totalNights = document.querySelector('.total-nights');
@@ -103,7 +102,7 @@ const populateAvailableRooms = (availableRooms) => {
         <img class="room-image" src="./images/turing-logo.png" alt="turing logo">
         <div class="room-info">
           <h3 class="room-type">${room.roomType}</h3>
-          <p class="bed-size">${room.numBeds} ${room.bedSize}${function () { if(room.bidet) { ', Bidet' } } }</p>
+          <p class="bed-size">${room.numBeds}${room.bedSize}${room.bidet ? ', Bidet' : '' }</p>
           <ul class="amenities">
             <li>Wifi</li>
             <li>Air conditioner</li>
