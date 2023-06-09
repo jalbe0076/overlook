@@ -2,7 +2,7 @@ import chai from 'chai';
 import { customerList } from './sample-data/sample-customer-list.js';
 import { roomList } from './sample-data/sample-room-list.js';
 import { bookingList } from './sample-data/sample-booking-list.js';
-import { checkUsername, getUserBookings, getTotalSpent, filterOutUnavailableRooms  } from '../src/booking-utils.js';
+import { checkUsername, getUserBookings, getTotalSpent, filterOutUnavailableRooms, filterAvailableRoomsByType  } from '../src/booking-utils.js';
 
 const expect = chai.expect;
 
@@ -132,5 +132,33 @@ describe('Get a customer\'s name from their username', () => {
   it('Should return all rooms if no rooms are booked for the day', () => {
     const availableRooms = filterOutUnavailableRooms('2022-02-04', bookingList.bookings, roomList.rooms); 
     expect(availableRooms).to.have.lengthOf(3);
+  });
+});
+
+describe('It should return rooms by selected type', () => {
+  let availableRooms;
+
+  beforeEach(() => {
+    availableRooms = filterOutUnavailableRooms('2022-02-04', bookingList.bookings, roomList.rooms);
+  });
+
+  it('Should return all rooms if no room type has been selected', () => {
+    const filteredAvailableRooms = filterAvailableRoomsByType(availableRooms); 
+    expect(filteredAvailableRooms).to.have.lengthOf(3);
+  });
+
+  it('Should return all rooms if the option all rooms is selected', () => {
+    const filteredAvailableRooms = filterAvailableRoomsByType(availableRooms, 'All Rooms'); 
+    expect(filteredAvailableRooms).to.have.lengthOf(3);
+  });
+
+  it('Should return all rooms if an option is selected', () => {
+    const filteredAvailableRooms = filterAvailableRoomsByType(availableRooms, 'suite'); 
+    expect(filteredAvailableRooms).to.have.lengthOf(1);
+  });
+
+  it('Should return all rooms if a different option is selected', () => {
+    const filteredAvailableRooms = filterAvailableRoomsByType(availableRooms, 'single room'); 
+    expect(filteredAvailableRooms).to.have.lengthOf(1);
   });
 });

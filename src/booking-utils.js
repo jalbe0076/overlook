@@ -71,11 +71,24 @@ const filterOutUnavailableRooms = (date, bookings, rooms) => {
   return availableRooms;
 };
 
+const filterAvailableRoomsByType = (availableRooms, filterType) => {
+
+  if (filterType === 'All Rooms' || filterType === undefined) {
+    return availableRooms;
+  } else {
+    const roomType = filterType.toLowerCase();
+    const filteredAvailableRooms = availableRooms.filter(room => room.roomType === roomType);
+
+    return filteredAvailableRooms;
+  }
+};
+
 export {
   checkUsername,
   getUserBookings,
   getTotalSpent,
   formatDate,
   getTodaysDate,
-  filterOutUnavailableRooms
+  filterOutUnavailableRooms,
+  filterAvailableRoomsByType
 };

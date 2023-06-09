@@ -12,6 +12,7 @@ const displayRooms = document.querySelector('main');
 const userProfile = document.querySelector('.user-profile');
 const welcomeUser = document.querySelector('.welcome-user');
 const pickedDate = document.querySelector('#pick-day');
+const roomType = document.querySelector('#room-types');
 
 const todaysDate = getTodaysDate();
 let lastFocusedElement;
@@ -58,17 +59,9 @@ const updateTotalSpent = () => {
   totalSpent.innerText = `${amoutSpent}`;
 };
 
-const populateBookings = (date, bookings, rooms) => {
+const populateBookings = (bookings, rooms) => {
   displayRooms.innerHTML = '';
-  // const formatedDate = formatDate(date);
-  // let timelineBookings;
 
-  // if (timeline === 'past') {
-  //   timelineBookings = bookings.filter(booking => formatedDate > booking.date);
-  // } else {
-  //   timelineBookings = bookings.filter(booking => formatedDate <= booking.date);
-  // }
-  
   bookings.forEach(booking => {
       const room = rooms.find(room => room.number === booking.roomNumber);
 
@@ -78,7 +71,7 @@ const populateBookings = (date, bookings, rooms) => {
         <div class="room-info">
           <h3 class="room-type">${room.roomType}</h3>
           <p class="bed-size">${room.numBeds} ${room.bedSize}${room.bidet ? ', Bidet' : '' }</p>
-          <ul class="amenities">
+          <ul class="amenities">Amenities
             <li>Wifi</li>
             <li>Air conditioner</li>
             <li>Balcony</li>
@@ -89,8 +82,7 @@ const populateBookings = (date, bookings, rooms) => {
           <p class="reference">Booking Reference: ${booking.id}</p>
           <p class="room-cost">$${room.costPerNight}</p>
         </div>
-      </article>
-      `;
+      </article>`;
   });
 };
 
@@ -103,8 +95,8 @@ const populateAvailableRooms = (availableRooms) => {
         <img class="room-image" src="./images/turing-logo.png" alt="turing logo">
         <div class="room-info">
           <h3 class="room-type">${room.roomType}</h3>
-          <p class="bed-size">${room.numBeds}${room.bedSize}${room.bidet ? ', Bidet' : '' }</p>
-          <ul class="amenities">
+          <p class="bed-size">${room.numBeds} ${room.bedSize}${room.bidet ? ', Bidet' : '' }</p>
+          <ul class="amenities">Amenities
             <li>Wifi</li>
             <li>Air conditioner</li>
             <li>Balcony</li>
