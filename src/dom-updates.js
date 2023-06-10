@@ -8,11 +8,12 @@ import { bookings, rooms, currentUser } from "./scripts";
 const userDropdownMenu = document.querySelector('#user-items');
 const totalNights = document.querySelector('.total-nights');
 const totalSpent = document.querySelector('.total-spent');
-const displayRooms = document.querySelector('main');
+const displayRooms = document.querySelector('.available-rooms');
 const userProfile = document.querySelector('.user-profile');
 const welcomeUser = document.querySelector('.welcome-user');
 const pickedDate = document.querySelector('#pick-day');
-const roomType = document.querySelector('#room-types');
+const modal = document.querySelector('.modal');
+const innerModal = document.querySelector('.inner-modal');
 
 const todaysDate = getTodaysDate();
 let lastFocusedElement;
@@ -91,7 +92,7 @@ const populateAvailableRooms = (availableRooms) => {
 
   availableRooms.forEach(room => {
     displayRooms.innerHTML += `
-      <article class="rooms">
+      <article class="rooms" id="${room.number}">
         <img class="room-image" src="./images/turing-logo.png" alt="turing logo">
         <div class="room-info">
           <h3 class="room-type">${room.roomType}</h3>
@@ -123,6 +124,49 @@ const setCalendarDates = () => {
   pickedDate.min = todaysDate;
 };
 
+const showRoomModal = (room, date) => {
+  modal.classList.toggle('hidden');
+  innerModal.innerHTML = `
+  <article class="rooms" id="${room.number}">
+    <img class="room-image" src="./images/turing-logo.png" alt="turing logo">
+    <div class="room-info">
+      <h3 class="room-type">${room.roomType}</h3>
+      <p class="bed-size">${room.numBeds} ${room.bedSize}${room.bidet ? ', Bidet' : '' }</p>
+      <ul class="amenities">Amenities
+        <li>Wifi</li>
+        <li>Air conditioner</li>
+        <li>Balcony</li>
+        <li>Pet Friendly</li>
+        <li>Access to gym and pool</li>
+      </ul>
+      <p class="booked-date" id="${date}">Stay with us on ${date}</p>
+       <p class="room-cost">$${room.costPerNight}</p>
+      <button class="book-room">BOOK NOW!</button>
+    </div>
+  </article>`;
+
+  const modalBookingBtn = document.querySelector('.book-room');
+
+  modalBookingBtn.addEventListener('click', (e) => {
+    showConfirmedBooking(room, date)
+  })
+};
+
+const showConfirmedBooking = (room, date) => {
+  const firstName = currentUser.name.split(' ')[0];
+
+  innerModal.innerHTML = `
+    <article class="rooms">
+      <img class="room-image" src="./images/turing-logo.png" alt="turing logo">
+      <div class="room-info">
+        <h3 class="booking-thanks">${firstName}, thank you for booking a ${room.roomType} with us</h3>
+        <p class="booking-date">Your booking is confirmed for ${date}</p>
+        <p class="reference">Your booking reference: </p>
+        <button class="book-room">return </button>
+      </div>
+    </article>`;
+};
+
 export {
   handleDropdown,
   updateNightsStayed,
@@ -131,5 +175,6 @@ export {
   populateUserWelcome,
   populateUserProfile,
   populateAvailableRooms,
-  setCalendarDates
+  setCalendarDates,
+  showRoomModal,
 };

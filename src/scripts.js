@@ -5,15 +5,15 @@
 import './css/styles.css';
 import './images/turing-logo.png'
 import { getAllData, postBooking, deleteBooking, findCustomer, getData } from './api-calls'
-import { handleDropdown, updateNightsStayed, updateTotalSpent, populateBookings, populateUserProfile, populateUserWelcome, populateAvailableRooms, setCalendarDates } from './dom-updates';
-import { getUserBookings, getTodaysDate, filterOutUnavailableRooms, filterAvailableRoomsByType } from './booking-utils';
-
+import { handleDropdown, updateNightsStayed, updateTotalSpent, populateBookings, populateUserProfile, populateUserWelcome, populateAvailableRooms, setCalendarDates, showRoomModal, modalBookingBtn } from './dom-updates';
+import { getUserBookings, getTodaysDate, filterOutUnavailableRooms, filterAvailableRoomsByType, findRoom } from './booking-utils';
 
 let customers;
 let rooms;
 let bookings;
 let currentUser;
 let userBookings;
+let selectedDate;
 const todaysDate = getTodaysDate();
 
 const pastTrips = document.querySelector('#past-trips');
@@ -46,11 +46,20 @@ futureTrips.addEventListener('click', () => {
 
 formData.addEventListener('submit', (e) => {
   e.preventDefault();
-  const selectedDate = new Date(`${pickedDate.value}T00:00`).toLocaleDateString("en-CA");
+  selectedDate = new Date(`${pickedDate.value}T00:00`).toLocaleDateString("en-CA");
   const selectedRoomType = roomType.value;
   const availableRooms = filterOutUnavailableRooms(selectedDate, bookings, rooms)
   const filteredRooms = filterAvailableRoomsByType(availableRooms, selectedRoomType);
   populateAvailableRooms(filteredRooms);
+  
+  let roomsToBook = document.querySelectorAll('.rooms');
+
+  roomsToBook.forEach((room, i) => {
+    room.addEventListener('click', (e) => {
+      const selectedRoom = findRoom(room.id, rooms);
+      showRoomModal(selectedRoom, selectedDate);
+    })
+  });
 });
 
 // =========================================================

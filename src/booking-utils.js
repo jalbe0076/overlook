@@ -83,6 +83,18 @@ const filterAvailableRoomsByType = (availableRooms, filterType) => {
   }
 };
 
+const findRoom = (roomNumber, rooms) => {
+  return rooms.find(room => room.number === parseInt(roomNumber))
+};
+
+const formatRoomToPost = (date, room, userId) => {
+  return { 
+    userID: userId, 
+    date: date, 
+    roomNumber: room.number 
+  };
+};
+
 export {
   checkUsername,
   getUserBookings,
@@ -90,5 +102,6 @@ export {
   formatDate,
   getTodaysDate,
   filterOutUnavailableRooms,
-  filterAvailableRoomsByType
+  filterAvailableRoomsByType,
+  findRoom
 };
