@@ -73,8 +73,8 @@ const filterOutUnavailableRooms = (date, bookings, rooms) => {
 };
 
 const filterAvailableRoomsByType = (availableRooms, filterType, date) => {
-  if (!availableRooms.length) { 
-    return `We are fully booked on ${date}, please consider staying with us another night`;
+  if (!availableRooms.length && filterType !== 'upcoming') { 
+    return `Sorry, we are fully booked on ${date}, please consider staying with us another night`;
   } 
 
   if (filterType === 'All Rooms' || filterType === undefined) {

@@ -35,11 +35,13 @@ window.addEventListener('load', () => {
 dropdownLinks.addEventListener('click', handleDropdown);
 
 pastTrips.addEventListener('click', () => {
+  resetTripMessage();
   userBookings = getUserBookings(todaysDate, currentUser.id, bookings, 'past');
   populateBookings(userBookings, rooms);
 });
 
 futureTrips.addEventListener('click', () => {
+  resetTripMessage();
   userBookings = getUserBookings(todaysDate, currentUser.id, bookings, 'upcoming');
   populateBookings(userBookings, rooms);
 });

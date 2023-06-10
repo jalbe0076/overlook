@@ -117,7 +117,7 @@ const displayTripMessage = (roomStatus) => {
 };
 
 const resetTripMessage = () => {
-  tripMessage.innerText = '';
+  tripMessage.innerText = `HOSPITALITY AT IT'S FINEST.`;
 }
 
 const populateUserWelcome = (usersName) => {
