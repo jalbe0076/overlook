@@ -48,6 +48,7 @@ const handleToggleEscape = (e) => {
   if (e.keyCode === 27) {
     lastFocusedElement.click();
   }
+
 };
 
 const updateNightsStayed = () => {

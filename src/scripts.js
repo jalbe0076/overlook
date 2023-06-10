@@ -60,8 +60,8 @@ formData.addEventListener('submit', (e) => {
   
   let roomsToBook = document.querySelectorAll('.rooms');
 
-  roomsToBook.forEach((room, i) => {
-    room.addEventListener('click', (e) => {
+  roomsToBook.forEach((room) => {
+    room.addEventListener('click', () => {
       const selectedRoom = findRoom(room.id, rooms);
       showRoomModal(selectedRoom, selectedDate);
     })
