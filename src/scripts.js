@@ -11,8 +11,9 @@ import './images/single-suite.jpg';
 import './images/double-suite.jpg';
 import './images/single-residential-suite.jpg';
 import './images/double-residential-suite.jpg';
+import './images/customer-rating.png'
 import { getAllData, postBooking, deleteBooking, findCustomer, getData } from './api-calls'
-import { handleDropdown, updateNightsStayed, updateTotalSpent, populateBookings, populateUserProfile, populateUserWelcome, populateAvailableRooms, setCalendarDates, showRoomModal, modalBookingBtn, displayTripMessage, resetTripMessage } from './dom-updates';
+import { handleDropdown, updateNightsStayed, updateTotalSpent, populateBookings, populateUserProfile, populateUserWelcome, populateAvailableRooms, setCalendarDates, showRoomModal, modalBookingBtn, displayTripMessage, resetTripMessage, updateCustomerStatus, handleActiveBtn } from './dom-updates';
 import { getUserBookings, getTodaysDate, filterOutUnavailableRooms, filterAvailableRoomsByType, findRoom } from './booking-utils';
 
 let customers;
@@ -29,6 +30,7 @@ const dropdownLinks = document.querySelector('.user-profile');
 const formData = document.querySelector('#booking-options');
 const pickedDate = document.querySelector('#pick-day');
 const roomType = document.querySelector('#room-types');
+const navBtns = document.querySelectorAll('.nav-tab')
 
 // =========================================================
 // ==================   event listeners   ==================
@@ -84,6 +86,14 @@ formData.addEventListener('submit', (e) => {
   });
 });
 
+navBtns.forEach(button => {
+  button.addEventListener('click', () => {
+    handleActiveBtn();
+    button.classList.add('nav-tab-active');
+    button.style.color =  '#212427';
+  });
+});
+
 
 // =========================================================
 // =====================   functions   =====================
@@ -95,10 +105,11 @@ const setData = () => {
       customers = resolve[0].customers;
       rooms = resolve[1].rooms;
       bookings = resolve[2].bookings;
-      currentUser = getCustomer(50);
+      currentUser = getCustomer(49);
       
       updateNightsStayed();
       updateTotalSpent();
+      updateCustomerStatus();
       populateUserProfile(currentUser.name);
       populateUserWelcome(currentUser.name);
     });

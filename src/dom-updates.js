@@ -15,6 +15,8 @@ const pickedDate = document.querySelector('#pick-day');
 const bookingModal = document.querySelector('.modal');
 const innerModal = document.querySelector('.inner-modal');
 const tripMessage = document.querySelector('.trip-message');
+const vipStatus = document.querySelector('.vip-status');
+const navBtns = document.querySelectorAll('.nav-tab');
 
 const todaysDate = getTodaysDate();
 let lastFocusedElement;
@@ -54,6 +56,18 @@ const handleToggleEscape = (e) => {
 const updateNightsStayed = () => {
   const nightsStayed = getUserBookings(todaysDate, currentUser.id, bookings, 'past');
   totalNights.innerText = `${nightsStayed.length}`;
+};
+
+const updateCustomerStatus = () => {
+  const nightsStayed = getUserBookings(todaysDate, currentUser.id, bookings, 'past').length;
+
+  if (nightsStayed < 10) {
+    vipStatus.innerHTML = `Prefered Customer`;
+  } else if (nightsStayed < 20) {
+    vipStatus.innerHTML = `Loyal Customer`;
+  } else {
+    vipStatus.innerHTML = `<img src="./images/customer-rating.png">VIP Customer`;
+  }
 };
 
 const updateTotalSpent = () => {
@@ -117,12 +131,12 @@ const displayTripMessage = (roomStatus) => {
 };
 
 const resetTripMessage = () => {
-  tripMessage.innerText = `HOSPITALITY AT IT'S FINEST.`;
+  tripMessage.innerText = `HOSPITALITY AT IT'S FINEST`;
 }
 
 const populateUserWelcome = (usersName) => {
   const firstName = usersName.split(' ')[0];
-  welcomeUser.innerText = `Welcome, ${firstName}`;
+  welcomeUser.innerText = `Welcome, ${firstName}!`;
 };
 
 const populateUserProfile = (usersName) => {
@@ -137,24 +151,24 @@ const setCalendarDates = () => {
 const showRoomModal = (room, date) => {
   bookingModal.classList.toggle('hidden');
   innerModal.innerHTML = `
-  <article class="rooms" id="${room.number}">
-    <img class="room-image" src="${handleRoomImage(room)}" alt="turing logo">
-    <div class="room-info">
-      <h3 class="room-type">${room.roomType}</h3>
-      <p class="bed-size">${room.numBeds} ${room.bedSize}${room.bidet ? ', Bidet' : '' }</p>
-      <ul class="amenities">Amenities
-        <li>Wifi</li>
-        <li>Air conditioner</li>
-        <li>Balcony</li>
-        <li>Pet Friendly</li>
-        <li>Access to gym and pool</li>
-      </ul>
-      <p class="booked-date" id="${date}">Stay with us on ${date}</p>
-      <p class="room-cost">$${room.costPerNight}</p>
-      <button class="book-room" id="book-room">BOOK NOW!</button>
-      <button class="another-room" id="another-room">PICK ANOTHER ROOM</button>
-    </div>
-  </article>`;
+    <article class="rooms" id="${room.number}">
+      <img class="room-image" src="${handleRoomImage(room)}" alt="turing logo">
+      <div class="room-info">
+        <h3 class="room-type">${room.roomType}</h3>
+        <p class="bed-size">${room.numBeds} ${room.bedSize}${room.bidet ? ', Bidet' : '' }</p>
+        <ul class="amenities">Amenities
+          <li>Wifi</li>
+          <li>Air conditioner</li>
+          <li>Balcony</li>
+          <li>Pet Friendly</li>
+          <li>Access to gym and pool</li>
+        </ul>
+        <p class="booked-date" id="${date}">Stay with us on ${date}</p>
+        <p class="room-cost">$${room.costPerNight}</p>
+        <button class="book-room" id="book-room">BOOK NOW!</button>
+        <button class="another-room" id="another-room">PICK ANOTHER ROOM</button>
+      </div>
+    </article>`;
 
   const confirmBookingBtn = document.querySelector('.book-room');
   const anotherBookingBtn = document.querySelector('.another-room');
@@ -197,7 +211,7 @@ const showConfirmedBooking = (room, date) => {
     .then(response => response.json())
     .then((response) => {
 
-      innerModal.innerHTML = `
+    innerModal.innerHTML = `
       <article class="rooms">
         <img class="room-image" src="${handleRoomImage(room)}" alt="turing logo">
         <div class="room-info">
@@ -240,7 +254,13 @@ const handleRoomImage = (room) => {
   } else {
     return `./images/double-residential-suite.jpg`;
   }
+};
 
+const handleActiveBtn = () => {
+  navBtns.forEach(button => {
+    button.classList.remove('nav-tab-active');
+    button.style.color = '#636363'
+  });
 };
 
 export {
@@ -254,5 +274,7 @@ export {
   setCalendarDates,
   showRoomModal,
   displayTripMessage,
-  resetTripMessage
+  resetTripMessage,
+  updateCustomerStatus,
+  handleActiveBtn
 };

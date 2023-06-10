@@ -2,7 +2,8 @@
   --brand-colour:  #cfd1d1;
   --black:#212427;
   --nav-grey: #333333;
-  --white: #ffffff; }
+  --white: #ffffff;
+  --unactive-tabs: #636363; }
 
 * {
   font-family: 'Inter', sans-serif;
@@ -34,13 +35,44 @@ h1 .logo {
 
 .user-profile {
   padding-right: 1rem;
-  font-size: 1.5rem; }
+  font-size: 1.1rem; }
+  .user-profile a {
+    display: flex;
+    align-items: center; }
+  .user-profile .profile-icon {
+    width: 2.4rem;
+    padding-right: .3em; }
+  .user-profile .user-chevron {
+    width: 2rem;
+    padding-left: 0.2; }
+
+nav {
+  margin: 1em; }
+  nav .trip-actions, nav #booking-options {
+    margin-top: 1.2em; }
+  nav .nav-tab {
+    font-size: 1.2rem;
+    background: none;
+    border: none;
+    color: var(--unactive-tabs);
+    padding-bottom: 0.2em;
+    font-weight: 500; }
+  nav .nav-tab + .nav-tab {
+    margin-left: 2rem; }
+  nav .nav-tab-active {
+    color: var(--black);
+    border-bottom: solid var(--black); }
 
 .dropdown-container {
   position: relative; }
   .dropdown-container .vip-status {
-    font-size: 1.4rem;
-    font-weight: 300; }
+    font-size: 1.2rem;
+    font-weight: 300;
+    display: flex;
+    align-items: center; }
+    .dropdown-container .vip-status img {
+      width: 2rem;
+      padding-right: 0.5em; }
 
 .dropdown-menu {
   position: absolute;
@@ -53,7 +85,7 @@ h1 .logo {
 .user-data-box {
   display: flex;
   flex-direction: column;
-  background-color: --brand-colour;
+  background-color: var(--brand-colour);
   border-radius: .6rem;
   padding: 1em;
   margin: 1em 0;
@@ -73,10 +105,14 @@ h1 .logo {
 .user-logout {
   padding: 0.5em 0 0 0; }
 
-main {
+main .trip-message {
+  margin: 1rem;
+  font-size: 1.5em;
+  font-weight: 400; }
+
+.available-rooms {
   display: flex;
-  flex-wrap: wrap;
-  margin: 1em 1em; }
+  flex-wrap: wrap; }
 
 .rooms {
   display: flex;
@@ -113,3 +149,6 @@ main {
 
 .hidden {
   display: none; }
+
+button:hover, input:hover, select:hover {
+  cursor: pointer; }

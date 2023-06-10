@@ -14,9 +14,13 @@
     <div class="logo-bar">
       <h1>OVERLOOK <span class="logo">BOUTIQUE HOTEL</span></h1>
       <div class="dropdown-container">
-        <a href="#" class="user-profile"><img src="./images/user-account-info.png " alt="profile infomation icon" class="profile-icon"><span class="user-name"></span><img src="./images/chevron-down-expand.png" alt=""></a>
+        <div class="user-profile">
+          <a href="#"><img src="./images/user-account-info.png " alt="profile infomation icon" class="profile-icon">
+            <span class="user-name"></span>
+            <img src="./images/chevron-down-expand.png" alt="" class="user-chevron"></a>
+        </div>
         <ul class="dropdown-menu" id="user-items" aria-expanded="false">
-          <p class="vip-status">VIP placeholder</p>
+          <div class="vip-status"><p class="customer-status">VIP placeholder</p></div>
           <div class="user-data-box">Nights with us<span class="user-metrix  total-nights"></span></div>
           <li><div class="user-data-box">Total spent so far<span class="user-metrix total-spent"></span></div></li>
           <li class="user-settings"><a href="#" class="user-item" id="user-settings">Settings</a></li>
@@ -27,12 +31,14 @@
     <nav>
       <h2 class="welcome-user">Welcome!</h2>
       <div class="trip-actions">
-        <button href="#" class="nav-tab" id="bookings">Plan your next stay</button>
+        <button href="#" class="nav-tab nav-tab-active" id="bookings">Plan your next stay</button>
         <button href="#" class="nav-tab" id="past-trips">Your past trips</button>
         <button href="#" class="nav-tab" id="upcoming-trips">Upcoming trips</button>
       </div>
       <form id="booking-options" action="../src/scripts.js" method="get">
+        <label class="hidden" for="pick-day">date</label>
         <input type="date" id="pick-day" name="trip-day" value="2022-04-22" min="2017-05-21" max="2024-06-01">
+        
         <select name="room-types" id="room-types" placeholder="Room Type">
           <option disabled selected value="All Rooms">Select room type</option>
           <option value="All Rooms">All Rooms</option>
@@ -43,16 +49,12 @@
         </select>
         <button type="submit" form="booking-options" value="submit" class="see-available-rooms">See available rooms</button>
       </form>
-      <div class="trip-message .hidden">
-        HOSPITALITY AT IT'S FINEST.
-        <!--  TRIPS MESSAGE FOR PAST OR FUTURE  -->
-      </div>
     </nav>  
   </section>
   <section class="modal hidden">
     <div class="inner-modal">
       <!-- SELECTED ROOM GOES HERE -->
-
+      
       <article class="rooms">
         <!-- <img class="room-image" src="" alt="turing logo"> -->
         <div class="room-info">
@@ -71,10 +73,14 @@
           <button class="book-room">BOOK NOW!</button>
         </div>
       </article>
-
+      
     </div>
   </section>
   <main>
+    <div>
+      <h3 class="trip-message">HOSPITALITY AT IT'S FINEST</h3>
+      <!--  TRIPS MESSAGE FOR PAST OR FUTURE  -->
+    </div>
     <section class="available-rooms">
       <!--  ROOMS GET POPULATED HERE  -->
     </section>

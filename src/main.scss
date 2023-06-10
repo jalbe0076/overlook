@@ -7,6 +7,7 @@
   --black:#212427;
   --nav-grey: #333333;
   --white: #ffffff;
+  --unactive-tabs: #636363;
 }
 
 * {
@@ -49,15 +50,65 @@ h1 .logo {
 
 .user-profile {
   padding-right: 1rem;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
+  
+  & a {
+    display: flex;
+    align-items: center;
+  }
+
+  & .profile-icon {
+    width: 2.4rem;
+    padding-right: .3em;
+  }
+
+  & .user-chevron {
+    width: 2rem;
+    padding-left: 0.2;
+  }
 }
+
+nav {
+  margin: 1em;
+
+  & .trip-actions, #booking-options{
+    margin-top: 1.2em;
+  }
+
+  & .nav-tab {
+    font-size: 1.2rem;
+    background: none;
+    border: none;
+    color: var(--unactive-tabs);
+    padding-bottom: 0.2em;
+    font-weight: 500;
+  }
+
+  & .nav-tab + .nav-tab  {
+    margin-left: 2rem;
+  }
+
+  & .nav-tab-active {
+    color: var(--black);
+    border-bottom: solid var(--black);
+  }
+
+}
+
 
 .dropdown-container {
   position: relative;
 
   & .vip-status {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 300;
+    display: flex;
+    align-items: center;
+
+    & img {
+      width: 2rem;
+      padding-right: 0.5em;
+    }
   }
 }
 
@@ -68,12 +119,14 @@ h1 .logo {
   padding: 1em;
   border: .1rem solid var(--black);
   border-radius: 0.5em;
+  
+
 }
 
 .user-data-box {
   display: flex;
   flex-direction: column;
-  background-color: --brand-colour;
+  background-color: var(--brand-colour);
   border-radius: .6rem;
   padding: 1em;
   margin: 1em 0;
@@ -99,14 +152,22 @@ h1 .logo {
   padding: 0.5em 0 0 0;
 }
 
+main {
+  
+  & .trip-message {
+    margin: 1rem;
+    font-size: 1.5em;
+    font-weight: 400;
+  }
+}
 // =========================================================
 // ====================   ROOM CARDS   =====================
 // =========================================================
 
-main {
+.available-rooms {
   display: flex;
   flex-wrap: wrap;
-  margin: 1em 1em;
+  // margin: 1em 1em;
 }
 .rooms {
   display: flex;
@@ -154,4 +215,8 @@ main {
 
 .hidden {
   display: none;
+}
+
+button:hover, input:hover, select:hover {
+  cursor: pointer;
 }
