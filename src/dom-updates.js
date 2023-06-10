@@ -70,7 +70,7 @@ const populateBookings = (bookings, rooms) => {
 
       displayRooms.innerHTML += `
       <article class="rooms" tabindex="0">
-        <img class="room-image" src="./images/turing-logo.png" alt="turing logo">
+        <img class="room-image" src="${handleRoomImage(room)}" alt="turing logo">
         <div class="room-info">
           <h3 class="room-type">${room.roomType}</h3>
           <p class="bed-size">${room.numBeds} ${room.bedSize}${room.bidet ? ', Bidet' : '' }</p>
@@ -95,7 +95,7 @@ const populateAvailableRooms = (availableRooms) => {
   availableRooms.forEach(room => {
     displayRooms.innerHTML += `
       <article class="rooms"  tabindex="0" id="${room.number}">
-        <img class="room-image" src="./images/turing-logo.png" alt="turing logo">
+        <img class="room-image" src="${handleRoomImage(room)}" alt="turing logo">
         <div class="room-info">
           <h3 class="room-type">${room.roomType}</h3>
           <p class="bed-size">${room.numBeds} ${room.bedSize}${room.bidet ? ', Bidet' : '' }</p>
@@ -138,7 +138,7 @@ const showRoomModal = (room, date) => {
   bookingModal.classList.toggle('hidden');
   innerModal.innerHTML = `
   <article class="rooms" id="${room.number}">
-    <img class="room-image" src="./images/turing-logo.png" alt="turing logo">
+    <img class="room-image" src="${handleRoomImage(room)}" alt="turing logo">
     <div class="room-info">
       <h3 class="room-type">${room.roomType}</h3>
       <p class="bed-size">${room.numBeds} ${room.bedSize}${room.bidet ? ', Bidet' : '' }</p>
@@ -183,7 +183,7 @@ const showConfirmedBooking = (room, date) => {
 
       innerModal.innerHTML = `
       <article class="rooms">
-        <img class="room-image" src="./images/turing-logo.png" alt="turing logo">
+        <img class="room-image" src="${handleRoomImage(room)}" alt="turing logo">
         <div class="room-info">
           <h3 class="booking-thanks">${firstName}, thank you for booking a ${room.roomType} with us</h3>
           <p class="booking-date">Your booking is confirmed on ${formatedDate}</p>
@@ -201,6 +201,28 @@ const showConfirmedBooking = (room, date) => {
       });
     })
     .catch(err => console.log("ERROR", err));
+};
+
+const handleRoomImage = (room) => {
+  
+  if (room.numBeds === 1 && room.roomType === 'single room') {
+    return `./images/single-room.jpg`;
+  } else if (room.numBeds === 2 && room.roomType === 'single room') {
+    return `./images/double-room.jpg`;
+  } else if (room.numBeds === 1 && room.roomType === 'junior suite') {
+    return `./images/single-junior-suite.jpg`;
+  } else if (room.numBeds === 2 && room.roomType === 'junior suite') {
+    return `./images/double-junior-suite.jpg`;
+  } else if (room.numBeds === 1 && room.roomType === 'suite') {
+    return `./images/single-suite.jpg`;
+  } else if (room.numBeds === 2 && room.roomType === 'suite') {
+    return `./images/double-suite.jpg`;
+  } else if (room.numBeds === 1 && room.roomType === 'residential suite') {
+    return `./images/single-residential-suite.jpg`;
+  } else {
+    return `./images/double-residential-suite.jpg`;
+  }
+
 };
 
 export {

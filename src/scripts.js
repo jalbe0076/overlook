@@ -3,7 +3,14 @@
 // =========================================================
 
 import './css/styles.css';
-import './images/turing-logo.png'
+import './images/single-room.jpg';
+import './images/double-room.jpg';
+import './images/single-junior-suite.jpg';
+import './images/double-junior-suite.jpg';
+import './images/single-suite.jpg';
+import './images/double-suite.jpg';
+import './images/single-residential-suite.jpg';
+import './images/double-residential-suite.jpg';
 import { getAllData, postBooking, deleteBooking, findCustomer, getData } from './api-calls'
 import { handleDropdown, updateNightsStayed, updateTotalSpent, populateBookings, populateUserProfile, populateUserWelcome, populateAvailableRooms, setCalendarDates, showRoomModal, modalBookingBtn, displayTripMessage, resetTripMessage } from './dom-updates';
 import { getUserBookings, getTodaysDate, filterOutUnavailableRooms, filterAvailableRoomsByType, findRoom } from './booking-utils';
