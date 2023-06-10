@@ -62,6 +62,16 @@ nav {
   nav .nav-tab-active {
     color: var(--black);
     border-bottom: solid var(--black); }
+  nav input + select, nav select + button {
+    margin-left: 1rem; }
+  nav form {
+    min-height: 33px; }
+
+#booking-options button, #booking-options input, #booking-options select {
+  padding: 0.3em 0.8em;
+  font-size: 1rem;
+  border-radius: .6rem;
+  height: 100%; }
 
 .dropdown-container {
   position: relative; }
@@ -80,7 +90,8 @@ nav {
   right: 0.5rem;
   padding: 1em;
   border: 0.1rem solid var(--black);
-  border-radius: 0.5em; }
+  border-radius: .6rem;
+  background-color: var(--white); }
 
 .user-data-box {
   display: flex;

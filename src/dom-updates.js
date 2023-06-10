@@ -194,7 +194,7 @@ const showRoomModal = (room, date) => {
   anotherBookingBtn.addEventListener('keydown', tabTrap);
 
   anotherBookingBtn.addEventListener('click', (e) => {
-    bookingModal.classList.add('hidden');
+    addHidden(bookingModal);
   });
 };
 
@@ -229,9 +229,9 @@ const showConfirmedBooking = (room, date) => {
 
       closeBookingReferenceBtn.addEventListener('click', () => {
         displayRooms.innerHTML = '';
-        bookingModal.classList.add('hidden');
+        addHidden(bookingModal);
       });
-    })
+    })   
     .catch(err => console.log("ERROR", err));
 };
 
@@ -263,6 +263,14 @@ const handleActiveBtn = () => {
   });
 };
 
+const addHidden = (element) => {
+  element.classList.add('hidden');
+}
+
+const removeHidden = (element) => {
+  element.classList.remove('hidden');
+}
+
 export {
   handleDropdown,
   updateNightsStayed,
@@ -276,5 +284,7 @@ export {
   displayTripMessage,
   resetTripMessage,
   updateCustomerStatus,
-  handleActiveBtn
+  handleActiveBtn,
+  addHidden,
+  removeHidden
 };

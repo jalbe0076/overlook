@@ -92,9 +92,24 @@ nav {
     color: var(--black);
     border-bottom: solid var(--black);
   }
+  & input + select, & select + button {
+    margin-left: 1rem;
+  }
 
+  & form {
+    min-height: 33px;
+  }
 }
 
+#booking-options {
+
+  & button, & input, & select {
+    padding: 0.3em 0.8em;
+    font-size: 1rem;
+    border-radius: .6rem;
+    height: 100%;
+  }
+}
 
 .dropdown-container {
   position: relative;
@@ -118,9 +133,8 @@ nav {
   right: 0.5rem;
   padding: 1em;
   border: .1rem solid var(--black);
-  border-radius: 0.5em;
-  
-
+  border-radius: .6rem;
+  background-color: var(--white);
 }
 
 .user-data-box {
