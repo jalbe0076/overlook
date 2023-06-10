@@ -5,7 +5,7 @@
 import './css/styles.css';
 import './images/turing-logo.png'
 import { getAllData, postBooking, deleteBooking, findCustomer, getData } from './api-calls'
-import { handleDropdown, updateNightsStayed, updateTotalSpent, populateBookings, populateUserProfile, populateUserWelcome, populateAvailableRooms, setCalendarDates, showRoomModal, modalBookingBtn } from './dom-updates';
+import { handleDropdown, updateNightsStayed, updateTotalSpent, populateBookings, populateUserProfile, populateUserWelcome, populateAvailableRooms, setCalendarDates, showRoomModal, modalBookingBtn, displayTripMessage, resetTripMessage } from './dom-updates';
 import { getUserBookings, getTodaysDate, filterOutUnavailableRooms, filterAvailableRoomsByType, findRoom } from './booking-utils';
 
 let customers;
@@ -46,11 +46,17 @@ futureTrips.addEventListener('click', () => {
 
 formData.addEventListener('submit', (e) => {
   e.preventDefault();
+  resetTripMessage();
   selectedDate = new Date(`${pickedDate.value}T00:00`).toLocaleDateString("en-CA");
   const selectedRoomType = roomType.value;
   const availableRooms = filterOutUnavailableRooms(selectedDate, bookings, rooms)
-  const filteredRooms = filterAvailableRoomsByType(availableRooms, selectedRoomType);
-  populateAvailableRooms(filteredRooms);
+  const filteredRooms = filterAvailableRoomsByType(availableRooms, selectedRoomType, selectedDate);
+  
+  if(typeof filteredRooms === 'string') {
+    displayTripMessage(filteredRooms);
+  } else {
+    populateAvailableRooms(filteredRooms);
+  }
   
   let roomsToBook = document.querySelectorAll('.rooms');
 

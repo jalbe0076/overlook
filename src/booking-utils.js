@@ -68,10 +68,14 @@ const filterOutUnavailableRooms = (date, bookings, rooms) => {
   const formatedDate = formatDate(date)
   const unavailableRooms = bookings.filter(booking => booking.date === formatedDate).map(unavailableRoom => unavailableRoom.roomNumber);
   const availableRooms = rooms.filter(room => !unavailableRooms.includes(room.number))
+
   return availableRooms;
 };
 
-const filterAvailableRoomsByType = (availableRooms, filterType) => {
+const filterAvailableRoomsByType = (availableRooms, filterType, date) => {
+  if (!availableRooms.length) { 
+    return `We are fully booked on ${date}, please consider staying with us another day`;
+  } 
 
   if (filterType === 'All Rooms' || filterType === undefined) {
     return availableRooms;
@@ -103,5 +107,6 @@ export {
   getTodaysDate,
   filterOutUnavailableRooms,
   filterAvailableRoomsByType,
-  findRoom
+  findRoom,
+  formatRoomToPost
 };

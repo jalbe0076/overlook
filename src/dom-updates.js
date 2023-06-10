@@ -2,8 +2,8 @@
 // ===============   variables and imports   ===============
 // =========================================================
 
-import { getUserBookings, getTotalSpent, formatDate, getTodaysDate, filterOutUnavailableRooms } from "./booking-utils";
-import { bookings, rooms, currentUser } from "./scripts";
+import { getUserBookings, getTotalSpent, formatDate, getTodaysDate, filterOutUnavailableRooms, formatRoomToPost } from "./booking-utils";
+import { bookings, rooms, currentUser, setData } from "./scripts";
 
 const userDropdownMenu = document.querySelector('#user-items');
 const totalNights = document.querySelector('.total-nights');
@@ -14,6 +14,7 @@ const welcomeUser = document.querySelector('.welcome-user');
 const pickedDate = document.querySelector('#pick-day');
 const bookingModal = document.querySelector('.modal');
 const innerModal = document.querySelector('.inner-modal');
+const tripMessage = document.querySelector('.trip-message');
 
 const todaysDate = getTodaysDate();
 let lastFocusedElement;
@@ -67,7 +68,7 @@ const populateBookings = (bookings, rooms) => {
       const room = rooms.find(room => room.number === booking.roomNumber);
 
       displayRooms.innerHTML += `
-      <article class="rooms">
+      <article class="rooms" tabindex="0">
         <img class="room-image" src="./images/turing-logo.png" alt="turing logo">
         <div class="room-info">
           <h3 class="room-type">${room.roomType}</h3>
@@ -92,7 +93,7 @@ const populateAvailableRooms = (availableRooms) => {
 
   availableRooms.forEach(room => {
     displayRooms.innerHTML += `
-      <article class="rooms" id="${room.number}">
+      <article class="rooms"  tabindex="0" id="${room.number}">
         <img class="room-image" src="./images/turing-logo.png" alt="turing logo">
         <div class="room-info">
           <h3 class="room-type">${room.roomType}</h3>
@@ -109,6 +110,14 @@ const populateAvailableRooms = (availableRooms) => {
       </article>`;
   });
 };
+
+const displayTripMessage = (roomStatus) => {
+  tripMessage.innerText = roomStatus;
+};
+
+const resetTripMessage = () => {
+  tripMessage.innerText = '';
+}
 
 const populateUserWelcome = (usersName) => {
   const firstName = usersName.split(' ')[0];
@@ -146,37 +155,51 @@ const showRoomModal = (room, date) => {
     </div>
   </article>`;
 
-  const modalBookingBtn = document.querySelector('.book-room');
-  const anotherBooking = document.querySelector('.another-room');
+  const confirmBookingBtn = document.querySelector('.book-room');
+  const anotherBookingBtn = document.querySelector('.another-room');
 
-  modalBookingBtn.addEventListener('click', (e) => {
-    showConfirmedBooking(room, date);
+  confirmBookingBtn.addEventListener('click', (e) => {
+   showConfirmedBooking(room, date);
   });
 
-  anotherBooking.addEventListener('click', (e) => {
+  anotherBookingBtn.addEventListener('click', (e) => {
     bookingModal.classList.add('hidden');
   });
 };
 
 const showConfirmedBooking = (room, date) => {
   const firstName = currentUser.name.split(' ')[0];
+  const formatedDate = formatDate(date);
+  const bookRoomReceipt = formatRoomToPost(formatedDate, room, currentUser.id);
 
-  innerModal.innerHTML = `
-    <article class="rooms">
-      <img class="room-image" src="./images/turing-logo.png" alt="turing logo">
-      <div class="room-info">
-        <h3 class="booking-thanks">${firstName}, thank you for booking a ${room.roomType} with us</h3>
-        <p class="booking-date">Your booking is confirmed on ${date}</p>
-        <p class="reference">Your booking reference: </p>
-        <button class="return-main">return </button>
-      </div>
-    </article>`;
+  fetch('http://localhost:3001/api/v1/bookings', {
+    method: 'POST',
+    body: JSON.stringify(bookRoomReceipt),
+    headers: { 'Content-Type': 'application/json' }
+  })
+    .then(response => response.json())
+    .then((response) => {
 
-    const closeBookingReference = document.querySelector('.return-main');
+      innerModal.innerHTML = `
+      <article class="rooms">
+        <img class="room-image" src="./images/turing-logo.png" alt="turing logo">
+        <div class="room-info">
+          <h3 class="booking-thanks">${firstName}, thank you for booking a ${room.roomType} with us</h3>
+          <p class="booking-date">Your booking is confirmed on ${formatedDate}</p>
+          <p class="reference">Your booking reference: ${response.newBooking.id}</p>
+          <button class="return-main">return </button>
+        </div>
+      </article>`;
+      setData();
 
-    closeBookingReference.addEventListener('click', (e) => {
-      bookingModal.classList.add('hidden');
-    });
+      const closeBookingReferenceBtn = document.querySelector('.return-main');
+
+      closeBookingReferenceBtn.addEventListener('click', (e) => {
+        displayRooms.innerHTML = '';
+        bookingModal.classList.add('hidden');
+      });
+    })
+    .catch(err => console.log("ERROR", err));
 };
 
 export {
@@ -189,4 +212,6 @@ export {
   populateAvailableRooms,
   setCalendarDates,
   showRoomModal,
+  displayTripMessage,
+  resetTripMessage
 };
