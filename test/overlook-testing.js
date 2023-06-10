@@ -120,7 +120,7 @@ describe(`Get a users bookings and calculate past total costs`, () => {
 
 describe('Get a customer\'s name from their username', () => {
   it('Should filter out rooms that are already booked for that day', () => {
-    const availableRooms = filterOutUnavailableRooms('2022-04-22', bookingList.bookings, roomList.rooms); 
+    const availableRooms = filterOutUnavailableRooms('2022/04/22', bookingList.bookings, roomList.rooms); 
     expect(availableRooms).to.have.lengthOf(1);
   });
 
@@ -160,5 +160,11 @@ describe('It should return rooms by selected type', () => {
   it('Should return all rooms if a different option is selected', () => {
     const filteredAvailableRooms = filterAvailableRoomsByType(availableRooms, 'single room'); 
     expect(filteredAvailableRooms).to.have.lengthOf(1);
+  });
+
+  it('Should return a message if there are no rooms available', () => {
+    availableRooms = filterOutUnavailableRooms('2022-04-23', bookingList.bookings, roomList.rooms);
+    const filteredAvailableRooms = filterAvailableRoomsByType(availableRooms, 'All Rooms', '2022/04/22'); 
+    expect(filteredAvailableRooms).to.equal(`We are fully booked on 2022/04/22, please consider staying with us another night`);
   });
 });

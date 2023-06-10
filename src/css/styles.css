@@ -1,8 +1,15 @@
+:root {
+  --brand-colour:  #cfd1d1;
+  --black:#212427;
+  --nav-grey: #333333;
+  --white: #ffffff; }
+
 * {
   font-family: 'Inter', sans-serif;
   margin: 0;
   padding: 0;
-  color: #212427; }
+  color: var(--black);
+  box-sizing: border-box; }
 
 li {
   list-style-type: none; }
@@ -11,7 +18,7 @@ a {
   text-decoration: none; }
 
 .logo-bar {
-  background-color: #cfd1d1;
+  background-color: var(--brand-colour);
   min-height: 4rem;
   display: flex;
   justify-content: space-between;
@@ -40,13 +47,13 @@ h1 .logo {
   top: 3rem;
   right: 0.5rem;
   padding: 1em;
-  border: 0.1rem solid #212427;
+  border: 0.1rem solid var(--black);
   border-radius: 0.5em; }
 
 .user-data-box {
   display: flex;
   flex-direction: column;
-  background-color: #cfd1d1;
+  background-color: --brand-colour;
   border-radius: .6rem;
   padding: 1em;
   margin: 1em 0;
@@ -73,11 +80,30 @@ main {
 
 .rooms {
   display: flex;
-  border: #212427 solid 3px;
+  border: var(--black) solid 3px;
   max-width: 700px;
   margin: 1em; }
   .rooms img {
     max-width: 300px; }
+
+.modal {
+  --gap: 15px;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--gap);
+  background: rgba(0, 0, 0, 0.5); }
+
+.inner-modal {
+  background: var(--white);
+  width: 100%;
+  max-width: 800px;
+  overflow: hidden;
+  border-radius: 4px; }
 
 [aria-expanded="true"] {
   display: block; }
