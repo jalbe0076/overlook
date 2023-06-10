@@ -168,9 +168,15 @@ const showConfirmedBooking = (room, date) => {
         <h3 class="booking-thanks">${firstName}, thank you for booking a ${room.roomType} with us</h3>
         <p class="booking-date">Your booking is confirmed on ${date}</p>
         <p class="reference">Your booking reference: </p>
-        <button class="book-room">return </button>
+        <button class="return-main">return </button>
       </div>
     </article>`;
+
+    const closeBookingReference = document.querySelector('.return-main');
+
+    closeBookingReference.addEventListener('click', (e) => {
+      bookingModal.classList.add('hidden');
+    });
 };
 
 export {
