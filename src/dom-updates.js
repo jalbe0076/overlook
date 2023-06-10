@@ -12,7 +12,7 @@ const displayRooms = document.querySelector('.available-rooms');
 const userProfile = document.querySelector('.user-profile');
 const welcomeUser = document.querySelector('.welcome-user');
 const pickedDate = document.querySelector('#pick-day');
-const modal = document.querySelector('.modal');
+const bookingModal = document.querySelector('.modal');
 const innerModal = document.querySelector('.inner-modal');
 
 const todaysDate = getTodaysDate();
@@ -125,7 +125,7 @@ const setCalendarDates = () => {
 };
 
 const showRoomModal = (room, date) => {
-  modal.classList.toggle('hidden');
+  bookingModal.classList.toggle('hidden');
   innerModal.innerHTML = `
   <article class="rooms" id="${room.number}">
     <img class="room-image" src="./images/turing-logo.png" alt="turing logo">
@@ -140,16 +140,22 @@ const showRoomModal = (room, date) => {
         <li>Access to gym and pool</li>
       </ul>
       <p class="booked-date" id="${date}">Stay with us on ${date}</p>
-       <p class="room-cost">$${room.costPerNight}</p>
+      <p class="room-cost">$${room.costPerNight}</p>
       <button class="book-room">BOOK NOW!</button>
+      <button class="another-room">PICK ANOTHER ROOM</button>
     </div>
   </article>`;
 
   const modalBookingBtn = document.querySelector('.book-room');
+  const anotherBooking = document.querySelector('.another-room');
 
   modalBookingBtn.addEventListener('click', (e) => {
-    showConfirmedBooking(room, date)
-  })
+    showConfirmedBooking(room, date);
+  });
+
+  anotherBooking.addEventListener('click', (e) => {
+    bookingModal.classList.add('hidden');
+  });
 };
 
 const showConfirmedBooking = (room, date) => {
@@ -160,7 +166,7 @@ const showConfirmedBooking = (room, date) => {
       <img class="room-image" src="./images/turing-logo.png" alt="turing logo">
       <div class="room-info">
         <h3 class="booking-thanks">${firstName}, thank you for booking a ${room.roomType} with us</h3>
-        <p class="booking-date">Your booking is confirmed for ${date}</p>
+        <p class="booking-date">Your booking is confirmed on ${date}</p>
         <p class="reference">Your booking reference: </p>
         <button class="book-room">return </button>
       </div>
