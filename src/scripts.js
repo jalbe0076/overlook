@@ -70,10 +70,17 @@ formData.addEventListener('submit', (e) => {
   let roomsToBook = document.querySelectorAll('.rooms');
 
   roomsToBook.forEach((room) => {
+    room.addEventListener('keyup', (e) => {
+        if (e.keyCode === 13 || e.keyCode === 32) {
+          const selectedRoom = findRoom(room.id, rooms);
+          showRoomModal(selectedRoom, selectedDate);
+        }
+      });
+
     room.addEventListener('click', () => {
       const selectedRoom = findRoom(room.id, rooms);
       showRoomModal(selectedRoom, selectedDate);
-    })
+    });
   });
 });
 

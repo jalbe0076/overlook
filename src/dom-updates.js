@@ -151,17 +151,33 @@ const showRoomModal = (room, date) => {
       </ul>
       <p class="booked-date" id="${date}">Stay with us on ${date}</p>
       <p class="room-cost">$${room.costPerNight}</p>
-      <button class="book-room">BOOK NOW!</button>
-      <button class="another-room">PICK ANOTHER ROOM</button>
+      <button class="book-room" id="book-room">BOOK NOW!</button>
+      <button class="another-room" id="another-room">PICK ANOTHER ROOM</button>
     </div>
   </article>`;
 
   const confirmBookingBtn = document.querySelector('.book-room');
   const anotherBookingBtn = document.querySelector('.another-room');
+  confirmBookingBtn.focus();
 
-  confirmBookingBtn.addEventListener('click', (e) => {
+  const tabTrap = (e) => {
+    if (e.keyCode === 9 && document.activeElement.id === 'another-room') {
+      confirmBookingBtn.focus();
+      
+    }
+  
+    if (e.keyCode === 9 && e.shiftKey && document.activeElement.id === 'book-room') {
+      anotherBookingBtn.focus();
+    }
+  };
+
+  confirmBookingBtn.addEventListener('keydown', tabTrap);
+
+  confirmBookingBtn.addEventListener('click', () => {
    showConfirmedBooking(room, date);
   });
+
+  anotherBookingBtn.addEventListener('keydown', tabTrap);
 
   anotherBookingBtn.addEventListener('click', (e) => {
     bookingModal.classList.add('hidden');
@@ -195,7 +211,9 @@ const showConfirmedBooking = (room, date) => {
 
       const closeBookingReferenceBtn = document.querySelector('.return-main');
 
-      closeBookingReferenceBtn.addEventListener('click', (e) => {
+      closeBookingReferenceBtn.focus();
+
+      closeBookingReferenceBtn.addEventListener('click', () => {
         displayRooms.innerHTML = '';
         bookingModal.classList.add('hidden');
       });
