@@ -40,6 +40,7 @@ const loginBtn = document.querySelector('.login-btn');
 const userPassword = document.querySelector('#password');
 const username = document.querySelector('#username');
 const loginPage = document.querySelector('.modal-login');
+const falseValidation = document.querySelector('.false-validation')
 
 // =========================================================
 // ==================   event listeners   ==================
@@ -157,7 +158,7 @@ loginBtn.addEventListener('click', (e) => {
     removeHidden(welcomeMessage);
     removeHidden(coverImg);
   } else {
-    console.log('no')
+    falseValidation.innerText = 'Please enter a valid username and password';;
   }
 
 });
