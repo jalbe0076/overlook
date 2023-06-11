@@ -10,13 +10,19 @@
   <title>Overlook</title>
 </head>
 <body>
+  <!-- <img src="./images/booking-page.jpg" alt="" class="cover"> -->
+  <div class="cover"></div>
   <section class="banner">
     <div class="logo-bar">
       <h1>OVERLOOK <span class="logo">BOUTIQUE HOTEL</span></h1>
       <div class="dropdown-container">
-        <a href="#" class="user-profile">John Doe</a>
+        <div class="user-profile">
+          <a href="#"><img src="./images/user-account-info.png " alt="profile infomation icon" class="profile-icon">
+            <span class="user-name"></span>
+            <img src="./images/chevron-down-expand.png" alt="" class="user-chevron"></a>
+        </div>
         <ul class="dropdown-menu" id="user-items" aria-expanded="false">
-          <p class="vip-status">VIP placeholder</p>
+          <div class="vip-status"><p class="customer-status">VIP placeholder</p></div>
           <div class="user-data-box">Nights with us<span class="user-metrix  total-nights"></span></div>
           <li><div class="user-data-box">Total spent so far<span class="user-metrix total-spent"></span></div></li>
           <li class="user-settings"><a href="#" class="user-item" id="user-settings">Settings</a></li>
@@ -27,34 +33,30 @@
     <nav>
       <h2 class="welcome-user">Welcome!</h2>
       <div class="trip-actions">
-        <button href="#" class="nav-tab" id="bookings">Plan your next stay</button>
+        <button href="#" class="nav-tab nav-tab-active" id="bookings">Plan your next stay</button>
         <button href="#" class="nav-tab" id="past-trips">Your past trips</button>
         <button href="#" class="nav-tab" id="upcoming-trips">Upcoming trips</button>
       </div>
       <form id="booking-options" action="../src/scripts.js" method="get">
-        <input type="date" id="pick-day" name="trip-day" value="2022-04-22" min="2017-05-21" max="2024-06-01">
-        <select name="room-types" id="room-types" placeholder="Room Type">
+        <input type="date" id="pick-day" name="trip-day" aria-label="pick-day" value="2022-04-22" min="2017-05-21" max="2024-06-01">
+        <select name="room-types" id="room-types" placeholder="Room Type" aria-label="room types">
           <option disabled selected value="All Rooms">Select room type</option>
           <option value="All Rooms">All Rooms</option>
           <option value="Single Room">Single Room</option>
           <option value="Junior Suite">Junior Suite</option>
           <option value="Suite">Suite</option>
           <option value="Residential Suite">Residential Suite</option>
-        </select>
+        </select>  
         <button type="submit" form="booking-options" value="submit" class="see-available-rooms">See available rooms</button>
       </form>
-      <div class="trip-message .hidden">
-        HOSPITALITY AT IT'S FINEST.
-        <!--  TRIPS MESSAGE FOR PAST OR FUTURE  -->
-      </div>
     </nav>  
   </section>
   <section class="modal hidden">
     <div class="inner-modal">
       <!-- SELECTED ROOM GOES HERE -->
-
-      <article class="rooms">
-        <img class="room-image" src="./images/turing-logo.png" alt="turing logo">
+      
+      <!-- <article class="rooms">
+        <img class="room-image" src="" alt="turing logo">
         <div class="room-info">
           <h3 class="room-type">${room.roomType}</h3>
           <p class="bed-size">${room.numBeds} ${room.bedSize}${room.bidet ? ', Bidet' : '' }</p>
@@ -70,11 +72,16 @@
           <p class="room-cost">$${room.costPerNight}</p>
           <button class="book-room">BOOK NOW!</button>
         </div>
-      </article>
-
+      </article> -->
+      
     </div>
   </section>
   <main>
+    <!-- <div id="trip-message"> -->
+      <h3 class="welcome-message">Hospitality at it's finest</h3>
+      <h3 class="trip-message"></h3>
+      <!--  TRIPS MESSAGE FOR PAST OR FUTURE  -->
+    <!-- </div> -->
     <section class="available-rooms">
       <!--  ROOMS GET POPULATED HERE  -->
     </section>

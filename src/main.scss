@@ -7,6 +7,7 @@
   --black:#212427;
   --nav-grey: #333333;
   --white: #ffffff;
+  --unactive-tabs: #636363;
 }
 
 * {
@@ -25,9 +26,28 @@ a {
   text-decoration: none;
 }
 
+.cover {
+  z-index: -1;
+  background-image: url("../images/booking-page.jpg");
+  background-size: cover;
+  background-color: rgba(255, 255, 255, 0.2);
+  background-blend-mode: lighten;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+
+}
+
 // =========================================================
 // ==================   banner section   ===================
 // =========================================================
+
+.banner {
+  position: sticky;
+  top: 0px;
+  width: 100vw;
+  // background-color: var(--white);
+}
 
 .logo-bar {
   background-color: var(--brand-colour);
@@ -49,15 +69,81 @@ h1 .logo {
 
 .user-profile {
   padding-right: 1rem;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
+  
+  & a {
+    display: flex;
+    align-items: center;
+  }
+
+  & .profile-icon {
+    width: 2.4rem;
+    padding-right: .3em;
+  }
+
+  & .user-chevron {
+    width: 2rem;
+    padding-left: 0.2;
+  }
+}
+
+nav {
+  margin: 1em;
+
+  & .trip-actions, #booking-options{
+    margin-top: 1.2em;
+  }
+
+  & .nav-tab {
+    font-size: 1.2rem;
+    background: none;
+    border: none;
+    color: var(--unactive-tabs);
+    padding-bottom: 0.2em;
+    font-weight: 500;
+  }
+
+  & .nav-tab + .nav-tab  {
+    margin-left: 2rem;
+  }
+
+  & .nav-tab-active {
+    color: var(--black);
+    border-bottom: solid var(--black);
+  }
+  & input + select, & select + button {
+    margin-left: 1rem;
+  }
+
+  & form {
+    min-height: 33px;
+    padding-bottom: 1em;
+  }
+}
+
+#booking-options {
+
+  & button, & input, & select {
+    padding: 0.3em 0.8em;
+    font-size: 1rem;
+    border-radius: .6rem;
+    height: 100%;
+  }
 }
 
 .dropdown-container {
   position: relative;
 
   & .vip-status {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 300;
+    display: flex;
+    align-items: center;
+
+    & img {
+      width: 2rem;
+      padding-right: 0.5em;
+    }
   }
 }
 
@@ -67,13 +153,14 @@ h1 .logo {
   right: 0.5rem;
   padding: 1em;
   border: .1rem solid var(--black);
-  border-radius: 0.5em;
+  border-radius: .6rem;
+  background-color: var(--white);
 }
 
 .user-data-box {
   display: flex;
   flex-direction: column;
-  background-color: --brand-colour;
+  background-color: var(--brand-colour);
   border-radius: .6rem;
   padding: 1em;
   margin: 1em 0;
@@ -99,23 +186,82 @@ h1 .logo {
   padding: 0.5em 0 0 0;
 }
 
+main {
+
+  & .welcome-message {
+    position: absolute;
+    margin: auto 0;  
+    text-align: center;
+    font-size: 4rem;
+    font-weight: 400;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    font-weight: 500;
+    color: var(--black);
+    letter-spacing: .15rem;
+  }
+
+  & .trip-message {
+    margin: 1em;
+    font-size: 1.3rem;
+  }
+}
 // =========================================================
 // ====================   ROOM CARDS   =====================
 // =========================================================
 
-main {
+.available-rooms {
   display: flex;
   flex-wrap: wrap;
-  margin: 1em 1em;
+  margin: 1em;
+  gap: 1.5rem;
 }
 .rooms {
   display: flex;
-  border: var(--black) solid 3px;
   max-width: 700px; 
-  margin: 1em;
+  gap: 1rem;
+  border-radius: .6em;
+  box-shadow: 16px 16px 15px -5px rgba(0, 0, 0, 0.22), -6px -6px 15px -5px rgba(0, 0, 0, 0.22);
+
+  & .room-info {
+    padding: 1em;
+    line-height: 1.5rem;
+  }
+
+  & .room-image {
+    object-fit:cover;
+    object-position: center;
+    border-radius: 0.6em 0 0 .6em;
+  }
+
+  & h3 {
+    font-size: 1.5rem;
+    padding-bottom: .6rem;
+    font-weight: 500;
+  }
+
+
+  & li {
+    list-style-type: circle;
+    list-style-position: inside;
+  }
+
+  & .bed-size {
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding-bottom: .4rem;
+  }
+
+  & .room-cost {
+    padding-top: .6rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+  }
 
   & img {
     max-width: 300px;
+    min-height: 344px;
   }
 }
 
@@ -138,10 +284,43 @@ main {
 
 .inner-modal {
   background: var(--white);
-  width: 100%;
   max-width: 800px; 
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: .6em;
+  transform: scale(1.3);
+  min-height: 344px;
+  position: relative;
+
+  & button + button {
+    margin-left: 1rem;
+  }
+
+  & button {
+    padding: 0.3em 0.8em;
+    font-size: 1rem;
+    border-radius: .6rem;
+    margin-top: 1rem;
+  }
+
+  & .room-info > .modal-esc {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0;
+    margin:  .3em .5em 0 0;
+    font-size: 2rem;
+    font-weight: 500;
+    background: none;
+    border: none;
+  }
+
+  & .booking-thanks {
+    margin-right: 1.5em;
+  }
+
+  & .modal-info {
+    width: 500px;
+  }
 }
 
 [aria-expanded="true"] {
@@ -154,4 +333,8 @@ main {
 
 .hidden {
   display: none;
+}
+
+button:hover, input:hover, select:hover {
+  cursor: pointer;
 }
