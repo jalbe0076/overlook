@@ -14,7 +14,7 @@ import './images/double-residential-suite.jpg';
 import './images/customer-rating.png';
 import './images/booking-page.jpg'
 import { getAllData, postBooking, deleteBooking, findCustomer, getData } from './api-calls'
-import { handleDropdown, updateNightsStayed, updateTotalSpent, populateBookings, populateUserProfile, populateUserWelcome, populateAvailableRooms, setCalendarDates, showRoomModal, modalBookingBtn, displayTripMessage, resetTripMessage, updateCustomerStatus, handleActiveBtn, addHidden, removeHidden, removeBookings } from './dom-updates';
+import { handleDropdown, updateNightsStayed, updateTotalSpent, populateBookings, populateUserProfile, populateUserWelcome, populateAvailableRooms, setCalendarDates, showRoomModal, modalBookingBtn, displayTripMessage, resetTripMessage, updateCustomerStatus, handleActiveBtn, addHidden, removeHidden, removeBookings, getUserInfo } from './dom-updates';
 import { getUserBookings, getTodaysDate, filterOutUnavailableRooms, filterAvailableRoomsByType, findRoom, checkPassword, checkUsername } from './booking-utils';
 
 let customers;
@@ -64,15 +64,14 @@ pastTrips.addEventListener('click', () => {
     banner.style.background = '#ffffff';
   } else {
     removeBookings();
-    banner.style.background = none;
+    banner.style.background = 'none';
   }
 });
 
 futureTrips.addEventListener('click', () => {
   userBookings = getUserBookings(todaysDate, currentUser.id, bookings, 'upcoming');
   resetTripMessage(userBookings);
-  console.log(resetTripMessage(userBookings))
-  console.log(typeof userBookings)
+
   if (typeof userBookings === 'object') {
     populateBookings(userBookings, rooms);
     addHidden(welcomeMessage);
@@ -157,8 +156,19 @@ loginBtn.addEventListener('click', (e) => {
     removeHidden(banner);
     removeHidden(welcomeMessage);
     removeHidden(coverImg);
+    
+    getCustomer(checkedUsername)
+      .then((user) => {
+        currentUser = user;
+        getUserInfo(user);
+        updateNightsStayed();
+          updateTotalSpent();
+          updateCustomerStatus();
+          populateUserProfile(user.name);
+          populateUserWelcome(user.name);
+      })
   } else {
-    falseValidation.innerText = 'Please enter a valid username and password';;
+    falseValidation.innerText = 'Please enter a valid username and password';
   }
 
 });
@@ -173,19 +183,11 @@ const setData = () => {
       customers = resolve[0].customers;
       rooms = resolve[1].rooms;
       bookings = resolve[2].bookings;
-      currentUser = getCustomer(42);
-      
-      updateNightsStayed();
-      updateTotalSpent();
-      updateCustomerStatus();
-      populateUserProfile(currentUser.name);
-      populateUserWelcome(currentUser.name);
     });
 };
 
 const getCustomer = (userId) => {
-  return customers.find(customer => customer.id === userId);
-  // return findCustomer(userId);
+  return findCustomer(userId);
 };
 
 export {

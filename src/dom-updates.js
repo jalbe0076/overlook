@@ -3,7 +3,7 @@
 // =========================================================
 
 import { getUserBookings, getTotalSpent, formatDate, getTodaysDate, filterOutUnavailableRooms, formatRoomToPost } from "./booking-utils";
-import { bookings, rooms, currentUser, setData } from "./scripts";
+import { bookings, rooms, setData } from "./scripts";
 
 const userDropdownMenu = document.querySelector('#user-items');
 const totalNights = document.querySelector('.total-nights');
@@ -20,6 +20,7 @@ const navBtns = document.querySelectorAll('.nav-tab');
 
 const todaysDate = getTodaysDate();
 let lastFocusedElement;
+let currentUser;
 
 // =========================================================
 // =====================   functions   =====================
@@ -285,6 +286,10 @@ const removeHidden = (element) => {
   element.classList.remove('hidden');
 }
 
+const getUserInfo = (user) => {
+  currentUser = user;
+};
+
 export {
   handleDropdown,
   updateNightsStayed,
@@ -301,5 +306,6 @@ export {
   handleActiveBtn,
   addHidden,
   removeHidden,
-  removeBookings
+  removeBookings,
+  getUserInfo
 };
