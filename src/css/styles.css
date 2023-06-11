@@ -24,8 +24,12 @@ a {
   height: 100vh;
   background-blend-mode: lighten;
   position: absolute;
-  object-fit: cover;
-  background-color: white; }
+  object-fit: cover; }
+
+.banner {
+  position: sticky;
+  top: 0px;
+  width: 100vw; }
 
 .logo-bar {
   background-color: var(--brand-colour);
@@ -74,7 +78,8 @@ nav {
   nav input + select, nav select + button {
     margin-left: 1rem; }
   nav form {
-    min-height: 33px; }
+    min-height: 33px;
+    padding-bottom: 1em; }
 
 #booking-options button, #booking-options input, #booking-options select {
   padding: 0.3em 0.8em;

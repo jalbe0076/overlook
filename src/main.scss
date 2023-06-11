@@ -35,12 +35,19 @@ a {
   background-blend-mode: lighten;
   position: absolute;
   object-fit:cover;
-  background-color: white;
+  // background-color: white;
 }
 
 // =========================================================
 // ==================   banner section   ===================
 // =========================================================
+
+.banner {
+  position: sticky;
+  top: 0px;
+  width: 100vw;
+  // background-color: var(--white);
+}
 
 .logo-bar {
   background-color: var(--brand-colour);
@@ -110,6 +117,7 @@ nav {
 
   & form {
     min-height: 33px;
+    padding-bottom: 1em;
   }
 }
 

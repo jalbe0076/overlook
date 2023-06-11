@@ -34,7 +34,8 @@ const navBtns = document.querySelectorAll('.nav-tab');
 const displayRoomsBtn = document.querySelector('.see-available-rooms');
 const displayRooms = document.querySelector('.available-rooms');
 const welcomeMessage = document.querySelector('.welcome-message');
-const coverImg = document.querySelector('.cover')
+const coverImg = document.querySelector('.cover');
+const banner = document.querySelector('.banner');
 
 // =========================================================
 // ==================   event listeners   ==================
@@ -55,23 +56,28 @@ pastTrips.addEventListener('click', () => {
     populateBookings(userBookings, rooms);
     addHidden(welcomeMessage);
     addHidden(coverImg);
+    banner.style.background = '#ffffff';
   } else {
     removeBookings();
+    banner.style.background = none;
   }
 });
 
 futureTrips.addEventListener('click', () => {
   userBookings = getUserBookings(todaysDate, currentUser.id, bookings, 'upcoming');
   resetTripMessage(userBookings);
-  
+  console.log(resetTripMessage(userBookings))
+  console.log(typeof userBookings)
   if (typeof userBookings === 'object') {
     populateBookings(userBookings, rooms);
     addHidden(welcomeMessage);
     addHidden(coverImg);
+    banner.style.background = '#ffffff';
   } else {
     removeBookings(userBookings);
     removeHidden(welcomeMessage);
-    removeHidden(coverImg)
+    removeHidden(coverImg);
+    banner.style.background = 'none';
   }
 });
 
@@ -84,9 +90,16 @@ formData.addEventListener('submit', (e) => {
   const filteredRooms = filterAvailableRoomsByType(availableRooms, selectedRoomType, selectedDate);
   
   if(typeof filteredRooms === 'string') {
+    removeHidden(welcomeMessage);
+    removeHidden(coverImg);
+    removeBookings();
     displayTripMessage(filteredRooms);
+    banner.style.background = 'none';
   } else {
+    addHidden(welcomeMessage);
+    addHidden(coverImg);
     populateAvailableRooms(filteredRooms);
+    banner.style.background = '#ffffff';
   }
   
   let roomsToBook = document.querySelectorAll('.rooms');
@@ -117,6 +130,10 @@ navBtns.forEach(button => {
       removeHidden(pickedDate);
       displayRooms.innerHTML = '';
       resetTripMessage();
+      removeBookings(userBookings);
+      removeHidden(welcomeMessage);
+      removeHidden(coverImg);
+      banner.style.background = 'none';
     } else {
       addHidden(displayRoomsBtn);
       addHidden(roomType);
