@@ -99,6 +99,10 @@ const formatRoomToPost = (date, room, userId) => {
   };
 };
 
+const checkPassword = (password) => {
+  return password === 'overlook2021' ? true : false;
+};
+
 export {
   checkUsername,
   getUserBookings,
@@ -108,5 +112,6 @@ export {
   filterOutUnavailableRooms,
   filterAvailableRoomsByType,
   findRoom,
-  formatRoomToPost
+  formatRoomToPost,
+  checkPassword
 };

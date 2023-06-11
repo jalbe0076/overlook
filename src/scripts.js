@@ -15,7 +15,7 @@ import './images/customer-rating.png';
 import './images/booking-page.jpg'
 import { getAllData, postBooking, deleteBooking, findCustomer, getData } from './api-calls'
 import { handleDropdown, updateNightsStayed, updateTotalSpent, populateBookings, populateUserProfile, populateUserWelcome, populateAvailableRooms, setCalendarDates, showRoomModal, modalBookingBtn, displayTripMessage, resetTripMessage, updateCustomerStatus, handleActiveBtn, addHidden, removeHidden, removeBookings } from './dom-updates';
-import { getUserBookings, getTodaysDate, filterOutUnavailableRooms, filterAvailableRoomsByType, findRoom } from './booking-utils';
+import { getUserBookings, getTodaysDate, filterOutUnavailableRooms, filterAvailableRoomsByType, findRoom, checkPassword, checkUsername } from './booking-utils';
 
 let customers;
 let rooms;
@@ -36,6 +36,10 @@ const displayRooms = document.querySelector('.available-rooms');
 const welcomeMessage = document.querySelector('.welcome-message');
 const coverImg = document.querySelector('.cover');
 const banner = document.querySelector('.banner');
+const loginBtn = document.querySelector('.login-btn');
+const userPassword = document.querySelector('#password');
+const username = document.querySelector('#username');
+const loginPage = document.querySelector('.modal-login');
 
 // =========================================================
 // ==================   event listeners   ==================
@@ -140,6 +144,22 @@ navBtns.forEach(button => {
       addHidden(pickedDate);
     }
   });
+});
+
+loginBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  const checkedUsername = checkUsername(username.value);
+  const checkedPassword = checkPassword(userPassword.value);
+
+  if (typeof checkedUsername === 'number'  && checkedPassword) {
+    addHidden(loginPage);
+    removeHidden(banner);
+    removeHidden(welcomeMessage);
+    removeHidden(coverImg);
+  } else {
+    console.log('no')
+  }
+
 });
 
 // =========================================================
