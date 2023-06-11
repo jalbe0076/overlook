@@ -229,6 +229,40 @@ main .trip-message {
   .inner-modal .modal-info {
     width: 500px; }
 
+.modal-login {
+  position: fixed;
+  top: 0;
+  width: 100vw; }
+  .modal-login .img-container {
+    background-color: var(--black);
+    float: left; }
+  .modal-login .cover-login {
+    display: block;
+    opacity: .7;
+    width: 50vw;
+    height: 100vh;
+    position: relative;
+    object-fit: cover;
+    object-position: center; }
+  .modal-login .inner-modal-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5em;
+    height: 100vh;
+    margin-top: 15%;
+    line-height: 0.7; }
+  .modal-login .hotel-title {
+    font-size: 5rem;
+    text-align: center; }
+    .modal-login .hotel-title .logo-login {
+      font-size: 3.15rem;
+      font-weight: 100; }
+  .modal-login #login {
+    display: flex;
+    flex-direction: column;
+    gap: 1em; }
+
 [aria-expanded="true"] {
   display: block; }
 
