@@ -23,6 +23,7 @@ let bookings;
 let currentUser;
 let userBookings;
 let selectedDate;
+let bookingConfirmed = false;
 const todaysDate = getTodaysDate();
 const pastTrips = document.querySelector('#past-trips');
 const futureTrips = document.querySelector('#upcoming-trips')
@@ -41,6 +42,7 @@ const userPassword = document.querySelector('#password');
 const username = document.querySelector('#username');
 const loginPage = document.querySelector('.modal-login');
 const falseValidation = document.querySelector('.false-validation')
+const bookingModal = document.querySelector('.modal');
 
 // =========================================================
 // ==================   event listeners   ==================
@@ -170,7 +172,22 @@ loginBtn.addEventListener('click', (e) => {
   } else {
     falseValidation.innerText = 'Please enter a valid username and password';
   }
+});
 
+bookingModal.addEventListener('click', (e) => { 
+  if (e.target.classList.contains('book-room')) {
+    bookingConfirmed = true;
+  }
+
+  if (e.target.classList.contains('modal') && !bookingConfirmed){
+    addHidden(bookingModal); 
+  } else if (e.target.classList.contains('modal') && bookingConfirmed) {
+    addHidden(bookingModal);
+    removeHidden(welcomeMessage);
+    removeHidden(coverImg);
+    banner.style.background = 'none';
+    displayRooms.innerHTML = '';
+  }
 });
 
 // =========================================================

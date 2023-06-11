@@ -322,5 +322,5 @@ export {
   addHidden,
   removeHidden,
   removeBookings,
-  getUserInfo
+  getUserInfo,
 };
