@@ -10,7 +10,8 @@
   <title>Overlook</title>
 </head>
 <body>
-  <img src="./images/booking-page.jpg" alt="" class="cover">
+  <!-- <img src="./images/booking-page.jpg" alt="" class="cover"> -->
+  <div class="cover"></div>
   <section class="banner">
     <div class="logo-bar">
       <h1>OVERLOOK <span class="logo">BOUTIQUE HOTEL</span></h1>
@@ -37,9 +38,8 @@
         <button href="#" class="nav-tab" id="upcoming-trips">Upcoming trips</button>
       </div>
       <form id="booking-options" action="../src/scripts.js" method="get">
-        <label class="hidden" for="pick-day">date</label>
-        <input type="date" id="pick-day" name="trip-day" value="2022-04-22" min="2017-05-21" max="2024-06-01">
-        <select name="room-types" id="room-types" placeholder="Room Type">
+        <input type="date" id="pick-day" name="trip-day" aria-label="pick-day" value="2022-04-22" min="2017-05-21" max="2024-06-01">
+        <select name="room-types" id="room-types" placeholder="Room Type" aria-label="room types">
           <option disabled selected value="All Rooms">Select room type</option>
           <option value="All Rooms">All Rooms</option>
           <option value="Single Room">Single Room</option>

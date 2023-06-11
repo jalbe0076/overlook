@@ -161,7 +161,8 @@ const showRoomModal = (room, date) => {
   innerModal.innerHTML = `
     <article class="rooms" id="${room.number}">
       <img class="room-image" src="${handleRoomImage(room)}" alt="turing logo">
-      <div class="room-info">
+      <div class="room-info modal-info">
+        <button class="modal-esc" id="modal-esc">X</button>
         <h3 class="room-type">${room.roomType}</h3>
         <p class="bed-size">${room.numBeds} ${room.bedSize}${room.bidet ? ', Bidet' : '' }</p>
         <ul class="amenities">Amenities
@@ -180,6 +181,7 @@ const showRoomModal = (room, date) => {
 
   const confirmBookingBtn = document.querySelector('.book-room');
   const anotherBookingBtn = document.querySelector('.another-room');
+  const modalEsc = document.querySelector('.modal-esc');
   confirmBookingBtn.focus();
 
   const tabTrap = (e) => {
@@ -187,13 +189,13 @@ const showRoomModal = (room, date) => {
       confirmBookingBtn.focus();
       
     }
-  
-    if (e.keyCode === 9 && e.shiftKey && document.activeElement.id === 'book-room') {
-      anotherBookingBtn.focus();
+
+    if (e.keyCode === 9 && e.shiftKey && document.activeElement.id === 'modal-esc') {
+      confirmBookingBtn.focus();
     }
   };
 
-  confirmBookingBtn.addEventListener('keydown', tabTrap);
+  modalEsc.addEventListener('keydown', tabTrap);
 
   confirmBookingBtn.addEventListener('click', () => {
    showConfirmedBooking(room, date);
@@ -202,6 +204,9 @@ const showRoomModal = (room, date) => {
   anotherBookingBtn.addEventListener('keydown', tabTrap);
 
   anotherBookingBtn.addEventListener('click', (e) => {
+    addHidden(bookingModal);
+  });
+  modalEsc.addEventListener('click', (e) => {
     addHidden(bookingModal);
   });
 };
@@ -222,7 +227,8 @@ const showConfirmedBooking = (room, date) => {
     innerModal.innerHTML = `
       <article class="rooms">
         <img class="room-image" src="${handleRoomImage(room)}" alt="turing logo">
-        <div class="room-info">
+        <div class="room-info modal-info">
+          <button class="modal-esc" id="modal-esc">X</button>
           <h3 class="booking-thanks">${firstName}, thank you for booking a ${room.roomType} with us</h3>
           <p class="booking-date">Your booking is confirmed on ${formatedDate}</p>
           <p class="reference">Your booking reference: ${response.newBooking.id}</p>
