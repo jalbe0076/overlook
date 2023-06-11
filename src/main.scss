@@ -46,7 +46,6 @@ a {
   position: sticky;
   top: 0px;
   width: 100vw;
-  // background-color: var(--white);
 }
 
 .logo-bar {
@@ -57,7 +56,7 @@ a {
   align-items: center;
 }
 
-h1 {
+.dashboard-title {
   font-size: 2rem;
   font-weight: 500;
   padding-left: 1rem;
@@ -329,21 +328,16 @@ main {
 // =========================================================
 
 .modal-login {
-  
-  // --gap: 15px;
   position: fixed;
   top: 0;
   width: 100vw;
-  // height: 100vh;
-  // display: flex;
-  // align-items: center;
-  // justify-content:;
+  text-align: center;
 
   & .img-container {
-
     background-color: var(--black);
     float: left;
   }
+
   & .cover-login {
     display: block;
     opacity: .7;
@@ -357,25 +351,15 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  // justify-content:center;
   gap: 5em;
   height: 100vh;
-  // top:20%
   margin-top: 15%;
-  // display:list-item;
   line-height: 0.7;
 }
 
 .hotel-title {
-  // color: var(--white);
   font-size: 5rem;
-  // position: absolute;
-  // margin-top: 1.5em;
-  // top: 50px;
-    // right: 3rem;
-    // padding-top: 10em;
-    text-align: center;
-    // line-height: -30px;
+  text-align: center;
 
     & .logo-login {
       font-size: 3.15rem;
@@ -387,12 +371,6 @@ main {
     flex-direction: column;
     gap: 1em;
   }
-
-  // & .inner-modal-login {
-  //   background-color: #ffffff;
-  //   position: absolute;
-  //   top: 100px;
-  // }
 }
 
 [aria-expanded="true"] {

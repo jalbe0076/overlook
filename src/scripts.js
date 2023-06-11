@@ -193,6 +193,5 @@ const getCustomer = (userId) => {
 export {
   bookings,
   setData,
-  currentUser,
   rooms
 };
