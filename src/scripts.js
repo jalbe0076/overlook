@@ -162,11 +162,11 @@ loginBtn.addEventListener('click', (e) => {
         currentUser = user;
         getUserInfo(user);
         updateNightsStayed();
-          updateTotalSpent();
-          updateCustomerStatus();
-          populateUserProfile(user.name);
-          populateUserWelcome(user.name);
-      })
+        updateTotalSpent();
+        updateCustomerStatus();
+        populateUserProfile(user.name);
+        populateUserWelcome(user.name);
+      });
   } else {
     falseValidation.innerText = 'Please enter a valid username and password';
   }

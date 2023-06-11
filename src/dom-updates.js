@@ -17,6 +17,9 @@ const innerModal = document.querySelector('.inner-modal');
 const tripMessage = document.querySelector('.trip-message');
 const vipStatus = document.querySelector('.vip-status');
 const navBtns = document.querySelectorAll('.nav-tab');
+const welcomeMessage = document.querySelector('.welcome-message');
+const coverImg = document.querySelector('.cover');
+const banner = document.querySelector('.banner');
 
 const todaysDate = getTodaysDate();
 let lastFocusedElement;
@@ -239,12 +242,24 @@ const showConfirmedBooking = (room, date) => {
       setData();
 
       const closeBookingReferenceBtn = document.querySelector('.return-main');
+      const modalEsc = document.querySelector('.modal-esc');
 
       closeBookingReferenceBtn.focus();
 
       closeBookingReferenceBtn.addEventListener('click', () => {
         displayRooms.innerHTML = '';
         addHidden(bookingModal);
+        removeHidden(welcomeMessage);
+        removeHidden(coverImg);
+        banner.style.background = 'none';
+      });
+
+      modalEsc.addEventListener('click', () => {
+        displayRooms.innerHTML = '';
+        addHidden(bookingModal);
+        removeHidden(welcomeMessage);
+        removeHidden(coverImg);
+        banner.style.background = 'none';
       });
     })   
     .catch(err => console.log("ERROR", err));
