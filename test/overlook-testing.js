@@ -71,7 +71,7 @@ describe(`Get a users bookings and calculate past total costs`, () => {
 
   it(`Should let the user know if they don't have upcoming bookings`, () => {
     user13Bookings = getUserBookings('2023-06-08', 13, bookingList.bookings, 'upcoming');
-    expect(user13Bookings).to.equal('No upcoming bookings');
+    expect(user13Bookings).to.equal('No upcoming bookings, book with us today!');
   });
 
   it(`If the booking date is today then the booking should show up as upcoming`, () => {
@@ -165,6 +165,6 @@ describe('It should return rooms by selected type', () => {
   it('Should return a message if there are no rooms available', () => {
     availableRooms = filterOutUnavailableRooms('2022-04-23', bookingList.bookings, roomList.rooms);
     const filteredAvailableRooms = filterAvailableRoomsByType(availableRooms, 'All Rooms', '2022/04/22'); 
-    expect(filteredAvailableRooms).to.equal(`We are fully booked on 2022/04/22, please consider staying with us another night`);
+    expect(filteredAvailableRooms).to.equal(`Sorry, we are fully booked on 2022/04/22, please consider staying with us another night`);
   });
 });

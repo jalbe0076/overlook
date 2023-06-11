@@ -11,9 +11,10 @@ import './images/single-suite.jpg';
 import './images/double-suite.jpg';
 import './images/single-residential-suite.jpg';
 import './images/double-residential-suite.jpg';
-import './images/customer-rating.png'
+import './images/customer-rating.png';
+import './images/booking-page.jpg'
 import { getAllData, postBooking, deleteBooking, findCustomer, getData } from './api-calls'
-import { handleDropdown, updateNightsStayed, updateTotalSpent, populateBookings, populateUserProfile, populateUserWelcome, populateAvailableRooms, setCalendarDates, showRoomModal, modalBookingBtn, displayTripMessage, resetTripMessage, updateCustomerStatus, handleActiveBtn, addHidden, removeHidden } from './dom-updates';
+import { handleDropdown, updateNightsStayed, updateTotalSpent, populateBookings, populateUserProfile, populateUserWelcome, populateAvailableRooms, setCalendarDates, showRoomModal, modalBookingBtn, displayTripMessage, resetTripMessage, updateCustomerStatus, handleActiveBtn, addHidden, removeHidden, removeBookings } from './dom-updates';
 import { getUserBookings, getTodaysDate, filterOutUnavailableRooms, filterAvailableRoomsByType, findRoom } from './booking-utils';
 
 let customers;
@@ -32,6 +33,8 @@ const roomType = document.querySelector('#room-types');
 const navBtns = document.querySelectorAll('.nav-tab');
 const displayRoomsBtn = document.querySelector('.see-available-rooms');
 const displayRooms = document.querySelector('.available-rooms');
+const welcomeMessage = document.querySelector('.welcome-message');
+const coverImg = document.querySelector('.cover')
 
 // =========================================================
 // ==================   event listeners   ==================
@@ -45,15 +48,31 @@ window.addEventListener('load', () => {
 dropdownLinks.addEventListener('click', handleDropdown);
 
 pastTrips.addEventListener('click', () => {
-  resetTripMessage();
   userBookings = getUserBookings(todaysDate, currentUser.id, bookings, 'past');
-  populateBookings(userBookings, rooms);
+  resetTripMessage(userBookings);
+  
+  if (typeof userBookings === 'object') {
+    populateBookings(userBookings, rooms);
+    addHidden(welcomeMessage);
+    addHidden(coverImg);
+  } else {
+    removeBookings();
+  }
 });
 
 futureTrips.addEventListener('click', () => {
-  resetTripMessage();
   userBookings = getUserBookings(todaysDate, currentUser.id, bookings, 'upcoming');
-  populateBookings(userBookings, rooms);
+  resetTripMessage(userBookings);
+  
+  if (typeof userBookings === 'object') {
+    populateBookings(userBookings, rooms);
+    addHidden(welcomeMessage);
+    addHidden(coverImg);
+  } else {
+    removeBookings(userBookings);
+    removeHidden(welcomeMessage);
+    removeHidden(coverImg)
+  }
 });
 
 formData.addEventListener('submit', (e) => {
@@ -71,7 +90,6 @@ formData.addEventListener('submit', (e) => {
   }
   
   let roomsToBook = document.querySelectorAll('.rooms');
-
   roomsToBook.forEach((room) => {
     room.addEventListener('keyup', (e) => {
         if (e.keyCode === 13 || e.keyCode === 32) {
@@ -98,6 +116,7 @@ navBtns.forEach(button => {
       removeHidden(roomType);
       removeHidden(pickedDate);
       displayRooms.innerHTML = '';
+      resetTripMessage();
     } else {
       addHidden(displayRoomsBtn);
       addHidden(roomType);
@@ -116,7 +135,7 @@ const setData = () => {
       customers = resolve[0].customers;
       rooms = resolve[1].rooms;
       bookings = resolve[2].bookings;
-      currentUser = getCustomer(49);
+      currentUser = getCustomer(42);
       
       updateNightsStayed();
       updateTotalSpent();

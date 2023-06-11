@@ -43,7 +43,7 @@ const getUserBookings = (date, userId, bookings, timeline) => {
   }
 
   if (!timelineBookings.length) {
-    return `No ${timeline} bookings`;
+    return `No ${timeline} bookings${timeline === 'upcoming' ? ', book with us today!' : ''}`;
   } else {
     return timelineBookings;
   }  

@@ -18,6 +18,15 @@ li {
 a {
   text-decoration: none; }
 
+.cover {
+  z-index: -1;
+  width: 100%;
+  height: 100vh;
+  background-blend-mode: lighten;
+  position: absolute;
+  object-fit: cover;
+  background-color: white; }
+
 .logo-bar {
   background-color: var(--brand-colour);
   min-height: 4rem;
@@ -116,10 +125,22 @@ nav {
 .user-logout {
   padding: 0.5em 0 0 0; }
 
+main .welcome-message {
+  position: absolute;
+  margin: auto 0;
+  text-align: center;
+  font-size: 4rem;
+  font-weight: 400;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  font-weight: 500;
+  color: var(--black);
+  letter-spacing: .15rem; }
+
 main .trip-message {
-  margin: 1rem;
-  font-size: 1.5em;
-  font-weight: 400; }
+  margin: 1em;
+  font-size: 1.3rem; }
 
 .available-rooms {
   display: flex;

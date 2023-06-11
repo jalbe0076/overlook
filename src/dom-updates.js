@@ -126,12 +126,20 @@ const populateAvailableRooms = (availableRooms) => {
   });
 };
 
+const removeBookings = ()  => {
+  displayRooms.innerHTML = '';
+};
+
 const displayTripMessage = (roomStatus) => {
   tripMessage.innerText = roomStatus;
 };
 
-const resetTripMessage = () => {
-  tripMessage.innerText = `HOSPITALITY AT IT'S FINEST`;
+const resetTripMessage = (message) => {
+  if (typeof message === 'string') {
+    tripMessage.innerText = `${message}`;
+  } else {
+    tripMessage.innerText = ``;
+  }
 }
 
 const populateUserWelcome = (usersName) => {
@@ -286,5 +294,6 @@ export {
   updateCustomerStatus,
   handleActiveBtn,
   addHidden,
-  removeHidden
+  removeHidden,
+  removeBookings
 };
