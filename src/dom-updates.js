@@ -71,7 +71,7 @@ const updateCustomerStatus = () => {
   } else if (nightsStayed < 20) {
     vipStatus.innerHTML = `Loyal Customer`;
   } else {
-    vipStatus.innerHTML = `<img src="./images/customer-rating.png">VIP Customer`;
+    vipStatus.innerHTML = `<img src="./images/customer-rating.png" alt="VIP star">VIP Customer`;
   }
 };
 
