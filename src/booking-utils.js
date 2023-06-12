@@ -17,7 +17,7 @@ const checkUsername = (username) => {
   const keyword = user.substring(0, 8);
   const userId = parseInt(user.substring(8));
 
-  if (keyword !== 'customer' || isNaN(userId) || userId > 50) {
+  if (keyword !== 'customer' || isNaN(userId) || userId > 50 || userId < 1) {
     return 'Please enter a valid username and password';
   }
 
