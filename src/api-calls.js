@@ -2,8 +2,8 @@ import { setData } from "./scripts";
 
 const getData = (data) => {
   return fetch(`http://localhost:3001/api/v1/${data}`)
-      .then(response => response.json())
-      .catch(error => console.log("ERROR", error));
+      .then(response => errorHandle(response))
+      .catch(error => alert(`${error.message}`));
 };
 
 const getAllData = () => {
@@ -16,18 +16,27 @@ const deleteBooking = (id) => {
     body: '',
     headers: { 'Content-Type': 'application/json' }
   })
-    .then(response => response.json())
+    .then(response => errorHandle(response))
     .then(() => setData())
-    .catch(err => console.log("ERROR", err));
+    .catch(error => alert(`${error.message}`));
 };
 
 const findCustomer = (id) => {
   return fetch(`http://localhost:3001/api/v1/customers/${id}`)
-      .then(response => response.json())
+      .then(response => errorHandle(response))
       .then(resolve => {
         return resolve
       })
-      .catch(error => console.log("ERROR", error));
+      .catch(error => alert(`${error.message}`));
+};
+
+const errorHandle = (response) => {
+  if (response.ok) {
+    return response.json();
+  } else {
+    
+    throw new Error(`${response.statusText}`);
+  }
 };
 
 export {

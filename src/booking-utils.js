@@ -103,6 +103,10 @@ const checkPassword = (password) => {
   return password === 'overlook2021' ? true : false;
 };
 
+const capatalizeFirstLetter = (word) => {
+  return word.charAt(0).toUpperCase() + word.slice(1);
+};
+
 export {
   checkUsername,
   getUserBookings,
@@ -113,5 +117,6 @@ export {
   filterAvailableRoomsByType,
   findRoom,
   formatRoomToPost,
-  checkPassword
+  checkPassword,
+  capatalizeFirstLetter
 };

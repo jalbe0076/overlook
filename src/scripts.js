@@ -128,7 +128,6 @@ navBtns.forEach(button => {
   button.addEventListener('click', () => {
     handleActiveBtn();
     button.classList.add('nav-tab-active');
-    button.style.color =  '#212427';
     
     if (button.id === 'bookings') {
       removeHidden(displayRoomsBtn);

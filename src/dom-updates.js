@@ -2,7 +2,7 @@
 // ===============   variables and imports   ===============
 // =========================================================
 
-import { getUserBookings, getTotalSpent, formatDate, getTodaysDate, filterOutUnavailableRooms, formatRoomToPost } from "./booking-utils";
+import { getUserBookings, getTotalSpent, formatDate, getTodaysDate, filterOutUnavailableRooms, formatRoomToPost, capatalizeFirstLetter } from "./booking-utils";
 import { bookings, rooms, setData } from "./scripts";
 
 const userDropdownMenu = document.querySelector('#user-items');
@@ -83,15 +83,17 @@ const updateTotalSpent = () => {
 const populateBookings = (bookings, rooms) => {
   displayRooms.innerHTML = '';
 
+
   bookings.forEach(booking => {
       const room = rooms.find(room => room.number === booking.roomNumber);
+      const capRoomType = capatalizeFirstLetter(room.roomType);
 
       displayRooms.innerHTML += `
       <article class="rooms" tabindex="0">
         <img class="room-image" src="${handleRoomImage(room)}" alt="turing logo">
         <div class="room-info">
-          <h3 class="room-type">${room.roomType}</h3>
-          <p class="bed-size">${room.numBeds} ${room.bedSize}${room.bidet ? ', Bidet' : '' }</p>
+          <h3 class="room-type">${capRoomType}</h3>
+          <p class="bed-size">${room.numBeds} ${room.bedSize} bed${room.numBeds > 1 ? 's' : ''}${room.bidet ? ', Bidet' : '' }</p>
           <ul class="amenities">Amenities
             <li>Wifi</li>
             <li>Air conditioner</li>
@@ -111,13 +113,15 @@ const populateAvailableRooms = (availableRooms) => {
   displayRooms.innerHTML = '';
 
   availableRooms.forEach(room => {
+    const capRoomType = capatalizeFirstLetter(room.roomType);
+
     displayRooms.innerHTML += `
       <article class="rooms"  tabindex="0" id="${room.number}">
         <img class="room-image" src="${handleRoomImage(room)}" alt="turing logo">
         <div class="room-info">
-          <h3 class="room-type">${room.roomType}</h3>
-          <p class="bed-size">${room.numBeds} ${room.bedSize}${room.bidet ? ', Bidet' : '' }</p>
-          <ul class="amenities">Amenities
+          <h3 class="room-type">${capRoomType}</h3>
+          <p class="bed-size">${room.numBeds} ${room.bedSize} bed${room.numBeds > 1 ? 's' : ''}${room.bidet ? ', Bidet' : '' }</p>
+          <ul class="amenities"><p>Amenities</p>
             <li>Wifi</li>
             <li>Air conditioner</li>
             <li>Balcony</li>
@@ -162,13 +166,16 @@ const setCalendarDates = () => {
 
 const showRoomModal = (room, date) => {
   bookingModal.classList.toggle('hidden');
+  const capRoomType = capatalizeFirstLetter(room.roomType);
+
   innerModal.innerHTML = `
-    <article class="rooms" id="${room.number}">
+    <article class="rooms modal-room" id="${room.number}">
       <img class="room-image" src="${handleRoomImage(room)}" alt="turing logo">
       <div class="room-info modal-info">
         <button class="modal-esc" id="modal-esc">X</button>
-        <h3 class="room-type">${room.roomType}</h3>
-        <p class="bed-size">${room.numBeds} ${room.bedSize}${room.bidet ? ', Bidet' : '' }</p>
+        <p class="booked-date" id="${date}">Stay with us on ${date}</p>
+        <h3 class="room-type">${capRoomType}</h3>
+        <p class="bed-size">${room.numBeds} ${room.bedSize} bed${room.numBeds > 1 ? 's' : ''}${room.bidet ? ', Bidet' : '' }</p>
         <ul class="amenities">Amenities
           <li>Wifi</li>
           <li>Air conditioner</li>
@@ -176,10 +183,11 @@ const showRoomModal = (room, date) => {
           <li>Pet Friendly</li>
           <li>Access to gym and pool</li>
         </ul>
-        <p class="booked-date" id="${date}">Stay with us on ${date}</p>
         <p class="room-cost">$${room.costPerNight}</p>
-        <button class="book-room" id="book-room">BOOK NOW!</button>
+        <div class="btn-container">
         <button class="another-room" id="another-room">PICK ANOTHER ROOM</button>
+        <button class="book-room" id="book-room">BOOK NOW!</button>
+        </div>
       </div>
     </article>`;
 
@@ -236,7 +244,9 @@ const showConfirmedBooking = (room, date) => {
           <h3 class="booking-thanks">${firstName}, thank you for booking a ${room.roomType} with us</h3>
           <p class="booking-date">Your booking is confirmed on ${formatedDate}</p>
           <p class="reference">Your booking reference: ${response.newBooking.id}</p>
-          <button class="return-main">return </button>
+          <div class="btn-container">
+            <button class="return-main">return </button>
+          </div>
         </div>
       </article>`;
       setData();

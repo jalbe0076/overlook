@@ -7,7 +7,8 @@
   --black:#212427;
   --nav-grey: #333333;
   --white: #ffffff;
-  --unactive-tabs: #636363;
+  --dashboard-grey: #484848;
+  --logo-colour: #542e71;
 }
 
 * {
@@ -35,8 +36,27 @@ a {
   width: 100%;
   height: 100vh;
   position: absolute;
-
 }
+
+button {
+  background-color: var(--logo-colour);
+  color: var(--white);
+  border-radius: 0.3rem;
+  padding: 0.6em 1.5em;
+  // border-style: none;
+  font-size: 16px;
+  border-color: var(--logo-colour);
+}
+
+input, select {
+  border-radius: 0.3rem;
+  border-width: 2px;
+  border-color: #999999;
+  font-size: 16px;
+  padding: 0.475em 1.2em;
+}
+
+
 
 // =========================================================
 // ==================   banner section   ===================
@@ -49,17 +69,23 @@ a {
 }
 
 .logo-bar {
-  background-color: var(--brand-colour);
+  background-color: var(--white);
   min-height: 4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  top: 0;
+
+  & .user-name {
+    color: var(--logo-colour);
+  }
 }
 
 .dashboard-title {
   font-size: 2rem;
-  font-weight: 500;
+  font-weight: 600;
   padding-left: 1rem;
+  color: var(--logo-colour);
 }
 
 h1 .logo {
@@ -78,11 +104,13 @@ h1 .logo {
   & .profile-icon {
     width: 2.4rem;
     padding-right: .3em;
+    filter: invert(20%) sepia(35%) saturate(1725%) hue-rotate(240deg) brightness(93%) contrast(92%);
   }
 
   & .user-chevron {
     width: 2rem;
     padding-left: 0.2;
+    filter: invert(20%) sepia(35%) saturate(1725%) hue-rotate(240deg) brightness(93%) contrast(92%);
   }
 }
 
@@ -97,8 +125,8 @@ nav {
     font-size: 1.2rem;
     background: none;
     border: none;
-    color: var(--unactive-tabs);
-    padding-bottom: 0.2em;
+    color: var(--dashboard-grey);
+    padding: 0 0 0.2em 0 ;
     font-weight: 500;
   }
 
@@ -107,8 +135,8 @@ nav {
   }
 
   & .nav-tab-active {
-    color: var(--black);
-    border-bottom: solid var(--black);
+    color: var(--dashboard-grey);
+    border-bottom: solid var(--dashboard-grey);
   }
   & input + select, & select + button {
     margin-left: 1rem;
@@ -118,16 +146,25 @@ nav {
     min-height: 33px;
     padding-bottom: 1em;
   }
+
+  & .welcome-user {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: var(--dashboard-grey)
+  }
+
+  & #pick-day {
+    padding: 0.45em 1.2em;
+  }
 }
 
 #booking-options {
 
-  & button, & input, & select {
-    padding: 0.3em 0.8em;
-    font-size: 1rem;
-    border-radius: .6rem;
-    height: 100%;
-  }
+  // & button, & input, & select {
+  //   padding: 0.3em 0.8em;
+  //   font-size: 1rem;
+  //   height: 100%;
+  // }
 }
 
 .dropdown-container {
@@ -152,7 +189,7 @@ nav {
   right: 0.5rem;
   padding: 1em;
   border: .1rem solid var(--black);
-  border-radius: .6rem;
+  border-radius: .3rem;
   background-color: var(--white);
 }
 
@@ -160,7 +197,7 @@ nav {
   display: flex;
   flex-direction: column;
   background-color: var(--brand-colour);
-  border-radius: .6rem;
+  border-radius: .3rem;
   padding: 1em;
   margin: 1em 0;
   font-size: 1.1rem;
@@ -197,8 +234,9 @@ main {
     top: 50%;
     left: 50%;
     font-weight: 500;
-    color: var(--black);
     letter-spacing: .15rem;
+    font-family: 'Playfair Display', serif;
+    color: var(--dashboard-grey)
   }
 
   & .trip-message {
@@ -218,32 +256,31 @@ main {
 }
 .rooms {
   display: flex;
-  max-width: 700px; 
+  min-width: 700px; 
+  min-height: 375px; 
   gap: 1rem;
-  border-radius: .6em;
+  border-radius: .3em;
   box-shadow: 16px 16px 15px -5px rgba(0, 0, 0, 0.22), -6px -6px 15px -5px rgba(0, 0, 0, 0.22);
 
   & .room-info {
-    padding: 1em;
+    padding: 2em 2em 2em 0.5em;
     line-height: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   & .room-image {
     object-fit:cover;
     object-position: center;
-    border-radius: 0.6em 0 0 .6em;
+    border-radius: 0.3em 0 0 .6em;
+    min-width: 50%;
   }
 
   & h3 {
     font-size: 1.5rem;
     padding-bottom: .6rem;
     font-weight: 500;
-  }
-
-
-  & li {
-    list-style-type: circle;
-    list-style-position: inside;
   }
 
   & .bed-size {
@@ -254,14 +291,38 @@ main {
 
   & .room-cost {
     padding-top: .6rem;
-    font-size: 1.3rem;
-    font-weight: 500;
+    font-size: 2.5rem;
+    font-weight: 700;
   }
 
   & img {
     max-width: 300px;
     min-height: 344px;
   }
+
+  & .room-type {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 2.25rem;
+  }
+
+  & .amenities {
+    font-weight: 500;
+
+  
+    & li {
+      font-weight: 400;
+      list-style-type: disc;
+      list-style-position: inside;
+      line-height: normal;
+      padding-left: 10px;
+    }
+  }
+
+  & .amenities p {
+    padding-bottom: 5px;
+  }
+
 }
 
 // =========================================================
@@ -281,36 +342,50 @@ main {
   background: rgba(0, 0, 0, 0.5);
 }
 
-.inner-modal {
+#inner-modal {
   background: var(--white);
-  max-width: 800px; 
+   
   overflow: hidden;
-  border-radius: .6em;
-  transform: scale(1.3);
+  border-radius: .3em;
+  // transform: scale(1.3);
   min-height: 344px;
   position: relative;
+
+  & .modal-room {
+    min-width: 900px;
+    min-height: 450px;
+  }
 
   & button + button {
     margin-left: 1rem;
   }
 
-  & button {
-    padding: 0.3em 0.8em;
-    font-size: 1rem;
-    border-radius: .6rem;
-    margin-top: 1rem;
+  & .btn-container {
+    margin-top: .8em;
   }
+
+  & .another-room {
+    color: var(--logo-colour);
+    background-color: var(--white);
+  }
+  // & button {
+  //   padding: 0.3em 0.8em;
+  //   font-size: 1rem;
+  //   border-radius: .3rem;
+  //   margin-top: 1rem;
+  // }
 
   & .room-info > .modal-esc {
     position: absolute;
     top: 0;
     right: 0;
     padding: 0;
-    margin:  .3em .5em 0 0;
+    margin:  .6em 1em 0 0;
     font-size: 2rem;
     font-weight: 500;
     background: none;
     border: none;
+    color: var(--black);
   }
 
   & .booking-thanks {
@@ -332,6 +407,7 @@ main {
   top: 0;
   width: 100vw;
   text-align: center;
+  // background-color: none;
 
   & .img-container {
     background-color: var(--black);
@@ -347,25 +423,29 @@ main {
     object-fit: cover;
     object-position: center;
   }
+
 .inner-modal-login {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 5em;
   height: 100vh;
-  margin-top: 15%;
+  padding-top: 15%;
   line-height: 0.7;
+  background-color: #e4ebfb;
 }
 
 .hotel-title {
   font-size: 5rem;
   text-align: center;
+  color: var(--logo-colour);
 
     & .logo-login {
       font-size: 3.15rem;
       font-weight: 100;
     }
   }
+
   #login {
     display: flex;
     flex-direction: column;
