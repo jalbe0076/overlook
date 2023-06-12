@@ -3,7 +3,7 @@
 // =========================================================
 
 import { errorHandle, postBooking } from "./api-calls";
-import { getUserBookings, getTotalSpent, formatDate, getTodaysDate, filterOutUnavailableRooms, formatRoomToPost, capatalizeFirstLetter } from "./booking-utils";
+import { getUserBookings, getTotalSpent, formatDate, getTodaysDate, formatRoomToPost, capatalizeFirstLetter } from "./booking-utils";
 import { bookings, rooms, setData } from "./scripts";
 
 const userDropdownMenu = document.querySelector('#user-items');
@@ -228,13 +228,7 @@ const showConfirmedBooking = (room, date) => {
   const formatedDate = formatDate(date);
   const bookRoomReceipt = formatRoomToPost(formatedDate, room, currentUser.id);
 
-  // postBooking(bookRoomReceipt)
-  fetch('http://localhost:3001/api/v1/bookings', {
-    method: 'POST',
-    body: JSON.stringify(bookRoomReceipt),
-    headers: { 'Content-Type': 'application/json' }
-  })
-    .then(response => errorHandle(response))
+  postBooking(bookRoomReceipt)
     .then((response) => {
 
     innerModal.innerHTML = `

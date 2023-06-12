@@ -450,3 +450,7 @@ main {
 button:hover, input:hover, select:hover {
   cursor: pointer;
 }
+
+button:hover, button:focus {
+  transform: scale(1.1);
+}
