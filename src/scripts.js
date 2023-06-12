@@ -12,10 +12,34 @@ import './images/double-suite.jpg';
 import './images/single-residential-suite.jpg';
 import './images/double-residential-suite.jpg';
 import './images/customer-rating.png';
-import './images/booking-page.jpg'
-import { getAllData, postBooking, deleteBooking, findCustomer, getData } from './api-calls'
-import { handleDropdown, updateNightsStayed, updateTotalSpent, populateBookings, populateUserProfile, populateUserWelcome, populateAvailableRooms, setCalendarDates, showRoomModal, modalBookingBtn, displayTripMessage, resetTripMessage, updateCustomerStatus, handleActiveBtn, addHidden, removeHidden, removeBookings } from './dom-updates';
-import { getUserBookings, getTodaysDate, filterOutUnavailableRooms, filterAvailableRoomsByType, findRoom } from './booking-utils';
+import './images/booking-page.jpg';
+import { getAllData, findCustomer } from './api-calls'
+import { handleDropdown, 
+  updateNightsStayed, 
+  updateTotalSpent, 
+  populateBookings, 
+  populateUserProfile, 
+  populateUserWelcome, 
+  populateAvailableRooms, 
+  setCalendarDates, 
+  showRoomModal, 
+  displayTripMessage, 
+  resetTripMessage, 
+  updateCustomerStatus, 
+  handleActiveBtn, 
+  addHidden, 
+  removeHidden, 
+  removeBookings, 
+  getUserInfo, 
+  userDropdownMenu,
+  displayRooms,
+  pickedDate,
+  bookingModal,
+  navBtns,
+  welcomeMessage,
+  coverImg,
+  banner } from './dom-updates';
+import { getUserBookings, getTodaysDate, filterOutUnavailableRooms, filterAvailableRoomsByType, findRoom, checkPassword, checkUsername } from './booking-utils';
 
 let customers;
 let rooms;
@@ -23,19 +47,21 @@ let bookings;
 let currentUser;
 let userBookings;
 let selectedDate;
+let bookingConfirmed = false;
 const todaysDate = getTodaysDate();
 const pastTrips = document.querySelector('#past-trips');
 const futureTrips = document.querySelector('#upcoming-trips')
 const dropdownLinks = document.querySelector('.user-profile');
 const formData = document.querySelector('#booking-options');
-const pickedDate = document.querySelector('#pick-day');
 const roomType = document.querySelector('#room-types');
-const navBtns = document.querySelectorAll('.nav-tab');
 const displayRoomsBtn = document.querySelector('.see-available-rooms');
-const displayRooms = document.querySelector('.available-rooms');
-const welcomeMessage = document.querySelector('.welcome-message');
-const coverImg = document.querySelector('.cover');
-const banner = document.querySelector('.banner');
+const loginBtn = document.querySelector('.login-btn');
+const userPassword = document.querySelector('#password');
+const username = document.querySelector('#username');
+const loginPage = document.querySelector('.modal-login');
+const falseValidation = document.querySelector('.false-validation')
+const userLogout = document.querySelector('#user-logout');
+const loginForm = document.querySelector('#login');
 
 // =========================================================
 // ==================   event listeners   ==================
@@ -59,15 +85,14 @@ pastTrips.addEventListener('click', () => {
     banner.style.background = '#ffffff';
   } else {
     removeBookings();
-    banner.style.background = none;
+    banner.style.background = 'none';
   }
 });
 
 futureTrips.addEventListener('click', () => {
   userBookings = getUserBookings(todaysDate, currentUser.id, bookings, 'upcoming');
   resetTripMessage(userBookings);
-  console.log(resetTripMessage(userBookings))
-  console.log(typeof userBookings)
+
   if (typeof userBookings === 'object') {
     populateBookings(userBookings, rooms);
     addHidden(welcomeMessage);
@@ -122,7 +147,6 @@ navBtns.forEach(button => {
   button.addEventListener('click', () => {
     handleActiveBtn();
     button.classList.add('nav-tab-active');
-    button.style.color =  '#212427';
     
     if (button.id === 'bookings') {
       removeHidden(displayRoomsBtn);
@@ -142,6 +166,61 @@ navBtns.forEach(button => {
   });
 });
 
+loginBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  const checkedUsername = checkUsername(username.value);
+  const checkedPassword = checkPassword(userPassword.value);
+  
+
+  if (typeof checkedUsername === 'number'  && checkedPassword) {
+    addHidden(loginPage);
+    removeHidden(banner);
+    removeHidden(welcomeMessage);
+    removeHidden(coverImg);
+    
+    getCustomer(checkedUsername)
+      .then((user) => {
+        currentUser = user;
+        getUserInfo(user);
+        updateNightsStayed();
+        updateTotalSpent();
+        updateCustomerStatus();
+        populateUserProfile(user.name);
+        populateUserWelcome(user.name);
+      });
+  } else {
+    falseValidation.innerText = 'Please enter a valid username and password';
+  }
+  loginForm.reset();
+});
+
+bookingModal.addEventListener('click', (e) => { 
+  if (e.target.classList.contains('book-room')) {
+    bookingConfirmed = true;
+  }
+
+  if (e.target.classList.contains('modal') && !bookingConfirmed){
+    addHidden(bookingModal); 
+  } else if (e.target.classList.contains('modal') && bookingConfirmed) {
+    addHidden(bookingModal);
+    removeHidden(welcomeMessage);
+    removeHidden(coverImg);
+    banner.style.background = 'none';
+    displayRooms.innerHTML = '';
+  }
+});
+
+userLogout.addEventListener('click', () => {
+  removeHidden(loginPage);
+  addHidden(banner);
+  banner.style.background = 'none';
+  addHidden(welcomeMessage);
+  addHidden(coverImg);
+  userDropdownMenu.setAttribute('aria-expanded', 'false');
+  displayRooms.innerHTML = '';
+  currentUser = undefined;
+});
+
 // =========================================================
 // =====================   functions   =====================
 // =========================================================
@@ -152,24 +231,15 @@ const setData = () => {
       customers = resolve[0].customers;
       rooms = resolve[1].rooms;
       bookings = resolve[2].bookings;
-      currentUser = getCustomer(42);
-      
-      updateNightsStayed();
-      updateTotalSpent();
-      updateCustomerStatus();
-      populateUserProfile(currentUser.name);
-      populateUserWelcome(currentUser.name);
     });
 };
 
 const getCustomer = (userId) => {
-  return customers.find(customer => customer.id === userId);
-  // return findCustomer(userId);
+  return findCustomer(userId);
 };
 
 export {
   bookings,
   setData,
-  currentUser,
   rooms
 };

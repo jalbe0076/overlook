@@ -2,8 +2,9 @@
 // ===============   variables and imports   ===============
 // =========================================================
 
-import { getUserBookings, getTotalSpent, formatDate, getTodaysDate, filterOutUnavailableRooms, formatRoomToPost } from "./booking-utils";
-import { bookings, rooms, currentUser, setData } from "./scripts";
+import { errorHandle, postBooking } from "./api-calls";
+import { getUserBookings, getTotalSpent, formatDate, getTodaysDate, filterOutUnavailableRooms, formatRoomToPost, capatalizeFirstLetter } from "./booking-utils";
+import { bookings, rooms, setData } from "./scripts";
 
 const userDropdownMenu = document.querySelector('#user-items');
 const totalNights = document.querySelector('.total-nights');
@@ -17,9 +18,13 @@ const innerModal = document.querySelector('.inner-modal');
 const tripMessage = document.querySelector('.trip-message');
 const vipStatus = document.querySelector('.vip-status');
 const navBtns = document.querySelectorAll('.nav-tab');
+const welcomeMessage = document.querySelector('.welcome-message');
+const coverImg = document.querySelector('.cover');
+const banner = document.querySelector('.banner');
 
 const todaysDate = getTodaysDate();
 let lastFocusedElement;
+let currentUser;
 
 // =========================================================
 // =====================   functions   =====================
@@ -66,7 +71,7 @@ const updateCustomerStatus = () => {
   } else if (nightsStayed < 20) {
     vipStatus.innerHTML = `Loyal Customer`;
   } else {
-    vipStatus.innerHTML = `<img src="./images/customer-rating.png">VIP Customer`;
+    vipStatus.innerHTML = `<img src="./images/customer-rating.png" alt="VIP star">VIP Customer`;
   }
 };
 
@@ -81,13 +86,14 @@ const populateBookings = (bookings, rooms) => {
 
   bookings.forEach(booking => {
       const room = rooms.find(room => room.number === booking.roomNumber);
+      const capRoomType = capatalizeFirstLetter(room.roomType);
 
       displayRooms.innerHTML += `
       <article class="rooms" tabindex="0">
         <img class="room-image" src="${handleRoomImage(room)}" alt="turing logo">
         <div class="room-info">
-          <h3 class="room-type">${room.roomType}</h3>
-          <p class="bed-size">${room.numBeds} ${room.bedSize}${room.bidet ? ', Bidet' : '' }</p>
+          <h3 class="room-type">${capRoomType}</h3>
+          <p class="bed-size">${room.numBeds} ${room.bedSize} bed${room.numBeds > 1 ? 's' : ''}${room.bidet ? ', Bidet' : '' }</p>
           <ul class="amenities">Amenities
             <li>Wifi</li>
             <li>Air conditioner</li>
@@ -107,13 +113,15 @@ const populateAvailableRooms = (availableRooms) => {
   displayRooms.innerHTML = '';
 
   availableRooms.forEach(room => {
+    const capRoomType = capatalizeFirstLetter(room.roomType);
+
     displayRooms.innerHTML += `
       <article class="rooms"  tabindex="0" id="${room.number}">
         <img class="room-image" src="${handleRoomImage(room)}" alt="turing logo">
         <div class="room-info">
-          <h3 class="room-type">${room.roomType}</h3>
-          <p class="bed-size">${room.numBeds} ${room.bedSize}${room.bidet ? ', Bidet' : '' }</p>
-          <ul class="amenities">Amenities
+          <h3 class="room-type">${capRoomType}</h3>
+          <p class="bed-size">${room.numBeds} ${room.bedSize} bed${room.numBeds > 1 ? 's' : ''}${room.bidet ? ', Bidet' : '' }</p>
+          <ul class="amenities"><p>Amenities</p>
             <li>Wifi</li>
             <li>Air conditioner</li>
             <li>Balcony</li>
@@ -158,13 +166,16 @@ const setCalendarDates = () => {
 
 const showRoomModal = (room, date) => {
   bookingModal.classList.toggle('hidden');
+  const capRoomType = capatalizeFirstLetter(room.roomType);
+
   innerModal.innerHTML = `
-    <article class="rooms" id="${room.number}">
+    <article class="rooms modal-room" id="${room.number}">
       <img class="room-image" src="${handleRoomImage(room)}" alt="turing logo">
       <div class="room-info modal-info">
         <button class="modal-esc" id="modal-esc">X</button>
-        <h3 class="room-type">${room.roomType}</h3>
-        <p class="bed-size">${room.numBeds} ${room.bedSize}${room.bidet ? ', Bidet' : '' }</p>
+        <p class="booked-date" id="${date}">Stay with us on ${date}</p>
+        <h3 class="room-type">${capRoomType}</h3>
+        <p class="bed-size">${room.numBeds} ${room.bedSize} bed${room.numBeds > 1 ? 's' : ''}${room.bidet ? ', Bidet' : '' }</p>
         <ul class="amenities">Amenities
           <li>Wifi</li>
           <li>Air conditioner</li>
@@ -172,10 +183,11 @@ const showRoomModal = (room, date) => {
           <li>Pet Friendly</li>
           <li>Access to gym and pool</li>
         </ul>
-        <p class="booked-date" id="${date}">Stay with us on ${date}</p>
         <p class="room-cost">$${room.costPerNight}</p>
-        <button class="book-room" id="book-room">BOOK NOW!</button>
+        <div class="btn-container">
         <button class="another-room" id="another-room">PICK ANOTHER ROOM</button>
+        <button class="book-room" id="book-room">BOOK NOW!</button>
+        </div>
       </div>
     </article>`;
 
@@ -185,23 +197,22 @@ const showRoomModal = (room, date) => {
   confirmBookingBtn.focus();
 
   const tabTrap = (e) => {
-    if (e.keyCode === 9 && document.activeElement.id === 'another-room') {
-      confirmBookingBtn.focus();
-      
+    if (e.keyCode === 9 && document.activeElement.id === 'book-room') {
+      anotherBookingBtn.focus();
     }
 
     if (e.keyCode === 9 && e.shiftKey && document.activeElement.id === 'modal-esc') {
-      confirmBookingBtn.focus();
+      anotherBookingBtn.focus();
     }
   };
 
   modalEsc.addEventListener('keydown', tabTrap);
+  confirmBookingBtn.addEventListener('keydown', tabTrap);
 
   confirmBookingBtn.addEventListener('click', () => {
    showConfirmedBooking(room, date);
   });
 
-  anotherBookingBtn.addEventListener('keydown', tabTrap);
 
   anotherBookingBtn.addEventListener('click', (e) => {
     addHidden(bookingModal);
@@ -216,12 +227,13 @@ const showConfirmedBooking = (room, date) => {
   const formatedDate = formatDate(date);
   const bookRoomReceipt = formatRoomToPost(formatedDate, room, currentUser.id);
 
+  // postBooking(bookRoomReceipt)
   fetch('http://localhost:3001/api/v1/bookings', {
     method: 'POST',
     body: JSON.stringify(bookRoomReceipt),
     headers: { 'Content-Type': 'application/json' }
   })
-    .then(response => response.json())
+    .then(response => errorHandle(response))
     .then((response) => {
 
     innerModal.innerHTML = `
@@ -232,21 +244,47 @@ const showConfirmedBooking = (room, date) => {
           <h3 class="booking-thanks">${firstName}, thank you for booking a ${room.roomType} with us</h3>
           <p class="booking-date">Your booking is confirmed on ${formatedDate}</p>
           <p class="reference">Your booking reference: ${response.newBooking.id}</p>
-          <button class="return-main">return </button>
+          <div class="btn-container">
+            <button class="return-main" id="return-main">return </button>
+          </div>
         </div>
       </article>`;
       setData();
 
       const closeBookingReferenceBtn = document.querySelector('.return-main');
-
+      const modalEsc = document.querySelector('.modal-esc');
+      const tabTrap = (e) => {
+        if (e.keyCode === 9 && document.activeElement.id === 'return-main') {
+          modalEsc.focus();
+        }
+    
+        if (e.keyCode === 9 && e.shiftKey && document.activeElement.id === 'modal-esc') {
+          closeBookingReferenceBtn.focus();
+        }
+      };
+    
+      closeBookingReferenceBtn.addEventListener('keydown', tabTrap);
+      
       closeBookingReferenceBtn.focus();
-
+      
       closeBookingReferenceBtn.addEventListener('click', () => {
         displayRooms.innerHTML = '';
         addHidden(bookingModal);
+        removeHidden(welcomeMessage);
+        removeHidden(coverImg);
+        banner.style.background = 'none';
+      });
+      
+      modalEsc.addEventListener('keydown', tabTrap);
+      modalEsc.addEventListener('click', () => {
+        displayRooms.innerHTML = '';
+        addHidden(bookingModal);
+        removeHidden(welcomeMessage);
+        removeHidden(coverImg);
+        banner.style.background = 'none';
       });
     })   
-    .catch(err => console.log("ERROR", err));
+    .catch(error => alert(`${error.message}`));
 };
 
 const handleRoomImage = (room) => {
@@ -285,6 +323,10 @@ const removeHidden = (element) => {
   element.classList.remove('hidden');
 }
 
+const getUserInfo = (user) => {
+  currentUser = user;
+};
+
 export {
   handleDropdown,
   updateNightsStayed,
@@ -301,5 +343,14 @@ export {
   handleActiveBtn,
   addHidden,
   removeHidden,
-  removeBookings
+  removeBookings,
+  getUserInfo,
+  userDropdownMenu,
+  displayRooms,
+  pickedDate,
+  bookingModal,
+  navBtns,
+  welcomeMessage,
+  coverImg,
+  banner
 };
