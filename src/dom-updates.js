@@ -200,7 +200,6 @@ const showRoomModal = (room, date) => {
   const tabTrap = (e) => {
     if (e.keyCode === 9 && document.activeElement.id === 'book-room') {
       anotherBookingBtn.focus();
-      
     }
 
     if (e.keyCode === 9 && e.shiftKey && document.activeElement.id === 'modal-esc') {
@@ -246,7 +245,7 @@ const showConfirmedBooking = (room, date) => {
           <p class="booking-date">Your booking is confirmed on ${formatedDate}</p>
           <p class="reference">Your booking reference: ${response.newBooking.id}</p>
           <div class="btn-container">
-            <button class="return-main">return </button>
+            <button class="return-main" id="return-main">return </button>
           </div>
         </div>
       </article>`;
@@ -254,9 +253,20 @@ const showConfirmedBooking = (room, date) => {
 
       const closeBookingReferenceBtn = document.querySelector('.return-main');
       const modalEsc = document.querySelector('.modal-esc');
-
+      const tabTrap = (e) => {
+        if (e.keyCode === 9 && document.activeElement.id === 'return-main') {
+          modalEsc.focus();
+        }
+    
+        if (e.keyCode === 9 && e.shiftKey && document.activeElement.id === 'modal-esc') {
+          closeBookingReferenceBtn.focus();
+        }
+      };
+    
+      closeBookingReferenceBtn.addEventListener('keydown', tabTrap);
+      
       closeBookingReferenceBtn.focus();
-
+      
       closeBookingReferenceBtn.addEventListener('click', () => {
         displayRooms.innerHTML = '';
         addHidden(bookingModal);
@@ -264,7 +274,8 @@ const showConfirmedBooking = (room, date) => {
         removeHidden(coverImg);
         banner.style.background = 'none';
       });
-
+      
+      modalEsc.addEventListener('keydown', tabTrap);
       modalEsc.addEventListener('click', () => {
         displayRooms.innerHTML = '';
         addHidden(bookingModal);

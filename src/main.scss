@@ -43,7 +43,6 @@ button {
   color: var(--white);
   border-radius: 0.3rem;
   padding: 0.6em 1.5em;
-  // border-style: none;
   font-size: 16px;
   border-color: var(--logo-colour);
 }
@@ -156,15 +155,6 @@ nav {
   & #pick-day {
     padding: 0.45em 1.2em;
   }
-}
-
-#booking-options {
-
-  // & button, & input, & select {
-  //   padding: 0.3em 0.8em;
-  //   font-size: 1rem;
-  //   height: 100%;
-  // }
 }
 
 .dropdown-container {
@@ -347,7 +337,6 @@ main {
    
   overflow: hidden;
   border-radius: .3em;
-  // transform: scale(1.3);
   min-height: 344px;
   position: relative;
 
@@ -368,12 +357,6 @@ main {
     color: var(--logo-colour);
     background-color: var(--white);
   }
-  // & button {
-  //   padding: 0.3em 0.8em;
-  //   font-size: 1rem;
-  //   border-radius: .3rem;
-  //   margin-top: 1rem;
-  // }
 
   & .room-info > .modal-esc {
     position: absolute;
@@ -407,7 +390,6 @@ main {
   top: 0;
   width: 100vw;
   text-align: center;
-  // background-color: none;
 
   & .img-container {
     background-color: var(--black);
