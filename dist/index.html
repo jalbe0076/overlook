@@ -6,20 +6,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
   <title>Overlook</title>
 </head>
 <body>
-  <!-- <img src="./images/booking-page.jpg" alt="" class="cover"> -->
-  <div class="cover"></div>
-  <section class="banner">
+  <section class="modal-login">
+    <div class="img-container">
+      <img src="./images/login-page.jpg" alt="privete pergolas inset around an infinity pool overlooking the ocean at dusk" class="cover-login">
+    </div>
+    <div class="inner-modal-login">
+      <h1 class="hotel-title">OVERLOOK<br><span class="logo-login">BOUTIQUE HOTEL</span></h1>
+      <form id="login" action="../src/scripts.js">
+        <input type="text" id="username" name="username" aria-label="enter username" placeholder="Username">
+        <input type="password" id="password" name="password" aria-label="enter password" placeholder="Password">
+        <button type="submit" form="login" value="submit" class="login-btn">Login</button>
+      </form>
+      <p class="false-validation"></p>
+    </div>
+  </section>
+  <div class="cover hidden"></div>
+  <section class="banner hidden">
     <div class="logo-bar">
-      <h1>OVERLOOK <span class="logo">BOUTIQUE HOTEL</span></h1>
+      <h1 class="dashboard-title">OVERLOOK <span class="logo">BOUTIQUE HOTEL</span></h1>
       <div class="dropdown-container">
         <div class="user-profile">
-          <a href="#"><img src="./images/user-account-info.png " alt="profile infomation icon" class="profile-icon">
+          <a href="#">
+            <img src="./images/user-account-info.png " alt="profile infomation icon" class="profile-icon">
             <span class="user-name"></span>
-            <img src="./images/chevron-down-expand.png" alt="" class="user-chevron"></a>
+            <img src="./images/chevron-down-expand.png" alt="" class="user-chevron">
+          </a>
         </div>
         <ul class="dropdown-menu" id="user-items" aria-expanded="false">
           <div class="vip-status"><p class="customer-status">VIP placeholder</p></div>
@@ -52,36 +67,13 @@
     </nav>  
   </section>
   <section class="modal hidden">
-    <div class="inner-modal">
-      <!-- SELECTED ROOM GOES HERE -->
-      
-      <!-- <article class="rooms">
-        <img class="room-image" src="" alt="turing logo">
-        <div class="room-info">
-          <h3 class="room-type">${room.roomType}</h3>
-          <p class="bed-size">${room.numBeds} ${room.bedSize}${room.bidet ? ', Bidet' : '' }</p>
-          <ul class="amenities">Amenities
-            <li>Wifi</li>
-            <li>Air conditioner</li>
-            <li>Balcony</li>
-            <li>Pet Friendly</li>
-            <li>Access to gym and pool</li>
-          </ul>
-          <p class="booked-date">Date: ${booking.date}</p>
-          <p class="reference">Booking Reference: ${booking.id}</p>
-          <p class="room-cost">$${room.costPerNight}</p>
-          <button class="book-room">BOOK NOW!</button>
-        </div>
-      </article> -->
-      
+    <div class="inner-modal" id="inner-modal">
+      <!-- SELECTED ROOM GOES HERE -->    
     </div>
   </section>
   <main>
-    <!-- <div id="trip-message"> -->
-      <h3 class="welcome-message">Hospitality at it's finest</h3>
-      <h3 class="trip-message"></h3>
-      <!--  TRIPS MESSAGE FOR PAST OR FUTURE  -->
-    <!-- </div> -->
+    <h3 class="welcome-message hidden">Hospitality at its finest</h3>
+    <p class="trip-message"></p>
     <section class="available-rooms">
       <!--  ROOMS GET POPULATED HERE  -->
     </section>

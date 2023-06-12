@@ -1,12 +1,4 @@
 // =========================================================
-// ===============   variables and imports   ===============
-// =========================================================
-
-
-
-
-
-// =========================================================
 // =====================   functions   =====================
 // =========================================================
 
@@ -21,10 +13,11 @@ const formatDate = (date) => {
 
 const checkUsername = (username) => {
   const user = username.toLowerCase();
+
   const keyword = user.substring(0, 8);
   const userId = parseInt(user.substring(8));
 
-  if (keyword !== 'customer' || isNaN(userId)) {
+  if (keyword !== 'customer' || isNaN(userId) || userId > 50) {
     return 'Please enter a valid username and password';
   }
 
@@ -99,6 +92,14 @@ const formatRoomToPost = (date, room, userId) => {
   };
 };
 
+const checkPassword = (password) => {
+  return password === 'overlook2021' ? true : false;
+};
+
+const capatalizeFirstLetter = (word) => {
+  return word.charAt(0).toUpperCase() + word.slice(1);
+};
+
 export {
   checkUsername,
   getUserBookings,
@@ -108,5 +109,7 @@ export {
   filterOutUnavailableRooms,
   filterAvailableRoomsByType,
   findRoom,
-  formatRoomToPost
+  formatRoomToPost,
+  checkPassword,
+  capatalizeFirstLetter
 };
