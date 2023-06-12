@@ -1,99 +1,45 @@
-# Webpack Starter Kit
+# Overlook
 
-## Clone This Repo
+### Abstract:
+[//]: <> (Briefly describe what you built and its features. What problem is the app solving? How does this application solve that problem?)
+A hotel dashboard system allows customers to log in and plan their next stay. Users can log in using different usernames and view different information such as the number of nights stayed in the past, total amount spent to date, and past and future bookings. User can also book their next stay, the system will check the date selected by the user to see what bookings have already been booked for that day, and it will then display the available rooms.
 
-That's right, _clone_ not fork. You will use this repo multiple times, but you can only fork a repository once. So here is what you need to do to clone the repo and still be able to push changes to your repo:
+### Installation Instructions:
+[//]: <> (What steps does a person have to take to get your app cloned down and running?)
+1. Fork this repository https://github.com/jalbe0076/overlook 
+1. Clone down your new, forked repo using the generated SSH link in the terminal
+1. cd into the repository and run `npm install` to install dependencies
+1. cd .. to get out of the directory
+1. clone down the local server and follow the steps listed in the link to get it installed https://github.com/turingschool-examples/overlook-api 
+1. run `npm start`in both directories and go to `http://localhost:8080/`, you should see a login page
+1. Enter the username and password to visit the site => Username: customer50 Password: overlook2021
 
-1. Clone down this repo. Since you don't want to name your project "webpack-starter-kit", you can use an optional argument when you run `git clone` (you replace the `[...]` with the terminal command arguments): `git clone [remote-address] [what you want to name the repo]`
-1. Remove the default remote: `git remote rm origin` (notice that `git remote -v` not gives you back nothing)
-1. Create a new repo on GitHub with the name of `[what you want to name the repo]` to be consistent with naming
-1. Copy the address that you would use to clone down this repo - something like `git@github.com:...`
-1. Add this remote to your cloned down repo: `git remote add origin [address you copied in the previous step]` - do not include the brackets
+### Preview of App:
+[//]: <> (Provide ONE gif or screenshot of your application - choose the "coolest" piece of functionality to show off.)
 
-Now try to commit something (just add a line in the README) and push it up to your new repo. If everything is setup correctly, you should see the changes on GitHub.
 
-## Setup
 
-After one person has gone through the steps of cloning down this repo and editing the remote, everyone should clone down the repo.
+### Context:
+[//]: <> (Give some context for the project here. How long did you have to work on it? How far into the Turing program are you?)
 
-Then install the library dependencies. Run:
+We were assigned the project on 2023.06.12 and had until 2023.06.13 to complete the project. The required features were completed on 2023.06.11 and refactoring and introducing additional features and technologies were completed before the due date. This is the Turing Mod 2 final solo project issued with the intent to implement everything that was thought since the beginning of the program. We were tasked to build a hotel dashboard system from scratch and fetch data from a local server. 
 
-```bash
-npm install
-```
+### Contributors:
+[//]: <> (Who worked on this application? Link to their GitHubs.)
 
-To verify that it is setup correctly, run `npm start` in your terminal. Go to `http://localhost:8080/` and you should see a page with the Turing logo image and a beautiful gradient background. If that's the case, you're good to go. Enter `control + c` in your terminal to stop the server at any time.
+[Jason Alberto](https://github.com/jalbe0076)
 
-## Where to Add Your Code
+### Learning Goals:
+[//]: <> (What were the learning goals of this project? What tech did you work with?)
+- Use object and array prototype methods to perform data manipulation
+- Create a clear and accessible user interface
+- Make network requests to retrieve data
+- Implement a robust testing suite using TDD
+- Write DRY, reusable code that follows SRP (Single Responsibility Principle)
+- Ensure the site is accessible for as many users as possible using multiple inputs (ie: keyboard)
 
-### JavaScript
-
-You have to be very intentional with where you add your feature code. This repo uses a tool called [webpack](https://webpack.js.org/) to combine many JavaScript files into one big file. Webpack enables you to have many, separate JavaScript files to keep your code organized and readable. Webpack expects all of your code files to be in a specific place, or else it doesn't know how to combine them all behind the scenes.
-
-**Create all of your feature code files in the `src` directory.**
-
-Since code is separated into multiple files, you need to use the `import` and `export` syntax to share code across file.
-
-Here is a video that walks through some information about [import and export](https://www.youtube.com/watch?v=_3oSWwapPKQ). There are a lot of resources out there about `import` and `export`, and resources will sometimes call them `ES6 modules`. It's something you will see in React and beyond.
-
-### HTML
-
-Add the HTML you need in the `index.html` file in the `./dist` directory. There is some boilerplate HTML that exists from the start that you can modify.
-
-### Images
-
-Add your image files in the `src/images` directory. Similar to CSS files, you need to `import` image files in the JavaScript entry file (`scripts.js`). Then go into the HTML and add an `img` element with the `src` attribute pointing to the `images` directory. There is an example in the `index.html` file for you to see.
-
-## How to View Your Code in Action
-
-In the terminal, run:
-
-```bash
-npm start
-```
-
-You will see a bunch of lines output to your terminal. One of those lines will be something like:
-
-```bash
-Project is running at http://localhost:8080/
-```
-
-Go to `http://localhost:8080/` in your browser to view your code running in the browser.
-
----
-
-## Test Files Organization
-
-Similar to feature code, your test code needs to be put in a specific place for it to run successfully.
-
-**Put all of your test files in the `test` directory.** As a convention, all test filenames should end with `-test.js`. For instance: `box-test.js`.
-
-## Running Your Tests
-
-Run your test suite using the command:
-
-```bash
-npm test
-```
-
-The test results will output to the terminal.
-
----
-
-## Linting Your Code
-
-Run the command in your terminal `npm run lint` to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit - the linter is still running successfully.
-
-Your linter will look at the JavaScript files you have within the `src` directory and the `test` directory.
-
-## Webpack?
-
-If you look in the `package.json` file, you'll see one of the library dependencies called `webpack`. If you're interested in learning more about what Webpack is and how it works behind the scenes, take a look through the [Webpack configuration documentation](https://webpack.js.org/concepts/).
-
-## Deploying to GitHub Pages
-
-_If you are finished with the functionality and testing of your project_, then you can consider deploying your project to the web! This way anyone can play it without cloning down your repo.
-
-[GitHub Pages](https://pages.github.com/) is a great way to deploy your project to the web. Don't worry about this until your project is free of bugs and well tested!
-
-If you _are_ done, you can follow [this procedure](./gh-pages-procedure.md) to get your project live on GitHub Pages.
+### Wins + Challenges:
+[//]: <> (What are 2-3 wins you have from this project? What were some challenges you faced - and how did you get over them?)
+Win #1 was making the user experience on the keyboard more pleasant by ensuring focus on specific elements when clicking and adding tab traps to ensure the focused element remains where input is required. 
+Win #2 Getting SASS setup and using it to write the CSS, learned how to manipulate the package.json to watch for any changes not requiring to save the file as code is written. 
+Win #3 Wrote a function to handle fetch requests that do not have an ok status and alert the user what the error is. 
