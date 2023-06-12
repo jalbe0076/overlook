@@ -4,7 +4,7 @@
 
 import { errorHandle, postBooking } from "./api-calls";
 import { getUserBookings, getTotalSpent, formatDate, getTodaysDate, formatRoomToPost, capatalizeFirstLetter } from "./booking-utils";
-import { bookings, rooms, setData } from "./scripts";
+import { bookings, loginPage, rooms, setData } from "./scripts";
 
 const userDropdownMenu = document.querySelector('#user-items');
 const totalNights = document.querySelector('.total-nights');
@@ -22,6 +22,8 @@ const welcomeMessage = document.querySelector('.welcome-message');
 const coverImg = document.querySelector('.cover');
 const banner = document.querySelector('.banner');
 const falseValidation = document.querySelector('.false-validation')
+const handelErrorPage = document.querySelector('.error-handle');
+const errorMessage = document.querySelector('.error-message');
 
 const todaysDate = getTodaysDate();
 let lastFocusedElement;
@@ -279,7 +281,7 @@ const showConfirmedBooking = (room, date) => {
         banner.style.background = 'none';
       });
     })   
-    .catch(error => alert(`${error.message}`));
+    .catch(error => handelErrorMessage(error));
 };
 
 const handleRoomImage = (room) => {
@@ -346,6 +348,14 @@ const displayUserError = (condition) => {
   return condition ? falseValidation.innerText = 'Please enter a valid username and password' : falseValidation.innerText = '';
 };
 
+const handelErrorMessage = (message) => {
+  removeHidden(handelErrorPage);
+  console.log(message)
+  errorMessage.innerText = `${message}`;
+
+  addHidden(loginPage)
+} 
+
 export {
   handleDropdown,
   updateNightsStayed,
@@ -368,6 +378,7 @@ export {
   adjustBannerStyleBg,
   resetRoomDisplay,
   displayUserError,
+  handelErrorMessage,
   userDropdownMenu,
   displayRooms,
   pickedDate,

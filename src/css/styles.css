@@ -44,6 +44,18 @@ input, select {
   font-size: 16px;
   padding: 0.475em 1.2em; }
 
+.error-handle {
+  background-color: var(--white);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  z-index: 2; }
+  .error-handle p {
+    margin: 1em;
+    font-size: 4rem;
+    color: #212427; }
+
 .banner {
   position: sticky;
   top: 0px;

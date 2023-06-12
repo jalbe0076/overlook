@@ -234,5 +234,6 @@ const getCustomer = (userId) => {
 export {
   bookings,
   setData,
-  rooms
+  rooms,
+  loginPage
 };

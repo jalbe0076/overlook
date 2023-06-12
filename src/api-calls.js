@@ -1,12 +1,10 @@
+import { handelErrorMessage } from "./dom-updates";
 import { setData } from "./scripts";
 
 const getData = (data) => {
   return fetch(`http://localhost:3001/api/v1/${data}`)
       .then(response => errorHandle(response))
-      .catch(error => 
-        {
-        alert(`${error.message}`)
-      });
+      .catch(error => handelErrorMessage(error));
 };
 
 const getAllData = () => {
@@ -30,7 +28,7 @@ const deleteBooking = (id) => {
   })
     .then(response => errorHandle(response))
     .then(() => setData())
-    .catch(error => alert(`${error.message}`));
+    .catch(error => handelErrorMessage(error));
 };
 
 const findCustomer = (id) => {
@@ -39,14 +37,14 @@ const findCustomer = (id) => {
       .then(resolve => {
         return resolve
       })
-      .catch(error => alert(`${error.message}`));
+      .catch(error => handelErrorMessage(error));
 };
 
 const errorHandle = (response) => {
   if (response.ok) {
     return response.json();
   } else {
-    alert(response.status);
+    throw new Error(`${response.status}  ${response.statusText}`);
   }
 };
 
