@@ -3,7 +3,12 @@ import { setData } from "./scripts";
 const getData = (data) => {
   return fetch(`http://localhost:3001/api/v1/${data}`)
       .then(response => errorHandle(response))
-      .catch(error => alert(`${error.message}`));
+      .catch(error => 
+        {
+          console.log(error)
+          console.dir(error)
+        alert(`${error.message}`)
+      });
 };
 
 const getAllData = () => {
@@ -34,8 +39,7 @@ const errorHandle = (response) => {
   if (response.ok) {
     return response.json();
   } else {
-    
-    throw new Error(`${response.statusText}`);
+    alert(response.status);
   }
 };
 

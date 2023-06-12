@@ -12,7 +12,7 @@ import './images/double-suite.jpg';
 import './images/single-residential-suite.jpg';
 import './images/double-residential-suite.jpg';
 import './images/customer-rating.png';
-import './images/booking-page.jpg'
+import './images/booking-page.jpg';
 import { getAllData, postBooking, deleteBooking, findCustomer, getData } from './api-calls'
 import { handleDropdown, updateNightsStayed, updateTotalSpent, populateBookings, populateUserProfile, populateUserWelcome, populateAvailableRooms, setCalendarDates, showRoomModal, modalBookingBtn, displayTripMessage, resetTripMessage, updateCustomerStatus, handleActiveBtn, addHidden, removeHidden, removeBookings, getUserInfo } from './dom-updates';
 import { getUserBookings, getTodaysDate, filterOutUnavailableRooms, filterAvailableRoomsByType, findRoom, checkPassword, checkUsername } from './booking-utils';
@@ -45,6 +45,7 @@ const falseValidation = document.querySelector('.false-validation')
 const bookingModal = document.querySelector('.modal');
 const userLogout = document.querySelector('#user-logout');
 const loginForm = document.querySelector('#login');
+const userDropdownMenu = document.querySelector('#user-items');
 
 // =========================================================
 // ==================   event listeners   ==================
@@ -196,8 +197,11 @@ bookingModal.addEventListener('click', (e) => {
 userLogout.addEventListener('click', () => {
   removeHidden(loginPage);
   addHidden(banner);
+  banner.style.background = 'none';
   addHidden(welcomeMessage);
   addHidden(coverImg);
+  userDropdownMenu.setAttribute('aria-expanded', 'false');
+  displayRooms.innerHTML = '';
   currentUser = undefined;
 });
 
