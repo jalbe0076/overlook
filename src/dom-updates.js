@@ -197,23 +197,22 @@ const showRoomModal = (room, date) => {
   confirmBookingBtn.focus();
 
   const tabTrap = (e) => {
-    if (e.keyCode === 9 && document.activeElement.id === 'another-room') {
-      confirmBookingBtn.focus();
+    if (e.keyCode === 9 && document.activeElement.id === 'book-room') {
+      anotherBookingBtn.focus();
       
     }
 
     if (e.keyCode === 9 && e.shiftKey && document.activeElement.id === 'modal-esc') {
-      confirmBookingBtn.focus();
+      anotherBookingBtn.focus();
     }
   };
 
   modalEsc.addEventListener('keydown', tabTrap);
+  confirmBookingBtn.addEventListener('keydown', tabTrap);
 
   confirmBookingBtn.addEventListener('click', () => {
    showConfirmedBooking(room, date);
   });
-
-  anotherBookingBtn.addEventListener('keydown', tabTrap);
 
   anotherBookingBtn.addEventListener('click', (e) => {
     addHidden(bookingModal);

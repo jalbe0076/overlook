@@ -43,6 +43,8 @@ const username = document.querySelector('#username');
 const loginPage = document.querySelector('.modal-login');
 const falseValidation = document.querySelector('.false-validation')
 const bookingModal = document.querySelector('.modal');
+const userLogout = document.querySelector('#user-logout');
+const loginForm = document.querySelector('#login');
 
 // =========================================================
 // ==================   event listeners   ==================
@@ -151,6 +153,7 @@ loginBtn.addEventListener('click', (e) => {
   e.preventDefault();
   const checkedUsername = checkUsername(username.value);
   const checkedPassword = checkPassword(userPassword.value);
+  
 
   if (typeof checkedUsername === 'number'  && checkedPassword) {
     addHidden(loginPage);
@@ -171,6 +174,7 @@ loginBtn.addEventListener('click', (e) => {
   } else {
     falseValidation.innerText = 'Please enter a valid username and password';
   }
+  loginForm.reset();
 });
 
 bookingModal.addEventListener('click', (e) => { 
@@ -187,6 +191,14 @@ bookingModal.addEventListener('click', (e) => {
     banner.style.background = 'none';
     displayRooms.innerHTML = '';
   }
+});
+
+userLogout.addEventListener('click', () => {
+  removeHidden(loginPage);
+  addHidden(banner);
+  addHidden(welcomeMessage);
+  addHidden(coverImg);
+  currentUser = undefined;
 });
 
 // =========================================================
