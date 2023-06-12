@@ -111,5 +111,5 @@ export {
   findRoom,
   formatRoomToPost,
   checkPassword,
-  capatalizeFirstLetter
+  capatalizeFirstLetter,
 };

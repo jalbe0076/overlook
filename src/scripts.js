@@ -50,7 +50,7 @@ let selectedDate;
 let bookingConfirmed = false;
 const todaysDate = getTodaysDate();
 const pastTrips = document.querySelector('#past-trips');
-const futureTrips = document.querySelector('#upcoming-trips')
+const futureTrips = document.querySelector('#upcoming-trips');
 const dropdownLinks = document.querySelector('.user-profile');
 const formData = document.querySelector('#booking-options');
 const roomType = document.querySelector('#room-types');
@@ -59,7 +59,7 @@ const loginBtn = document.querySelector('.login-btn');
 const userPassword = document.querySelector('#password');
 const username = document.querySelector('#username');
 const loginPage = document.querySelector('.modal-login');
-const falseValidation = document.querySelector('.false-validation')
+const falseValidation = document.querySelector('.false-validation');
 const userLogout = document.querySelector('#user-logout');
 const loginForm = document.querySelector('#login');
 
