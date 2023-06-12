@@ -36,6 +36,16 @@ describe('Get a customer\'s name from their username', () => {
     expect(user).to.equal('Please enter a valid username and password');
   });
 
+  it('Should know if user id is in the system', () => {
+    user = checkUsername('customer0');
+    expect(user).to.equal('Please enter a valid username and password');
+  });
+
+  it('Should know if user id is in the system', () => {
+    user = checkUsername('customer-3');
+    expect(user).to.equal('Please enter a valid username and password');
+  });
+
   it('Should return the user ID associated with the username', () => {
     expect(user).to.equal(15);
   });
