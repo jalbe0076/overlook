@@ -2,6 +2,7 @@
 // ===============   variables and imports   ===============
 // =========================================================
 
+import { errorHandle } from "./api-calls";
 import { getUserBookings, getTotalSpent, formatDate, getTodaysDate, filterOutUnavailableRooms, formatRoomToPost, capatalizeFirstLetter } from "./booking-utils";
 import { bookings, rooms, setData } from "./scripts";
 
@@ -214,6 +215,7 @@ const showRoomModal = (room, date) => {
    showConfirmedBooking(room, date);
   });
 
+
   anotherBookingBtn.addEventListener('click', (e) => {
     addHidden(bookingModal);
   });
@@ -232,7 +234,7 @@ const showConfirmedBooking = (room, date) => {
     body: JSON.stringify(bookRoomReceipt),
     headers: { 'Content-Type': 'application/json' }
   })
-    .then(response => response.json())
+    .then(response => errorHandle(response))
     .then((response) => {
 
     innerModal.innerHTML = `
@@ -271,7 +273,7 @@ const showConfirmedBooking = (room, date) => {
         banner.style.background = 'none';
       });
     })   
-    .catch(err => console.log("ERROR", err));
+    .catch(error => alert(`${error.message}`));
 };
 
 const handleRoomImage = (room) => {

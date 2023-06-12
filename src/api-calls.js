@@ -44,4 +44,5 @@ export {
   getData,
   deleteBooking,
   findCustomer,
+  errorHandle
 };
