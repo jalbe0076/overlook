@@ -2,7 +2,7 @@
 // ===============   variables and imports   ===============
 // =========================================================
 
-import { errorHandle } from "./api-calls";
+import { errorHandle, postBooking } from "./api-calls";
 import { getUserBookings, getTotalSpent, formatDate, getTodaysDate, filterOutUnavailableRooms, formatRoomToPost, capatalizeFirstLetter } from "./booking-utils";
 import { bookings, rooms, setData } from "./scripts";
 
@@ -83,7 +83,6 @@ const updateTotalSpent = () => {
 
 const populateBookings = (bookings, rooms) => {
   displayRooms.innerHTML = '';
-
 
   bookings.forEach(booking => {
       const room = rooms.find(room => room.number === booking.roomNumber);
@@ -228,6 +227,7 @@ const showConfirmedBooking = (room, date) => {
   const formatedDate = formatDate(date);
   const bookRoomReceipt = formatRoomToPost(formatedDate, room, currentUser.id);
 
+  // postBooking(bookRoomReceipt)
   fetch('http://localhost:3001/api/v1/bookings', {
     method: 'POST',
     body: JSON.stringify(bookRoomReceipt),
@@ -345,4 +345,12 @@ export {
   removeHidden,
   removeBookings,
   getUserInfo,
+  userDropdownMenu,
+  displayRooms,
+  pickedDate,
+  bookingModal,
+  navBtns,
+  welcomeMessage,
+  coverImg,
+  banner
 };

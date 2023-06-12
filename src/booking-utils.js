@@ -13,10 +13,11 @@ const formatDate = (date) => {
 
 const checkUsername = (username) => {
   const user = username.toLowerCase();
+
   const keyword = user.substring(0, 8);
   const userId = parseInt(user.substring(8));
 
-  if (keyword !== 'customer' || isNaN(userId)) {
+  if (keyword !== 'customer' || isNaN(userId) || userId > 50) {
     return 'Please enter a valid username and password';
   }
 

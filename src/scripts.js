@@ -13,8 +13,32 @@ import './images/single-residential-suite.jpg';
 import './images/double-residential-suite.jpg';
 import './images/customer-rating.png';
 import './images/booking-page.jpg';
-import { getAllData, postBooking, deleteBooking, findCustomer, getData } from './api-calls'
-import { handleDropdown, updateNightsStayed, updateTotalSpent, populateBookings, populateUserProfile, populateUserWelcome, populateAvailableRooms, setCalendarDates, showRoomModal, modalBookingBtn, displayTripMessage, resetTripMessage, updateCustomerStatus, handleActiveBtn, addHidden, removeHidden, removeBookings, getUserInfo } from './dom-updates';
+import { getAllData, findCustomer } from './api-calls'
+import { handleDropdown, 
+  updateNightsStayed, 
+  updateTotalSpent, 
+  populateBookings, 
+  populateUserProfile, 
+  populateUserWelcome, 
+  populateAvailableRooms, 
+  setCalendarDates, 
+  showRoomModal, 
+  displayTripMessage, 
+  resetTripMessage, 
+  updateCustomerStatus, 
+  handleActiveBtn, 
+  addHidden, 
+  removeHidden, 
+  removeBookings, 
+  getUserInfo, 
+  userDropdownMenu,
+  displayRooms,
+  pickedDate,
+  bookingModal,
+  navBtns,
+  welcomeMessage,
+  coverImg,
+  banner } from './dom-updates';
 import { getUserBookings, getTodaysDate, filterOutUnavailableRooms, filterAvailableRoomsByType, findRoom, checkPassword, checkUsername } from './booking-utils';
 
 let customers;
@@ -29,23 +53,15 @@ const pastTrips = document.querySelector('#past-trips');
 const futureTrips = document.querySelector('#upcoming-trips')
 const dropdownLinks = document.querySelector('.user-profile');
 const formData = document.querySelector('#booking-options');
-const pickedDate = document.querySelector('#pick-day');
 const roomType = document.querySelector('#room-types');
-const navBtns = document.querySelectorAll('.nav-tab');
 const displayRoomsBtn = document.querySelector('.see-available-rooms');
-const displayRooms = document.querySelector('.available-rooms');
-const welcomeMessage = document.querySelector('.welcome-message');
-const coverImg = document.querySelector('.cover');
-const banner = document.querySelector('.banner');
 const loginBtn = document.querySelector('.login-btn');
 const userPassword = document.querySelector('#password');
 const username = document.querySelector('#username');
 const loginPage = document.querySelector('.modal-login');
 const falseValidation = document.querySelector('.false-validation')
-const bookingModal = document.querySelector('.modal');
 const userLogout = document.querySelector('#user-logout');
 const loginForm = document.querySelector('#login');
-const userDropdownMenu = document.querySelector('#user-items');
 
 // =========================================================
 // ==================   event listeners   ==================

@@ -5,8 +5,6 @@ const getData = (data) => {
       .then(response => errorHandle(response))
       .catch(error => 
         {
-          console.log(error)
-          console.dir(error)
         alert(`${error.message}`)
       });
 };
@@ -14,6 +12,15 @@ const getData = (data) => {
 const getAllData = () => {
   return Promise.all([ getData('customers'), getData('rooms'), getData('bookings') ]);
 };
+
+// const postBooking = (bookRoomReceipt) => {
+//   fetch('http://localhost:3001/api/v1/bookings', {
+//     method: 'POST',
+//     body: JSON.stringify(bookRoomReceipt),
+//     headers: { 'Content-Type': 'application/json' }
+//   })
+//     .then(response => errorHandle(response))
+// };
 
 const deleteBooking = (id) => {
   fetch(`http://localhost:3001/api/v1/bookings/${id}`, {
@@ -48,5 +55,6 @@ export {
   getData,
   deleteBooking,
   findCustomer,
-  errorHandle
+  errorHandle,
+  // postBooking
 };
