@@ -21,6 +21,7 @@ const navBtns = document.querySelectorAll('.nav-tab');
 const welcomeMessage = document.querySelector('.welcome-message');
 const coverImg = document.querySelector('.cover');
 const banner = document.querySelector('.banner');
+const falseValidation = document.querySelector('.false-validation')
 
 const todaysDate = getTodaysDate();
 let lastFocusedElement;
@@ -82,7 +83,7 @@ const updateTotalSpent = () => {
 };
 
 const populateBookings = (bookings, rooms) => {
-  displayRooms.innerHTML = '';
+  resetRoomDisplay();
 
   bookings.forEach(booking => {
       const room = rooms.find(room => room.number === booking.roomNumber);
@@ -110,7 +111,7 @@ const populateBookings = (bookings, rooms) => {
 };
 
 const populateAvailableRooms = (availableRooms) => {
-  displayRooms.innerHTML = '';
+  resetRoomDisplay();
 
   availableRooms.forEach(room => {
     const capRoomType = capatalizeFirstLetter(room.roomType);
@@ -135,7 +136,7 @@ const populateAvailableRooms = (availableRooms) => {
 };
 
 const removeBookings = ()  => {
-  displayRooms.innerHTML = '';
+  resetRoomDisplay();
 };
 
 const displayTripMessage = (roomStatus) => {
@@ -268,7 +269,7 @@ const showConfirmedBooking = (room, date) => {
       closeBookingReferenceBtn.focus();
       
       closeBookingReferenceBtn.addEventListener('click', () => {
-        displayRooms.innerHTML = '';
+        resetRoomDisplay();
         addHidden(bookingModal);
         removeHidden(welcomeMessage);
         removeHidden(coverImg);
@@ -277,7 +278,7 @@ const showConfirmedBooking = (room, date) => {
       
       modalEsc.addEventListener('keydown', tabTrap);
       modalEsc.addEventListener('click', () => {
-        displayRooms.innerHTML = '';
+        resetRoomDisplay();
         addHidden(bookingModal);
         removeHidden(welcomeMessage);
         removeHidden(coverImg);
@@ -327,6 +328,30 @@ const getUserInfo = (user) => {
   currentUser = user;
 };
 
+const adjustBannerStyleBg = (condition) => {
+  return condition ? banner.style.background = '#ffffff' : banner.style.background = 'none';
+};
+
+const viewDashboardBackground = (condition) => {
+  if (condition) {
+    removeHidden(coverImg);
+    removeHidden(welcomeMessage);
+    adjustBannerStyleBg(!condition);
+  } else {
+    addHidden(coverImg);
+    addHidden(welcomeMessage);
+    adjustBannerStyleBg(!condition);
+  }
+};
+
+const resetRoomDisplay = () => {
+  displayRooms.innerHTML = '';
+};
+
+const displayUserError = (condition) => {
+  return condition ? falseValidation.innerText = 'Please enter a valid username and password' : falseValidation.innerText = '';
+};
+
 export {
   handleDropdown,
   updateNightsStayed,
@@ -345,6 +370,10 @@ export {
   removeHidden,
   removeBookings,
   getUserInfo,
+  viewDashboardBackground,
+  adjustBannerStyleBg,
+  resetRoomDisplay,
+  displayUserError,
   userDropdownMenu,
   displayRooms,
   pickedDate,
