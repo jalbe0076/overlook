@@ -71,7 +71,7 @@ We were assigned the project on 2023.06.12 and had until 2023.06.13 to complete 
 ## Wins + Challenges:
 [//]: <> (What are 2-3 wins you have from this project? What were some challenges you faced - and how did you get over them?)
 
-Win #1 Made the user experience when navigatings with the keyboard more pleasant by ensuring focus on specific elements when clicking and adding tab traps to ensure the focused element remains where input is required. 
-Win #2 Getting SASS setup and using it to write the CSS, learned how to manipulate the package.json to watch for any changes not requiring to save the file as code is written. 
-Win #3 Wrote a function to handle fetch requests that do not have an ok status and alert the user what the error is. 
+**Win #1** Made the user experience when navigatings with the keyboard more pleasant by ensuring focus on specific elements when clicking and adding tab traps to ensure the focused element remains where input is required. <br>
+**Win #2** Getting SASS setup and using it to write the CSS, learned how to manipulate the package.json to watch for any changes not requiring to save the file as code is written. <br>
+**Win #3** Wrote a function to handle fetch requests that do not have an ok status and alert the user what the error is. 
 
