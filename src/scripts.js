@@ -65,6 +65,7 @@ const loginPage = document.querySelector('.modal-login');
 const userLogout = document.querySelector('#user-logout');
 const loginForm = document.querySelector('#login');
 const listenPageClick = document.querySelector('#page');
+const bookingBtnTab = document.querySelector('#bookings')
 
 // =========================================================
 // ==================   event listeners   ==================
@@ -83,12 +84,10 @@ pastTrips.addEventListener('click', () => {
   
   if (typeof userBookings === 'object') {
     populateBookings(userBookings, rooms);
-    addHidden(welcomeMessage);
-    addHidden(coverImg);
-    adjustBannerStyleBg(true);
+    viewDashboardBackground(false);
   } else {
     removeBookings();
-    banner.style.background = 'none';
+    viewDashboardBackground(true);
   }
 });
 
@@ -101,7 +100,7 @@ futureTrips.addEventListener('click', () => {
     viewDashboardBackground(false);
   } else {
     removeBookings(userBookings);
-    viewDashboardBackground(false);
+    viewDashboardBackground(true);
   }
 });
 
@@ -214,6 +213,8 @@ userLogout.addEventListener('click', () => {
   resetRoomDisplay();
   currentUser = undefined;
   displayUserError(false);
+  handleActiveBtn();
+  bookingBtnTab.classList.add('nav-tab-active');
 });
 
 listenPageClick.addEventListener('click', (e) => {
