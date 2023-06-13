@@ -32,13 +32,16 @@ import { handleDropdown,
   removeBookings, 
   getUserInfo, 
   userDropdownMenu,
-  displayRooms,
   pickedDate,
   bookingModal,
   navBtns,
   welcomeMessage,
   coverImg,
-  banner } from './dom-updates';
+  banner, 
+  viewDashboardBackground,
+  adjustBannerStyleBg,
+  displayUserError,
+  resetRoomDisplay } from './dom-updates';
 import { getUserBookings, getTodaysDate, filterOutUnavailableRooms, filterAvailableRoomsByType, findRoom, checkPassword, checkUsername } from './booking-utils';
 
 let customers;
@@ -59,9 +62,9 @@ const loginBtn = document.querySelector('.login-btn');
 const userPassword = document.querySelector('#password');
 const username = document.querySelector('#username');
 const loginPage = document.querySelector('.modal-login');
-const falseValidation = document.querySelector('.false-validation');
 const userLogout = document.querySelector('#user-logout');
 const loginForm = document.querySelector('#login');
+const listenPageClick = document.querySelector('#page');
 
 // =========================================================
 // ==================   event listeners   ==================
@@ -82,7 +85,7 @@ pastTrips.addEventListener('click', () => {
     populateBookings(userBookings, rooms);
     addHidden(welcomeMessage);
     addHidden(coverImg);
-    banner.style.background = '#ffffff';
+    adjustBannerStyleBg(true);
   } else {
     removeBookings();
     banner.style.background = 'none';
@@ -95,14 +98,10 @@ futureTrips.addEventListener('click', () => {
 
   if (typeof userBookings === 'object') {
     populateBookings(userBookings, rooms);
-    addHidden(welcomeMessage);
-    addHidden(coverImg);
-    banner.style.background = '#ffffff';
+    viewDashboardBackground(false);
   } else {
     removeBookings(userBookings);
-    removeHidden(welcomeMessage);
-    removeHidden(coverImg);
-    banner.style.background = 'none';
+    viewDashboardBackground(false);
   }
 });
 
@@ -115,16 +114,12 @@ formData.addEventListener('submit', (e) => {
   const filteredRooms = filterAvailableRoomsByType(availableRooms, selectedRoomType, selectedDate);
   
   if(typeof filteredRooms === 'string') {
-    removeHidden(welcomeMessage);
-    removeHidden(coverImg);
     removeBookings();
     displayTripMessage(filteredRooms);
-    banner.style.background = 'none';
+    viewDashboardBackground(true);
   } else {
-    addHidden(welcomeMessage);
-    addHidden(coverImg);
     populateAvailableRooms(filteredRooms);
-    banner.style.background = '#ffffff';
+    viewDashboardBackground(false);
   }
   
   let roomsToBook = document.querySelectorAll('.rooms');
@@ -147,17 +142,16 @@ navBtns.forEach(button => {
   button.addEventListener('click', () => {
     handleActiveBtn();
     button.classList.add('nav-tab-active');
+    button.style.color = '#212427';
     
     if (button.id === 'bookings') {
       removeHidden(displayRoomsBtn);
       removeHidden(roomType);
       removeHidden(pickedDate);
-      displayRooms.innerHTML = '';
+      resetRoomDisplay();
       resetTripMessage();
       removeBookings(userBookings);
-      removeHidden(welcomeMessage);
-      removeHidden(coverImg);
-      banner.style.background = 'none';
+      viewDashboardBackground(true);
     } else {
       addHidden(displayRoomsBtn);
       addHidden(roomType);
@@ -189,8 +183,9 @@ loginBtn.addEventListener('click', (e) => {
         populateUserWelcome(user.name);
       });
   } else {
-    falseValidation.innerText = 'Please enter a valid username and password';
+    displayUserError(true);
   }
+
   loginForm.reset();
 });
 
@@ -203,22 +198,28 @@ bookingModal.addEventListener('click', (e) => {
     addHidden(bookingModal); 
   } else if (e.target.classList.contains('modal') && bookingConfirmed) {
     addHidden(bookingModal);
-    removeHidden(welcomeMessage);
-    removeHidden(coverImg);
-    banner.style.background = 'none';
-    displayRooms.innerHTML = '';
+    viewDashboardBackground(true)
+    resetRoomDisplay();
   }
+  bookingConfirmed = false;
 });
 
 userLogout.addEventListener('click', () => {
   removeHidden(loginPage);
   addHidden(banner);
-  banner.style.background = 'none';
+  adjustBannerStyleBg(false);
   addHidden(welcomeMessage);
   addHidden(coverImg);
   userDropdownMenu.setAttribute('aria-expanded', 'false');
-  displayRooms.innerHTML = '';
+  resetRoomDisplay();
   currentUser = undefined;
+  displayUserError(false);
+});
+
+listenPageClick.addEventListener('click', (e) => {
+  if (e.target !== userDropdownMenu && !userDropdownMenu.contains(e.target) && !e.target.parentNode.classList.contains('user-profile-drop')) {
+    userDropdownMenu.setAttribute('aria-expanded', 'false');
+  }
 });
 
 // =========================================================
@@ -241,5 +242,6 @@ const getCustomer = (userId) => {
 export {
   bookings,
   setData,
-  rooms
+  rooms,
+  loginPage
 };
