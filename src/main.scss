@@ -9,13 +9,14 @@
   --white: #ffffff;
   --dashboard-grey: #484848;
   --logo-colour: #542e71;
+  --logo-colour-hover: #381255; 
 }
 
 * {
   font-family: 'Inter', sans-serif;
   margin: 0;
   padding: 0;
-  color: var(--black);
+  color: var(--dashboard-grey);
   box-sizing: border-box;
 }
 
@@ -45,6 +46,7 @@ button {
   padding: 0.6em 1.5em;
   font-size: 16px;
   border-color: var(--logo-colour);
+  transition: background-color 0.3s ease;
 }
 
 input, select {
@@ -151,8 +153,8 @@ nav {
   }
 
   & .nav-tab-active {
-    color: var(--dashboard-grey);
-    border-bottom: solid var(--dashboard-grey);
+    color: var(--black);
+    border-bottom: solid var(--black);
   }
   & input + select, & select + button {
     margin-left: 1rem;
@@ -203,7 +205,7 @@ nav {
 .user-data-box {
   display: flex;
   flex-direction: column;
-  background-color: var(--brand-colour);
+  box-shadow: 16px 16px 15px -5px rgba(0, 0, 0, 0.22), -6px -6px 15px -5px rgba(0, 0, 0, 0.22);
   border-radius: .3rem;
   padding: 1em;
   margin: 1em 0;
@@ -280,7 +282,7 @@ main {
   & .room-image {
     object-fit:cover;
     object-position: center;
-    border-radius: 0.3em 0 0 .6em;
+    border-radius: 0.3em 0 0 .3em;
     min-width: 50%;
   }
 
@@ -397,7 +399,6 @@ main {
   }
 }
 
-
 // =========================================================
 // =======================   LOGIN   =======================
 // =========================================================
@@ -407,6 +408,7 @@ main {
   top: 0;
   width: 100vw;
   text-align: center;
+
 
   & .img-container {
     background-color: var(--black);
@@ -452,6 +454,10 @@ main {
   }
 }
 
+// =========================================================
+// ======================   EFFECTS   ======================
+// =========================================================
+
 [aria-expanded="true"] {
   display: block;
 }
@@ -468,6 +474,22 @@ button:hover, input:hover, select:hover {
   cursor: pointer;
 }
 
-button:hover, button:focus {
-  transform: scale(1.1);
+button:not(.nav-tab):hover, button:not(.nav-tab):focus {
+  background-color: var(--logo-colour-hover);
+}
+
+#another-room:hover {
+  color: var(--logo-colour-hover);
+  border-color: var(--logo-colour-hover);
+}
+
+.nav-tab:hover, .nav-tab:focus, #user-logout:hover, #user-logout:focus {
+  color: var(--black)!important;
+}
+
+.user-name:hover {
+  color: var(--logo-colour-hover);
+}
+.user-chevron:hover, .profile-icon:hover {
+  filter: invert(8%) sepia(39%) saturate(5166%) hue-rotate(264deg) brightness(103%) contrast(99%);
 }

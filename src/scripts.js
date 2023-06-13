@@ -64,6 +64,7 @@ const username = document.querySelector('#username');
 const loginPage = document.querySelector('.modal-login');
 const userLogout = document.querySelector('#user-logout');
 const loginForm = document.querySelector('#login');
+const listenPageClick = document.querySelector('#page');
 
 // =========================================================
 // ==================   event listeners   ==================
@@ -141,6 +142,7 @@ navBtns.forEach(button => {
   button.addEventListener('click', () => {
     handleActiveBtn();
     button.classList.add('nav-tab-active');
+    button.style.color = '#212427';
     
     if (button.id === 'bookings') {
       removeHidden(displayRoomsBtn);
@@ -212,6 +214,12 @@ userLogout.addEventListener('click', () => {
   resetRoomDisplay();
   currentUser = undefined;
   displayUserError(false);
+});
+
+listenPageClick.addEventListener('click', (e) => {
+  if (e.target !== userDropdownMenu && !userDropdownMenu.contains(e.target) && !e.target.parentNode.classList.contains('user-profile-drop')) {
+    userDropdownMenu.setAttribute('aria-expanded', 'false');
+  }
 });
 
 // =========================================================

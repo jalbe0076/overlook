@@ -43,7 +43,7 @@ const handleDropdown = (e) => {
   let focusableElements = userDropdownMenu.querySelectorAll('a')
   lastFocusedElement = document.activeElement;
   focusableElements[0].focus();
-  focusableElements.forEach(link => link.addEventListener('keydown', handleToggleEscape))
+  focusableElements.forEach(link => link.addEventListener('keydown', handleToggleEscape));
 };
 
 const handleToggleEscape = (e) => {
@@ -58,7 +58,6 @@ const handleToggleEscape = (e) => {
   if (e.keyCode === 27) {
     lastFocusedElement.click();
   }
-
 };
 
 const updateNightsStayed = () => {
@@ -261,9 +260,7 @@ const showConfirmedBooking = (room, date) => {
       };
     
       closeBookingReferenceBtn.addEventListener('keydown', tabTrap);
-      
-      closeBookingReferenceBtn.focus();
-      
+         
       closeBookingReferenceBtn.addEventListener('click', () => {
         resetRoomDisplay();
         addHidden(bookingModal);
@@ -350,9 +347,7 @@ const displayUserError = (condition) => {
 
 const handelErrorMessage = (message) => {
   removeHidden(handelErrorPage);
-  console.log(message)
   errorMessage.innerText = `${message}`;
-
   addHidden(loginPage)
 } 
 
