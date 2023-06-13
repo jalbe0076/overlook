@@ -3,8 +3,8 @@
 // =========================================================
 
 import { errorHandle, postBooking } from "./api-calls";
-import { getUserBookings, getTotalSpent, formatDate, getTodaysDate, filterOutUnavailableRooms, formatRoomToPost, capatalizeFirstLetter } from "./booking-utils";
-import { bookings, rooms, setData } from "./scripts";
+import { getUserBookings, getTotalSpent, formatDate, getTodaysDate, formatRoomToPost, capatalizeFirstLetter } from "./booking-utils";
+import { bookings, loginPage, rooms, setData } from "./scripts";
 
 const userDropdownMenu = document.querySelector('#user-items');
 const totalNights = document.querySelector('.total-nights');
@@ -21,6 +21,9 @@ const navBtns = document.querySelectorAll('.nav-tab');
 const welcomeMessage = document.querySelector('.welcome-message');
 const coverImg = document.querySelector('.cover');
 const banner = document.querySelector('.banner');
+const falseValidation = document.querySelector('.false-validation')
+const handelErrorPage = document.querySelector('.error-handle');
+const errorMessage = document.querySelector('.error-message');
 
 const todaysDate = getTodaysDate();
 let lastFocusedElement;
@@ -40,7 +43,7 @@ const handleDropdown = (e) => {
   let focusableElements = userDropdownMenu.querySelectorAll('a')
   lastFocusedElement = document.activeElement;
   focusableElements[0].focus();
-  focusableElements.forEach(link => link.addEventListener('keydown', handleToggleEscape))
+  focusableElements.forEach(link => link.addEventListener('keydown', handleToggleEscape));
 };
 
 const handleToggleEscape = (e) => {
@@ -55,7 +58,6 @@ const handleToggleEscape = (e) => {
   if (e.keyCode === 27) {
     lastFocusedElement.click();
   }
-
 };
 
 const updateNightsStayed = () => {
@@ -82,7 +84,7 @@ const updateTotalSpent = () => {
 };
 
 const populateBookings = (bookings, rooms) => {
-  displayRooms.innerHTML = '';
+  resetRoomDisplay();
 
   bookings.forEach(booking => {
       const room = rooms.find(room => room.number === booking.roomNumber);
@@ -110,7 +112,7 @@ const populateBookings = (bookings, rooms) => {
 };
 
 const populateAvailableRooms = (availableRooms) => {
-  displayRooms.innerHTML = '';
+  resetRoomDisplay();
 
   availableRooms.forEach(room => {
     const capRoomType = capatalizeFirstLetter(room.roomType);
@@ -135,7 +137,7 @@ const populateAvailableRooms = (availableRooms) => {
 };
 
 const removeBookings = ()  => {
-  displayRooms.innerHTML = '';
+  resetRoomDisplay();
 };
 
 const displayTripMessage = (roomStatus) => {
@@ -227,13 +229,7 @@ const showConfirmedBooking = (room, date) => {
   const formatedDate = formatDate(date);
   const bookRoomReceipt = formatRoomToPost(formatedDate, room, currentUser.id);
 
-  // postBooking(bookRoomReceipt)
-  fetch('http://localhost:3001/api/v1/bookings', {
-    method: 'POST',
-    body: JSON.stringify(bookRoomReceipt),
-    headers: { 'Content-Type': 'application/json' }
-  })
-    .then(response => errorHandle(response))
+  postBooking(bookRoomReceipt)
     .then((response) => {
 
     innerModal.innerHTML = `
@@ -264,11 +260,9 @@ const showConfirmedBooking = (room, date) => {
       };
     
       closeBookingReferenceBtn.addEventListener('keydown', tabTrap);
-      
-      closeBookingReferenceBtn.focus();
-      
+         
       closeBookingReferenceBtn.addEventListener('click', () => {
-        displayRooms.innerHTML = '';
+        resetRoomDisplay();
         addHidden(bookingModal);
         removeHidden(welcomeMessage);
         removeHidden(coverImg);
@@ -277,14 +271,14 @@ const showConfirmedBooking = (room, date) => {
       
       modalEsc.addEventListener('keydown', tabTrap);
       modalEsc.addEventListener('click', () => {
-        displayRooms.innerHTML = '';
+        resetRoomDisplay();
         addHidden(bookingModal);
         removeHidden(welcomeMessage);
         removeHidden(coverImg);
         banner.style.background = 'none';
       });
     })   
-    .catch(error => alert(`${error.message}`));
+    .catch(error => handelErrorMessage(error));
 };
 
 const handleRoomImage = (room) => {
@@ -327,6 +321,36 @@ const getUserInfo = (user) => {
   currentUser = user;
 };
 
+const adjustBannerStyleBg = (condition) => {
+  return condition ? banner.style.background = '#ffffff' : banner.style.background = 'none';
+};
+
+const viewDashboardBackground = (condition) => {
+  if (condition) {
+    removeHidden(coverImg);
+    removeHidden(welcomeMessage);
+    adjustBannerStyleBg(!condition);
+  } else {
+    addHidden(coverImg);
+    addHidden(welcomeMessage);
+    adjustBannerStyleBg(!condition);
+  }
+};
+
+const resetRoomDisplay = () => {
+  displayRooms.innerHTML = '';
+};
+
+const displayUserError = (condition) => {
+  return condition ? falseValidation.innerText = 'Please enter a valid username and password' : falseValidation.innerText = '';
+};
+
+const handelErrorMessage = (message) => {
+  removeHidden(handelErrorPage);
+  errorMessage.innerText = `${message}`;
+  addHidden(loginPage)
+} 
+
 export {
   handleDropdown,
   updateNightsStayed,
@@ -345,6 +369,11 @@ export {
   removeHidden,
   removeBookings,
   getUserInfo,
+  viewDashboardBackground,
+  adjustBannerStyleBg,
+  resetRoomDisplay,
+  displayUserError,
+  handelErrorMessage,
   userDropdownMenu,
   displayRooms,
   pickedDate,
