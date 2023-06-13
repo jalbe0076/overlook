@@ -408,11 +408,16 @@ main {
   top: 0;
   width: 100vw;
   text-align: center;
+  display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  justify-content: center;
 
 
   & .img-container {
     background-color: var(--black);
     float: left;
+    width: 50vw;
   }
 
   & .cover-login {
@@ -429,11 +434,18 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5em;
+  // justify-content: center;
+  gap: 3em;
   height: 100vh;
+  width: 50vw;
   padding-top: 15%;
   line-height: 0.7;
   background-color: #e4ebfb;
+
+  & .login-btn {
+    align-self: flex-start;
+    margin: 0 auto;
+  }
 }
 
 .hotel-title {
@@ -451,6 +463,52 @@ main {
     display: flex;
     flex-direction: column;
     gap: 1em;
+  }
+}
+
+@media (max-width: 1000px) and (orientation: portrait) {
+  .modal-login {
+    flex-direction: column;
+
+    & .img-container, & .cover-login {
+      width:100vw;
+      height: 50vh;
+    }
+
+    .hotel-title {
+      font-size: 3rem;
+
+      & .logo-login {
+        font-size: 1.9rem;
+      }
+    }
+
+    .inner-modal-login {
+      gap: 1.5em;
+      height: 50vh;
+      width: 100vw;
+      padding-top: 0;
+      padding-top: 10%;
+    }
+  }
+}
+
+@media (max-width: 1000px) and (orientation: landscape) {
+  .modal-login {
+
+    .hotel-title {
+      font-size: 3rem;
+
+      & .logo-login {
+        font-size: 1.9rem;
+      }
+    }
+
+    .inner-modal-login {
+      gap: 1.5em;
+      padding-top: 0;
+      padding-top: 5%;
+    }
   }
 }
 
