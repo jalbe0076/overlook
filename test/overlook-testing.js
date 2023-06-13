@@ -2,7 +2,7 @@ import chai from 'chai';
 import { customerList } from './sample-data/sample-customer-list.js';
 import { roomList } from './sample-data/sample-room-list.js';
 import { bookingList } from './sample-data/sample-booking-list.js';
-import { checkUsername, getUserBookings, getTotalSpent, filterOutUnavailableRooms, filterAvailableRoomsByType  } from '../src/booking-utils.js';
+import { checkUsername, getUserBookings, getTotalSpent, filterOutUnavailableRooms, filterAvailableRoomsByType, findRoom, formatRoomToPost, checkPassword } from '../src/booking-utils.js';
 
 const expect = chai.expect;
 
@@ -53,6 +53,16 @@ describe('Get a customer\'s name from their username', () => {
   it('Should be able to get another users ID associated with the username', () => {
     user = checkUsername('customer1');
     expect(user).to.equal(1);
+  });
+
+  it('Should check if the password is correct', () => {
+    const correctPassword = checkPassword('overlook2021');
+    expect(correctPassword).be.true;
+  });
+
+  it('Should check if the password is correct', () => {
+    const correctPassword = checkPassword('overlook202');
+    expect(correctPassword).be.false;
   });
 });
 
@@ -151,10 +161,12 @@ describe('Get a customer\'s name from their username', () => {
 });
 
 describe('It should return rooms by selected type', () => {
-  let availableRooms;
+  let availableRooms, room, roomBooking;
 
   beforeEach(() => {
     availableRooms = filterOutUnavailableRooms('2022-02-04', bookingList.bookings, roomList.rooms);
+    room = findRoom(2, roomList.rooms);
+    roomBooking = formatRoomToPost('2022/02/01', room, 15);
   });
 
   it('Should return all rooms if no room type has been selected', () => {
@@ -181,5 +193,26 @@ describe('It should return rooms by selected type', () => {
     availableRooms = filterOutUnavailableRooms('2022-04-23', bookingList.bookings, roomList.rooms);
     const filteredAvailableRooms = filterAvailableRoomsByType(availableRooms, 'All Rooms', '2022/04/22'); 
     expect(filteredAvailableRooms).to.equal(`Sorry, we are fully booked on 2022/04/22, please consider staying with us another night`);
+  });
+
+  it('Should be able to return infomation on a specific room', () => {
+    expect(room.number).to.equal(2);
+  });
+
+  it('Specific room info should include a number, if it has a bidet, the room type, bed size, number of beds and the cost', () => {
+    expect(room).to.have.keys([ 'number', 'roomType', 'bidet', 'bedSize', 'numBeds', 'costPerNight']);
+  });
+
+  it('Should be able to return infomation on another room', () => {
+    room = findRoom('1', roomList.rooms);
+    expect(room.number).to.equal(1);
+  });
+
+  it('Should send info on the secific room when confirming to book', () => {
+    expect(roomBooking).to.have.keys([ 'userID', 'date', 'roomNumber' ])
+  });
+
+  it('Should send info on the secific room when confirming to book', () => {
+    expect(roomBooking).to.have.keys([ 'userID', 'date', 'roomNumber' ])
   });
 });

@@ -53,7 +53,7 @@ let selectedDate;
 let bookingConfirmed = false;
 const todaysDate = getTodaysDate();
 const pastTrips = document.querySelector('#past-trips');
-const futureTrips = document.querySelector('#upcoming-trips')
+const futureTrips = document.querySelector('#upcoming-trips');
 const dropdownLinks = document.querySelector('.user-profile');
 const formData = document.querySelector('#booking-options');
 const roomType = document.querySelector('#room-types');
