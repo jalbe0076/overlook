@@ -168,23 +168,57 @@ nav {
 .user-logout {
   padding: 0.5em 0 0 0; }
 
-main .welcome-message {
-  position: absolute;
-  margin: auto 0;
-  text-align: center;
-  font-size: 4rem;
-  font-weight: 400;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
-  font-weight: 500;
-  letter-spacing: .15rem;
-  font-family: 'Playfair Display', serif;
-  color: var(--dashboard-grey); }
+main {
+  display: flex;
+  flex-direction: column; }
+  main .welcome-message {
+    padding: 0 .5em;
+    text-align: center;
+    font-size: 4rem;
+    font-weight: 400;
+    font-weight: 500;
+    letter-spacing: .15rem;
+    font-family: 'Playfair Display', serif;
+    color: var(--dashboard-grey); }
+  main .trip-message {
+    margin: 1em;
+    font-size: 1.3rem; }
 
-main .trip-message {
-  margin: 1em;
-  font-size: 1.3rem; }
+@media (max-width: 800px) {
+  nav .welcome-user {
+    font-size: 2rem; }
+  .logo-bar .user-name {
+    display: none; }
+  .dashboard-title {
+    font-size: 1.6rem; }
+  main .welcome-message {
+    font-size: 3rem; } }
+
+@media (max-width: 1025px) and (orientation: landscape) {
+  nav .welcome-user {
+    font-size: 2rem; }
+  main .welcome-message {
+    font-size: 3rem; } }
+
+@media (max-height: 450px) {
+  .dropdown-menu {
+    padding: .8em 1em;
+    min-width: 19rem; }
+  .user-data-box {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: .7em;
+    padding: .5em;
+    margin: .5em 0;
+    font-size: 1rem; }
+    .user-data-box .user-metrix {
+      font-size: 1.2rem; }
+  .user-item {
+    font-size: 1rem;
+    font-weight: 500; }
+  .user-logout {
+    padding: 0; } }
 
 .available-rooms {
   display: flex;
@@ -345,7 +379,7 @@ main .trip-message {
       padding-top: 0;
       padding-top: 10%; } }
 
-@media (max-width: 1000px) and (orientation: landscape) {
+@media (max-width: 1025px) and (orientation: landscape) {
   .modal-login .hotel-title {
     font-size: 3rem; }
     .modal-login .hotel-title .logo-login {
