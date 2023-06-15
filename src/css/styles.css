@@ -100,7 +100,9 @@ h1 .logo {
 nav {
   margin: 1em; }
   nav .trip-actions, nav #booking-options {
-    margin-top: 1.2em; }
+    margin-top: 1.2em;
+    display: flex;
+    gap: 2rem; }
   nav .nav-tab {
     font-size: 1.2rem;
     background: none;
@@ -108,13 +110,14 @@ nav {
     color: var(--dashboard-grey);
     padding: 0 0 0.2em 0;
     font-weight: 500; }
-  nav .nav-tab + .nav-tab {
-    margin-left: 2rem; }
+  nav .mob-container {
+    display: flex;
+    gap: 1em; }
   nav .nav-tab-active {
     color: var(--black);
     border-bottom: solid var(--black); }
-  nav input + select, nav select + button {
-    margin-left: 1rem; }
+  nav #booking-options {
+    gap: 1rem; }
   nav form {
     min-height: 33px;
     padding-bottom: 1em; }
@@ -273,6 +276,40 @@ main {
       padding-left: 10px; }
   .rooms .amenities p {
     padding-bottom: 5px; }
+
+@media (max-width: 630px) {
+  button, select, input {
+    font-size: 0.9rem; } }
+
+@media (max-width: 580px) {
+  .logo {
+    display: none; }
+  nav {
+    margin: 0.5em 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    nav #welcome-user {
+      align-self: baseline; }
+    nav .trip-actions {
+      flex-direction: column;
+      gap: .5em;
+      margin-top: 0.2em; }
+      nav .trip-actions .nav-tab {
+        font-size: 1.1rem; }
+    nav #booking-options {
+      flex-direction: column;
+      gap: 0.5em;
+      margin-top: 0.2em; }
+    nav .mob-container {
+      flex-direction: row; } }
+
+@media (max-width: 300px) {
+  nav .mob-container {
+    flex-direction: column;
+    gap: .5em; }
+  main .welcome-message {
+    font-size: 2.5rem; } }
 
 .modal {
   --gap: 15px;
