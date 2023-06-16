@@ -279,7 +279,22 @@ main {
 
 @media (max-width: 630px) {
   button, select, input {
-    font-size: 0.9rem; } }
+    font-size: 0.9rem; }
+  .rooms {
+    width: 100%;
+    min-width: auto;
+    min-height: auto; }
+    .rooms .room-type {
+      font-size: 2rem; }
+    .rooms .room-info {
+      line-height: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start; }
+    .rooms .room-cost {
+      padding-top: 1.6rem; }
+    .rooms .room-image {
+      min-height: fit-content; } }
 
 @media (max-width: 580px) {
   .logo {
@@ -310,6 +325,23 @@ main {
     gap: .5em; }
   main .welcome-message {
     font-size: 2.5rem; } }
+
+@media (max-width: 930px) and (orientation: landscape) {
+  .banner {
+    position: static; } }
+
+@media (max-width: 930px) and (orientation: portrait) {
+  .rooms {
+    flex-direction: column; }
+    .rooms img {
+      min-width: 0; }
+    .rooms .room-image {
+      width: 100%;
+      max-width: none;
+      border-radius: 0.3em 0.3em 0 0;
+      min-width: 0; }
+    .rooms .room-info {
+      padding: 0 1em 1.5em 1.5em; } }
 
 .modal {
   --gap: 15px;
