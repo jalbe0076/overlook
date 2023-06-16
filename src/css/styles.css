@@ -46,6 +46,10 @@ input, select {
   font-size: 16px;
   padding: 0.475em 1.2em; }
 
+.modal-esc .modal-esc-img {
+  width: 50px;
+  min-height: auto; }
+
 .error-handle {
   background-color: var(--white);
   width: 100vw;
@@ -100,7 +104,9 @@ h1 .logo {
 nav {
   margin: 1em; }
   nav .trip-actions, nav #booking-options {
-    margin-top: 1.2em; }
+    margin-top: 1.2em;
+    display: flex;
+    gap: 2rem; }
   nav .nav-tab {
     font-size: 1.2rem;
     background: none;
@@ -108,13 +114,14 @@ nav {
     color: var(--dashboard-grey);
     padding: 0 0 0.2em 0;
     font-weight: 500; }
-  nav .nav-tab + .nav-tab {
-    margin-left: 2rem; }
+  nav .mob-container {
+    display: flex;
+    gap: 1em; }
   nav .nav-tab-active {
     color: var(--black);
     border-bottom: solid var(--black); }
-  nav input + select, nav select + button {
-    margin-left: 1rem; }
+  nav #booking-options {
+    gap: 1rem; }
   nav form {
     min-height: 33px;
     padding-bottom: 1em; }
@@ -168,23 +175,57 @@ nav {
 .user-logout {
   padding: 0.5em 0 0 0; }
 
-main .welcome-message {
-  position: absolute;
-  margin: auto 0;
-  text-align: center;
-  font-size: 4rem;
-  font-weight: 400;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
-  font-weight: 500;
-  letter-spacing: .15rem;
-  font-family: 'Playfair Display', serif;
-  color: var(--dashboard-grey); }
+main {
+  display: flex;
+  flex-direction: column; }
+  main .welcome-message {
+    padding: 0 .5em;
+    text-align: center;
+    font-size: 4rem;
+    font-weight: 400;
+    font-weight: 500;
+    letter-spacing: .15rem;
+    font-family: 'Playfair Display', serif;
+    color: var(--dashboard-grey); }
+  main .trip-message {
+    margin: 1em;
+    font-size: 1.3rem; }
 
-main .trip-message {
-  margin: 1em;
-  font-size: 1.3rem; }
+@media (max-width: 800px) {
+  nav .welcome-user {
+    font-size: 2rem; }
+  .logo-bar .user-name {
+    display: none; }
+  .dashboard-title {
+    font-size: 1.6rem; }
+  main .welcome-message {
+    font-size: 3rem; } }
+
+@media (max-width: 1025px) and (orientation: landscape) {
+  nav .welcome-user {
+    font-size: 2rem; }
+  main .welcome-message {
+    font-size: 3rem; } }
+
+@media (max-height: 450px) {
+  .dropdown-menu {
+    padding: .8em 1em;
+    min-width: 19rem; }
+  .user-data-box {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: .7em;
+    padding: .5em;
+    margin: .5em 0;
+    font-size: 1rem; }
+    .user-data-box .user-metrix {
+      font-size: 1.2rem; }
+  .user-item {
+    font-size: 1rem;
+    font-weight: 500; }
+  .user-logout {
+    padding: 0; } }
 
 .available-rooms {
   display: flex;
@@ -240,6 +281,72 @@ main .trip-message {
   .rooms .amenities p {
     padding-bottom: 5px; }
 
+@media (max-width: 630px) {
+  button, select, input {
+    font-size: 0.9rem; }
+  .rooms {
+    width: 100%;
+    min-width: auto;
+    min-height: auto; }
+    .rooms .room-type {
+      font-size: 2rem; }
+    .rooms .room-info {
+      line-height: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start; }
+    .rooms .room-cost {
+      padding-top: 1.6rem; }
+    .rooms .room-image {
+      min-height: fit-content; } }
+
+@media (max-width: 580px) {
+  .logo {
+    display: none; }
+  nav {
+    margin: 0.5em 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    nav #welcome-user {
+      align-self: baseline; }
+    nav .trip-actions {
+      flex-direction: column;
+      gap: .5em;
+      margin-top: 0.2em; }
+      nav .trip-actions .nav-tab {
+        font-size: 1.1rem; }
+    nav #booking-options {
+      flex-direction: column;
+      gap: 0.5em;
+      margin-top: 0.2em; }
+    nav .mob-container {
+      flex-direction: row; } }
+
+@media (max-width: 300px) {
+  nav .mob-container {
+    flex-direction: column;
+    gap: .5em; }
+  main .welcome-message {
+    font-size: 2.5rem; } }
+
+@media (max-width: 930px) and (orientation: landscape) {
+  .banner {
+    position: static; } }
+
+@media (max-width: 930px) and (orientation: portrait) {
+  .rooms {
+    flex-direction: column; }
+    .rooms img {
+      min-width: 0; }
+    .rooms .room-image {
+      width: 100%;
+      max-width: none;
+      border-radius: 0.3em 0.3em 0 0;
+      min-width: 0; }
+    .rooms .room-info {
+      padding: 0 1em 1.5em 1.5em; } }
+
 .modal {
   --gap: 15px;
   position: fixed;
@@ -284,14 +391,94 @@ main .trip-message {
   #inner-modal .modal-info {
     width: 500px; }
 
+@media (max-width: 580px) {
+  #inner-modal {
+    max-height: 95vh;
+    min-height: auto;
+    position: relative; }
+    #inner-modal .modal-room {
+      min-width: auto;
+      min-height: auto; }
+    #inner-modal .room-image {
+      max-height: 280px; }
+    #inner-modal .btn-container {
+      margin-top: 1em;
+      display: flex;
+      flex-direction: column;
+      width: fit-content;
+      gap: 0.5em; }
+    #inner-modal #book-room {
+      margin: 0; } }
+
+@media (max-width: 1025px) and (orientation: landscape) {
+  .rooms {
+    min-width: 95vw;
+    min-height: auto; }
+  #inner-modal {
+    max-height: 95vh;
+    position: relative; }
+    #inner-modal .modal-info {
+      width: auto; }
+    #inner-modal .modal-room {
+      min-width: auto;
+      min-height: auto; }
+    #inner-modal .room-image {
+      min-width: auto; }
+    #inner-modal .btn-container {
+      margin-top: 1em; }
+    #inner-modal button + button {
+      margin: .5em 0 0 0; } }
+
+@media (max-height: 376px) and (orientation: landscape) {
+  .rooms .room-info {
+    padding: 1em 1em 1em 0.3em; }
+  .rooms .room-cost {
+    font-size: 1.8rem; }
+  .rooms .room-type {
+    font-size: 1.5rem;
+    padding-bottom: .3em; }
+  .rooms .bed-size {
+    font-size: 1rem;
+    padding-bottom: 0; }
+  .rooms .amenities {
+    font-size: 0.9rem; }
+  #inner-modal .btn-container {
+    margin-top: 0.4em; }
+  #inner-modal button + button {
+    margin: .2em 0 0 0; } }
+
+@media (max-height: 290px) and (orientation: landscape) {
+  button {
+    padding: 0.3em 1em; }
+  .rooms .room-info {
+    padding: .5em .5em .5em 0.3em; }
+  .rooms .room-type {
+    font-size: 1rem;
+    padding-bottom: .3em; }
+  .rooms .room-cost {
+    font-size: 1rem; }
+  .rooms .room-image {
+    max-width: 245px;
+    min-height: auto; }
+  .rooms .amenities {
+    font-size: 0.7rem; }
+  #inner-modal {
+    min-height: auto; }
+    #inner-modal .modal-room {
+      max-width: 95vw !important;
+      max-height: 95vh !important; } }
+
 .modal-login {
   position: fixed;
   top: 0;
   width: 100vw;
-  text-align: center; }
+  text-align: center;
+  display: flex;
+  justify-content: center; }
   .modal-login .img-container {
     background-color: var(--black);
-    float: left; }
+    float: left;
+    width: 50vw; }
   .modal-login .cover-login {
     display: block;
     opacity: .7;
@@ -304,11 +491,15 @@ main .trip-message {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5em;
+    gap: 3em;
     height: 100vh;
+    width: 50vw;
     padding-top: 15%;
     line-height: 0.7;
     background-color: #e4ebfb; }
+    .modal-login .inner-modal-login .login-btn {
+      align-self: flex-start;
+      margin: 0 auto; }
   .modal-login .hotel-title {
     font-size: 5rem;
     text-align: center;
@@ -320,6 +511,35 @@ main .trip-message {
     display: flex;
     flex-direction: column;
     gap: 1em; }
+
+@media (max-width: 1000px) and (orientation: portrait) {
+  .modal-login {
+    flex-direction: column; }
+    .modal-login .img-container, .modal-login .cover-login {
+      width: 100vw;
+      height: 50vh; }
+    .modal-login .hotel-title {
+      font-size: 3rem; }
+      .modal-login .hotel-title .logo-login {
+        font-size: 1.9rem; }
+    .modal-login .inner-modal-login {
+      gap: 1.5em;
+      height: 50vh;
+      width: 100vw;
+      padding-top: 0;
+      padding-top: 10%; }
+  #inner-modal .modal-info {
+    width: auto; } }
+
+@media (max-width: 1025px) and (orientation: landscape) {
+  .modal-login .hotel-title {
+    font-size: 3rem; }
+    .modal-login .hotel-title .logo-login {
+      font-size: 1.9rem; }
+  .modal-login .inner-modal-login {
+    gap: 1.5em;
+    padding-top: 0;
+    padding-top: 5%; } }
 
 [aria-expanded="true"] {
   display: block; }

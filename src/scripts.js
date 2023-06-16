@@ -13,6 +13,7 @@ import './images/single-residential-suite.jpg';
 import './images/double-residential-suite.jpg';
 import './images/customer-rating.png';
 import './images/booking-page.jpg';
+import './images/close-symbol.png'
 import { getAllData, findCustomer } from './api-calls'
 import { handleDropdown, 
   updateNightsStayed, 
@@ -124,11 +125,11 @@ formData.addEventListener('submit', (e) => {
   let roomsToBook = document.querySelectorAll('.rooms');
   roomsToBook.forEach((room) => {
     room.addEventListener('keyup', (e) => {
-        if (e.keyCode === 13 || e.keyCode === 32) {
-          const selectedRoom = findRoom(room.id, rooms);
-          showRoomModal(selectedRoom, selectedDate);
-        }
-      });
+      if (e.keyCode === 13 || e.keyCode === 32) {
+        const selectedRoom = findRoom(room.id, rooms);
+        showRoomModal(selectedRoom, selectedDate);
+      }
+    });
 
     room.addEventListener('click', () => {
       const selectedRoom = findRoom(room.id, rooms);
@@ -173,7 +174,7 @@ loginBtn.addEventListener('click', (e) => {
     
     getCustomer(checkedUsername)
       .then((user) => {
-        currentUser = user;
+        currentUser = user; 
         getUserInfo(user);
         updateNightsStayed();
         updateTotalSpent();
@@ -181,6 +182,7 @@ loginBtn.addEventListener('click', (e) => {
         populateUserProfile(user.name);
         populateUserWelcome(user.name);
       });
+
   } else {
     displayUserError(true);
   }
