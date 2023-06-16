@@ -11,7 +11,7 @@
 </head>
 <body id="page">
   <section class="error-handle hidden"><p class="error-message"></p></section>
-  <section class="modal-login">
+  <section class="modal-login">  
     <div class="img-container">
       <img src="./images/login-page.jpg" alt="private pergolas inset around an infinity pool overlooking the ocean at dusk" class="cover-login">
     </div>
@@ -25,7 +25,7 @@
       <p class="false-validation"></p>
     </div>
   </section>
-  <div class="cover hidden"></div>
+  <div class="cover hidden"></div> 
   <section class="banner hidden">
     <div class="logo-bar">
       <h1 class="dashboard-title">OVERLOOK <span class="logo">BOUTIQUE HOTEL</span></h1>
@@ -47,13 +47,14 @@
       </div>
     </div>
     <nav>
-      <h2 class="welcome-user">Welcome!</h2>
+      <h2 class="welcome-user" id="welcome-user">Welcome!</h2>
       <div class="trip-actions">
         <button href="#" class="nav-tab nav-tab-active" id="bookings">Plan your next stay</button>
         <button href="#" class="nav-tab" id="past-trips">Your past trips</button>
         <button href="#" class="nav-tab" id="upcoming-trips">Upcoming trips</button>
       </div>
       <form id="booking-options" action="../src/scripts.js" method="get">
+        <div class="mob-container">
         <input type="date" id="pick-day" name="trip-day" aria-label="pick-day" value="2022-04-22" min="2017-05-21" max="2024-06-01">
         <select name="room-types" id="room-types" placeholder="Room Type" aria-label="room types">
           <option disabled selected value="All Rooms">Select room type</option>
@@ -63,7 +64,9 @@
           <option value="Suite">Suite</option>
           <option value="Residential Suite">Residential Suite</option>
         </select>  
+        </div>
         <button type="submit" form="booking-options" value="submit" class="see-available-rooms">See available rooms</button>
+  
       </form>
     </nav>  
   </section>
@@ -73,7 +76,7 @@
     </div>
   </section>
   <main>
-    <h3 class="welcome-message hidden">Hospitality at its finest</h3>
+    <h3 class="welcome-message hidden">Hospitality at its finest</h3> 
     <p class="trip-message"></p>
     <section class="available-rooms">
       <!--  ROOMS GET POPULATED HERE  -->

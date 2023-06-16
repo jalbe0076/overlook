@@ -2,8 +2,6 @@
 // =====================   functions   =====================
 // =========================================================
 
-import { viewDashboardBackground } from "./dom-updates";
-
 const getTodaysDate = () => {
   let date = new Date().toLocaleDateString("en-CA");
   return date;

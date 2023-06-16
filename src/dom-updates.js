@@ -174,7 +174,7 @@ const showRoomModal = (room, date) => {
     <article class="rooms modal-room" id="${room.number}">
       <img class="room-image" src="${handleRoomImage(room)}" alt="turing logo">
       <div class="room-info modal-info">
-        <button class="modal-esc" id="modal-esc">X</button>
+        <button class="modal-esc" id="modal-esc"><img class="modal-esc-img" src="./images/close-symbol.png" alt="esc button"></button>
         <p class="booked-date" id="${date}">Stay with us on ${date}</p>
         <h3 class="room-type">${capRoomType}</h3>
         <p class="bed-size">${room.numBeds} ${room.bedSize} bed${room.numBeds > 1 ? 's' : ''}${room.bidet ? ', Bidet' : '' }</p>
@@ -236,7 +236,7 @@ const showConfirmedBooking = (room, date) => {
       <article class="rooms">
         <img class="room-image" src="${handleRoomImage(room)}" alt="turing logo">
         <div class="room-info modal-info">
-          <button class="modal-esc" id="modal-esc">X</button>
+          <button class="modal-esc" id="modal-esc"><img class="modal-esc-img" src="./images/close-symbol.png" alt="esc button"></button>
           <h3 class="booking-thanks">${firstName}, thank you for booking a ${room.roomType} with us</h3>
           <p class="booking-date">Your booking is confirmed on ${formatedDate}</p>
           <p class="reference">Your booking reference: ${response.newBooking.id}</p>

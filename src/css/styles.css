@@ -46,6 +46,10 @@ input, select {
   font-size: 16px;
   padding: 0.475em 1.2em; }
 
+.modal-esc .modal-esc-img {
+  width: 50px;
+  min-height: auto; }
+
 .error-handle {
   background-color: var(--white);
   width: 100vw;
@@ -523,7 +527,9 @@ main {
       height: 50vh;
       width: 100vw;
       padding-top: 0;
-      padding-top: 10%; } }
+      padding-top: 10%; }
+  #inner-modal .modal-info {
+    width: auto; } }
 
 @media (max-width: 1025px) and (orientation: landscape) {
   .modal-login .hotel-title {
