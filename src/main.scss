@@ -151,9 +151,8 @@ nav {
   }
 
   & .mob-container  {
-  //   margin-left: 2rem;
-  display: flex;
-  gap: 1em;
+    display: flex;
+    gap: 1em;
   }
 
   & .nav-tab-active {
@@ -161,8 +160,7 @@ nav {
     border-bottom: solid var(--black);
   }
   & #booking-options{
-    // margin-left: 1rem;
-  gap: 1rem;
+    gap: 1rem;
   }
 
   & form {
@@ -313,9 +311,10 @@ main {
 
   .user-metrix {
     font-size: 1.2rem;
-}
+  }
 
 }
+
 .user-item {
   font-size: 1rem;
   font-weight: 500;
@@ -413,7 +412,6 @@ main {
   
   .rooms {
     width: 100%;
-    // height: 90vh;
     min-width: auto;
     min-height: auto;
 
@@ -422,7 +420,6 @@ main {
     }
 
     .room-info {
-      // padding: 1em 1em 1em 0.5em;
       line-height: 1.5rem;
       display: flex;
       flex-direction: column;
@@ -458,7 +455,6 @@ main {
       flex-direction: column;
       gap: .5em;
       margin-top: 0.2em;
-      // align-items: flex-start;
 
       .nav-tab {
         font-size: 1.1rem;
@@ -467,29 +463,16 @@ main {
     }
 
     #booking-options {
-      // width: 63%;
       flex-direction: column;
       gap: 0.5em;
       margin-top: 0.2em;
     }
 
     .mob-container {
-    //   display: flex;
-    // width: 65%;
       flex-direction: row;
     }
   }
 }
-
-// @media (max-width: 450px) {
-
-  // nav {
-  //   & .trip-actions {
-      // flex-direction: column;
-  //   }
-  // }
-
-// }
 
 @media (max-width: 300px) {
   nav {
@@ -508,45 +491,12 @@ main {
 }
 
 @media (max-width: 930px) and (orientation: landscape) {
-  
   .banner {
     position: static;
   }
-
-  // .rooms {
-  //   width: 90vw;
-  //   // height: 90vh;
-  //   min-width: auto;
-  //   min-height: auto;
-
-  //   .room-type {
-  //     font-size: 2rem;
-  //   }
-
-  //   .room-info {
-  //     padding: 1em 1em 1em 0.5em;
-  //     line-height: 1.5rem;
-  //     display: flex;
-  //     flex-direction: column;
-  //     justify-content: flex-start;
-  //   }
-
-  //   .room-cost {
-  //     padding-top: 1.6rem;
-  //   }
-
-  //   .room-image {
-  //     min-height: fit-content;
-  //   }
-  // }
 }
 
 @media (max-width: 930px) and (orientation: portrait) {
-  
-  // .banner {
-  //   position: static;
-  // }
-
   .rooms {
     flex-direction: column;
 
@@ -560,30 +510,10 @@ main {
       border-radius: 0.3em 0.3em 0 0;
       min-width: 0;
     }
-  //   width: 90vw;
-  //   // height: 90vh;
-  //   min-width: auto;
-  //   min-height: auto;
-
-  //   .room-type {
-  //     font-size: 2rem;
-  //   }
 
     .room-info {
       padding: 0 1em 1.5em 1.5em;
-  //     line-height: 1.5rem;
-  //     display: flex;
-  //     flex-direction: column;
-  //     justify-content: flex-start;
     }
-
-  //   .room-cost {
-  //     padding-top: 1.6rem;
-  //   }
-
-  //   .room-image {
-  //     min-height: fit-content;
-  //   }
   }
 }
 
@@ -652,6 +582,140 @@ main {
   }
 }
 
+@media (max-width: 580px) {
+  #inner-modal {
+    max-height: 95vh;
+    min-height: auto;
+    position: relative;
+  
+    & .modal-room {
+      min-width: auto;
+      min-height: auto;
+    }
+
+    .room-image {
+      max-height: 280px;
+    }
+
+    .btn-container {
+      margin-top: 1em;
+      display: flex;
+      flex-direction: column;
+      width: fit-content;
+      gap: 0.5em;
+    }
+
+    #book-room {
+      margin: 0;
+    }
+
+  }
+}
+
+@media (max-width: 1025px) and (orientation: landscape) {
+  .rooms {
+    min-width: 95vw;
+    min-height: auto;
+  }
+
+  #inner-modal {
+     max-height: 95vh;
+    position: relative;
+
+    .modal-info {
+      width: auto;
+    }
+  
+    & .modal-room {
+      min-width: auto;
+      min-height: auto;
+    }
+
+    .room-image {
+      min-width: auto
+    }
+
+    .btn-container {
+      margin-top: 1em;
+    }
+
+    & button + button {
+      margin: .5em 0 0 0;
+    }
+  }
+}
+
+@media (max-height: 376px) and (orientation: landscape) {
+  .rooms {
+    .room-info {
+      padding: 1em 1em 1em 0.3em;
+    }
+    .room-cost {
+      font-size: 1.8rem;
+    }
+
+    .room-type {
+      font-size: 1.5rem;
+      padding-bottom: .3em;
+    }
+
+    .bed-size {
+      font-size: 1rem;
+      padding-bottom: 0;
+    }
+
+    .amenities {
+      font-size: 0.9rem;
+    }
+  }
+  #inner-modal {
+      .btn-container {
+      margin-top: 0.4em;
+    }
+
+    & button + button {
+      margin: .2em 0 0 0;
+    }
+  }
+}
+
+@media (max-height: 290px) and (orientation: landscape) {
+  button {
+    padding: 0.3em 1em;
+  }
+  
+  .rooms {
+    .room-info {
+      padding: .5em .5em .5em 0.3em;
+    }
+
+    .room-type {
+      font-size: 1rem;
+      padding-bottom: .3em;
+    }
+    .room-cost {
+      font-size: 1rem;
+    }
+    .room-image {
+      max-width: 245px;
+      min-height: auto;
+    }
+
+    .amenities {
+      font-size: 0.7rem;
+    }
+  }
+
+  #inner-modal {
+    min-height: auto;
+
+    .modal-room {
+      max-width: 95vw !important;
+      max-height: 95vh !important;
+    }
+  }
+}
+
 // =========================================================
 // =======================   LOGIN   =======================
 // =========================================================
@@ -663,7 +727,6 @@ main {
   text-align: center;
   display: flex;
   justify-content: center;
-
 
   & .img-container {
     background-color: var(--black);

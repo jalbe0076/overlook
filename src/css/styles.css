@@ -387,6 +387,83 @@ main {
   #inner-modal .modal-info {
     width: 500px; }
 
+@media (max-width: 580px) {
+  #inner-modal {
+    max-height: 95vh;
+    min-height: auto;
+    position: relative; }
+    #inner-modal .modal-room {
+      min-width: auto;
+      min-height: auto; }
+    #inner-modal .room-image {
+      max-height: 280px; }
+    #inner-modal .btn-container {
+      margin-top: 1em;
+      display: flex;
+      flex-direction: column;
+      width: fit-content;
+      gap: 0.5em; }
+    #inner-modal #book-room {
+      margin: 0; } }
+
+@media (max-width: 1025px) and (orientation: landscape) {
+  .rooms {
+    min-width: 95vw;
+    min-height: auto; }
+  #inner-modal {
+    max-height: 95vh;
+    position: relative; }
+    #inner-modal .modal-info {
+      width: auto; }
+    #inner-modal .modal-room {
+      min-width: auto;
+      min-height: auto; }
+    #inner-modal .room-image {
+      min-width: auto; }
+    #inner-modal .btn-container {
+      margin-top: 1em; }
+    #inner-modal button + button {
+      margin: .5em 0 0 0; } }
+
+@media (max-height: 376px) and (orientation: landscape) {
+  .rooms .room-info {
+    padding: 1em 1em 1em 0.3em; }
+  .rooms .room-cost {
+    font-size: 1.8rem; }
+  .rooms .room-type {
+    font-size: 1.5rem;
+    padding-bottom: .3em; }
+  .rooms .bed-size {
+    font-size: 1rem;
+    padding-bottom: 0; }
+  .rooms .amenities {
+    font-size: 0.9rem; }
+  #inner-modal .btn-container {
+    margin-top: 0.4em; }
+  #inner-modal button + button {
+    margin: .2em 0 0 0; } }
+
+@media (max-height: 290px) and (orientation: landscape) {
+  button {
+    padding: 0.3em 1em; }
+  .rooms .room-info {
+    padding: .5em .5em .5em 0.3em; }
+  .rooms .room-type {
+    font-size: 1rem;
+    padding-bottom: .3em; }
+  .rooms .room-cost {
+    font-size: 1rem; }
+  .rooms .room-image {
+    max-width: 245px;
+    min-height: auto; }
+  .rooms .amenities {
+    font-size: 0.7rem; }
+  #inner-modal {
+    min-height: auto; }
+    #inner-modal .modal-room {
+      max-width: 95vw !important;
+      max-height: 95vh !important; } }
+
 .modal-login {
   position: fixed;
   top: 0;
