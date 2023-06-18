@@ -2,7 +2,7 @@ import { handelErrorMessage } from "./dom-updates";
 import { setData } from "./scripts";
 
 const getData = (data) => {
-  return fetch(`http://localhost:3001/api/v1/${data}`)
+  return fetch(`https://overlook-api-seven.vercel.app/api/v1/${data}`)
       .then(response => errorHandle(response))
       .catch(error => handelErrorMessage(error));
 };
@@ -12,7 +12,7 @@ const getAllData = () => {
 };
 
 const postBooking = (data) => {
-  return fetch('http://localhost:3001/api/v1/bookings', {
+  return fetch('https://overlook-api-seven.vercel.app/api/v1/bookings', {
     method: 'POST',
     body: JSON.stringify(data),
     headers: { 'Content-Type': 'application/json' }
@@ -21,7 +21,7 @@ const postBooking = (data) => {
 };
 
 const deleteBooking = (id) => {
-  fetch(`http://localhost:3001/api/v1/bookings/${id}`, {
+  fetch(`https://overlook-api-seven.vercel.app/api/v1/bookings/${id}`, {
     method: 'DELETE',
     body: '',
     headers: { 'Content-Type': 'application/json' }
@@ -32,7 +32,7 @@ const deleteBooking = (id) => {
 };
 
 const findCustomer = (id) => {
-  return fetch(`http://localhost:3001/api/v1/customers/${id}`)
+  return fetch(`https://overlook-api-seven.vercel.app/api/v1/customers/${id}`)
       .then(response => errorHandle(response))
       .then(resolve => {
         return resolve
