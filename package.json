@@ -6,7 +6,7 @@
   "main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jalbe0076/overlook.git"
+    "url": "git+https://github.com/turingschool-examples/webpack-starter-kit.git"
   },
   "author": "Turing School of Software and Design",
   "license": "MIT",
